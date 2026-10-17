@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://i.scdn.co https://upload.wikimedia.org https://commons.wikimedia.org https://audiomack.com https://*.audiomack.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://bandcamp.com https://w.soundcloud.com https://audiomack.com https://*.audiomack.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.vercel.app https://www.youtube.com https://cancon-data-gate.vercel.app; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com https://w.soundcloud.com">
+<script>window.DATA_API="https://cancon-data-gate.vercel.app";</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Playback Diagnostic — CanCon Radio</title>
+<style>
+body{background:#14100d;color:#f2e9dc;font:14px/1.5 Helvetica,Arial,sans-serif;padding:1.2rem;max-width:900px;margin:auto}
+h1{font-size:1.2rem} .v{border:1px solid rgba(242,233,220,.2);border-radius:.6rem;padding:1rem;margin:1rem 0}
+button{font:inherit;padding:2.2rem 1rem;border-radius:.6rem;border:1px solid rgba(242,233,220,.3);
+  background:none;color:#f2e9dc;cursor:pointer;width:100%;text-align:left;font-size:1rem}
+button:hover{background:rgba(242,233,220,.08)}
+.log{font:12px ui-monospace,monospace;white-space:pre-wrap;color:#9fd49f;margin-top:.6rem;max-height:190px;overflow:auto}
+.st{font:700 12px ui-monospace,monospace;padding:.25rem .55rem;border-radius:4px;display:inline-block;margin-top:.5rem}
+.st-wait{background:#444}.st-play{background:#2c7a3f}.st-fail{background:#a33327}
+.ph{width:224px;height:224px;background:#000;margin-top:.6rem}
+</style>
+</head>
+<body>
+<h1>Playback diagnostic — real-gesture test</h1>
+<p>Each giant button below tests one playback strategy. Tap each one and watch the status. Green = the strategy works in this browser; red = it fails here.</p>
+
+<div class="v"><b>A — reference flow:</b> create player on tap, then <code>loadVideoById</code> at full volume (kimi.pro's exact pattern)
+<button id="bA">RUN TEST A</button><div class="ph" id="mA"></div><span class="st st-wait" id="sA">waiting</span><div class="log" id="lA"></div></div>
+
+<div class="v"><b>B — our flow:</b> create player on tap, mute first, then <code>loadVideoById</code>, unmute on playing
+<button id="bB">RUN TEST B</button><div class="ph" id="mB"></div><span class="st st-wait" id="sB">waiting</span><div class="log" id="lB"></div></div>
+
+<div class="v"><b>C — direct playVideo in tap:</b> player created at page load (silent), tap calls <code>playVideo()</code> inside the gesture
+<button id="bC">RUN TEST C</button><div class="ph" id="mC"></div><span class="st st-wait" id="sC">waiting</span><div class="log" id="lC"></div></div>
+
+<div class="v"><b>D — regular host:</b> same as A but on <code>www.youtube.com</code> instead of youtube-nocookie.com
+<button id="bD">RUN TEST D</button><div class="ph" id="mD"></div><span class="st st-wait" id="sD">waiting</span><div class="log" id="lD"></div></div>
+
+<script>
+var VID = 'dDLiVwpv89s';   /* Alanis Morissette - Thank U */
+var players = {};
+function setStatus(n, txt, cls) {
+  var el = document.getElementById('s' + n);
+  el.textContent = txt; el.className = 'st ' + cls;
+}
+function log(n, msg) {
+  var el = document.getElementById('l' + n);
+  el.textContent += new Date().toISOString().slice(17, 23) + '  ' + msg + '\n';
+}
+function loadYT() {
+  return new Promise(function (resolve) {
+    if (window.YT && YT.Player) return resolve();
+    var prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function () { prev && prev(); resolve(); };
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  });
+}
+/* A: kimi-pro reference pattern — player born on tap, full volume load */
+document.getElementById('bA').addEventListener('click', function () {
+  log('A', 'tap: isActive=' + (navigator.userActivation ? navigator.userActivation.isActive : '?'));
+  this.disabled = true; setStatus('A', 'creating…', 'st-wait');
+  loadYT().then(function () {
+    players.A = new YT.Player('mA', {
+      width: '224', height: '224', host: 'https://www.youtube-nocookie.com',
+      playerVars: { autoplay: 1, rel: 0, playsinline: 1, modestbranding: 1 },
+      events: {
+        onReady: function () { log('A', 'onReady -> loadVideoById'); try { players.A.loadVideoById(VID); } catch (e) { log('A', 'ERR ' + e); } },
+        onStateChange: function (ev) { log('A', 'state ' + ev.data); if (ev.data === 1) setStatus('A', 'PLAYING', 'st-play'); if (ev.data === 2) setStatus('A', 'paused', 'st-wait'); },
+        onError: function (ev) { log('A', 'ERROR code ' + ev.data); setStatus('A', 'ERROR ' + ev.data, 'st-fail'); }
+      }
+    });
+  });
+});
+/* B: our pattern — mute first */
+document.getElementById('bB').addEventListener('click', function () {
+  log('B', 'tap: isActive=' + (navigator.userActivation ? navigator.userActivation.isActive : '?'));
+  this.disabled = true; setStatus('B', 'creating…', 'st-wait');
+  loadYT().then(function () {
+    players.B = new YT.Player('mB', {
+      width: '224', height: '224', host: 'https://www.youtube-nocookie.com',
+      playerVars: { autoplay: 1, rel: 0, playsinline: 1, modestbranding: 1 },
+      events: {
+        onReady: function () {
+          log('B', 'onReady -> mute + loadVideoById');
+          try { players.B.mute(); players.B.setVolume(0); players.B.loadVideoById(VID); } catch (e) { log('B', 'ERR ' + e); }
+        },
+        onStateChange: function (ev) {
+          log('B', 'state ' + ev.data);
+          if (ev.data === 1) {
+            setStatus('B', 'PLAYING (muted start)', 'st-play');
+            try { players.B.unMute(); players.B.setVolume(80); log('B', 'unmuted'); } catch (e) { log('B', 'unmute ERR ' + e); }
+          }
+        },
+        onError: function (ev) { log('B', 'ERROR code ' + ev.data); setStatus('B', 'ERROR ' + ev.data, 'st-fail'); }
+      }
+    });
+  });
+});
+/* C: player born at page load; tap calls playVideo inside the gesture */
+loadYT().then(function () {
+  players.C = new YT.Player('mC', {
+    width: '224', height: '224', host: 'https://www.youtube-nocookie.com',
+    playerVars: { rel: 0, playsinline: 1, modestbranding: 1 },
+    events: {
+      onReady: function () { log('C', 'pre-created at load, cued'); try { players.C.cueVideoById(VID); } catch (e) {} },
+      onStateChange: function (ev) { log('C', 'state ' + ev.data); if (ev.data === 1) setStatus('C', 'PLAYING', 'st-play'); },
+      onError: function (ev) { log('C', 'ERROR code ' + ev.data); setStatus('C', 'ERROR ' + ev.data, 'st-fail'); }
+    }
+  });
+});
+document.getElementById('bC').addEventListener('click', function () {
+  log('C', 'tap: isActive=' + (navigator.userActivation ? navigator.userActivation.isActive : '?'));
+  this.disabled = true; setStatus('C', 'playVideo in gesture…', 'st-wait');
+  try { players.C.setVolume(80); players.C.playVideo(); } catch (e) { log('C', 'ERR ' + e); }
+});
+/* D: same as A but regular youtube host */
+document.getElementById('bD').addEventListener('click', function () {
+  log('D', 'tap: isActive=' + (navigator.userActivation ? navigator.userActivation.isActive : '?'));
+  this.disabled = true; setStatus('D', 'creating…', 'st-wait');
+  loadYT().then(function () {
+    players.D = new YT.Player('mD', {
+      width: '224', height: '224', host: 'https://www.youtube.com',
+      playerVars: { autoplay: 1, rel: 0, playsinline: 1, modestbranding: 1 },
+      events: {
+        onReady: function () { log('D', 'onReady -> loadVideoById'); try { players.D.loadVideoById(VID); } catch (e) { log('D', 'ERR ' + e); } },
+        onStateChange: function (ev) { log('D', 'state ' + ev.data); if (ev.data === 1) setStatus('D', 'PLAYING', 'st-play'); },
+        onError: function (ev) { log('D', 'ERROR code ' + ev.data); setStatus('D', 'ERROR ' + ev.data, 'st-fail'); }
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

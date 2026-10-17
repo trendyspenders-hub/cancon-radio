@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://i.scdn.co https://upload.wikimedia.org https://commons.wikimedia.org https://audiomack.com https://*.audiomack.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://bandcamp.com https://w.soundcloud.com https://audiomack.com https://*.audiomack.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.vercel.app https://www.youtube.com https://cancon-data-gate.vercel.app; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com https://w.soundcloud.com">
+<script>window.DATA_API="https://cancon-data-gate.vercel.app";</script><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CanCon Radio — Site Admin</title>
+<style>
+:root{--night:#14110c;--night2:#1c1811;--cream:#f3ead0;--dim:#b7ac8f;--faint:#7d745e;
+--signal:#e0451f;--gold:#e8c565;--ok:#7fb069;--line:rgba(243,234,208,.14)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--night);color:var(--cream);font:14px/1.55 "Helvetica Neue",Arial,sans-serif;min-height:100vh}
+.mono{font-family:"SF Mono",Menlo,monospace;font-size:12px}
+header{display:flex;align-items:baseline;gap:1rem;padding:1rem 1.5rem;border-bottom:1px solid var(--line)}
+h1{font-size:1.1rem}h1 b{color:var(--signal)}
+header .mono{color:var(--faint);margin-left:auto}
+header button{margin-left:1rem}
+main{padding:1.25rem 1.5rem 4rem;max-width:1180px}
+section{margin-bottom:2.2rem}
+h2{font-family:"SF Mono",Menlo,monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem}
+.card{background:var(--night2);border:1px solid var(--line);border-radius:.55rem;padding:.7rem .8rem}
+.card b{display:block;font-size:1.25rem}
+.card span{font-family:"SF Mono",Menlo,monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{font-family:"SF Mono",Menlo,monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:left;padding:.4rem .6rem;border-bottom:1px solid var(--line)}
+td{padding:.4rem .6rem;border-bottom:1px solid rgba(243,234,208,.06)}
+button{font:inherit;cursor:pointer;border-radius:999px;padding:.32rem .9rem;border:1px solid rgba(243,234,208,.3);background:transparent;color:var(--cream)}
+button:hover{background:var(--cream);color:var(--night)}
+button.run{border-color:var(--signal);color:var(--signal)}
+button.run:hover{background:var(--signal);color:#fff}
+button:disabled{opacity:.35;cursor:default}
+button:disabled:hover{background:transparent;color:var(--cream)}
+input{font:inherit;background:var(--night2);color:var(--cream);border:1px solid var(--line);border-radius:.4rem;padding:.45rem .7rem}
+.msg{font-size:.85rem;color:var(--gold);min-height:1.2em;margin-bottom:.6rem}
+#login{max-width:340px;margin:14vh auto;background:var(--night2);border:1px solid var(--line);border-radius:.8rem;padding:2rem}
+#login h2{margin-bottom:1rem}
+#login input{width:100%;margin-bottom:.7rem}
+.badge{font-family:"SF Mono",Menlo,monospace;font-size:.62rem;letter-spacing:.08em;color:var(--faint)}
+.feed{font-size:.78rem;color:var(--dim)}
+.ok{color:var(--ok)}.bad{color:var(--signal)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.4rem}
+.dot.on{background:var(--ok)}.dot.off{background:var(--faint)}
+.dot.run{background:var(--gold);animation:pulse 1.2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.flags{display:flex;flex-wrap:wrap;gap:.4rem}
+.flag{font-family:"SF Mono",Menlo,monospace;font-size:.62rem;letter-spacing:.08em;padding:.25rem .6rem;border-radius:999px;border:1px solid var(--line);color:var(--dim)}
+.flag.done{border-color:rgba(127,176,105,.5);color:var(--ok)}
+.totop{position:fixed;right:1.2rem;bottom:1.2rem;opacity:.5}
+</style></head><body>
+<header><h1>CANCON <b>SITE ADMIN</b></h1><span class="mono" id="clock"></span>
+<button onclick="signOut()">Sign out</button></header>
+<div id="login">
+  <h2>Sign in</h2>
+  <div class="msg" id="loginmsg"></div>
+  <input id="lemail" type="email" placeholder="email" autocomplete="username">
+  <input id="lpass" type="password" placeholder="password" autocomplete="current-password">
+  <button style="width:100%" onclick="doLogin()">Sign in</button>
+</div>
+<main id="panel" style="display:none">
+
+<section><h2>Fleet <span class="badge">— what the harvest Mac is doing right now</span></h2>
+<div class="cards" id="fleet"></div></section>
+
+<section><h2>Overview</h2><div class="cards" id="cards"></div></section>
+
+<section><h2>Harvest waves <span class="badge">— sequential queue, one YouTube consumer at a time</span></h2>
+<div class="flags" id="flags"></div></section>
+
+<section><h2>Re-scrape jobs <span class="badge">— queued here, executed by the harvest Mac within ~1 min</span></h2>
+<div class="msg" id="runmsg"></div>
+<table id="jobs"><thead><tr><th>Job</th><th>Kind</th><th>State</th><th>Last result</th><th></th></tr></thead><tbody></tbody></table></section>
+
+<section><h2>Queue &amp; results</h2><div class="feed mono" id="feed">…</div></section>
+</main>
+<script>
+var CREDS = JSON.parse(sessionStorage.getItem("ccr_site_admin") || "null");
+/* key -> [label, kind]; must match admin/dashboard.py RUNNERS keys + the gate allowlist */
+var JOBS = {
+  "deep-channel":["Whole-channel deep pass","youtube"],
+  "official-yt":["Official-channel pass","youtube"],
+  "dead-check":["Dead-track check (8k)","youtube"],
+  "radar":["New-releases radar","youtube"],
+  "additions-wave":["Additions wave (1.5K verified artists)","youtube"],
+  "candidates-wave":["Candidates wave (10K new artists)","youtube"],
+  "audiomack-canada":["Audiomack Canada pass","heavy"],
+  "setlists":["Setlist.fm histories","heavy"],
+  "discogs":["Discogs pass","heavy"],
+  "genres-mb":["MusicBrainz genre crawl","heavy"],
+  "spotify-join":["Spotify ID join (Premium-gated)","heavy"],
+  "imc":["IMC weekly chart","charts"],
+  "billboard":["Billboard charts (14 slugs)","charts"],
+  "spinitron":["Campus playlists (Spinitron)","charts"],
+  "charts-match":["Re-link charts to tracks","charts"],
+  "mb-works":["MB works ISWC pass","metadata"],
+  "mb-releases":["MB release barcodes","metadata"],
+  "events":["Concerts (Ticketmaster)","metadata"],
+  "derived":["Derived data","metadata"],
+  "lyrics":["Lyrics pass (LRClib, free)","metadata"],
+  "push":["Push results to GitHub","maintenance"]
+};
+var WAVES = [
+  ["harvest_complete","Main artists.txt (20.9K)"],
+  ["backfill_complete","Backfill (6.6K)"],
+  ["additions_complete","Additions wave (1.5K)"],
+  ["candidates_complete","Candidates wave (10K)"],
+  ["canadianbands_complete","CanadianBands wave (277)"],
+  ["mundial_complete","Mundial Montreal wave (70)"],
+  ["discovery_complete","Discovery wave (1,451: labels/agencies/archives)"],
+  ["explicit_complete","Explicit backfill"],
+  ["rpm_complete","RPM OCR"],
+  ["earshot_complete","!earshot campus"],
+  ["discogs_complete","Discogs"],
+  ["awards2_complete","Awards DBs"],
+  ["awards3_complete","Awards round 3"],
+  ["musiccanada_complete","Certifications"],
+  ["polaris_complete","Polaris"],
+  ["factor_complete","FACTOR"]
+];
+var $ = function(s){return document.querySelector(s)};
+var fmt = function(n){return n==null?"—":Number(n).toLocaleString("en-CA")};
+function authHeaders(){return {"Content-Type":"application/json","X-Admin-Key":CREDS.password,"X-Admin-Email":CREDS.email}}
+async function gate(action, opts){
+  var r = await fetch(window.DATA_API + "/api/admin/" + action, opts);
+  return r.json();
+}
+async function doLogin(){
+  var email = $("#lemail").value.trim(), password = $("#lpass").value;
+  var r = await gate("login", {method:"POST", headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email:email, password:password})});
+  if (r.ok){ CREDS = {email:email, password:password};
+    sessionStorage.setItem("ccr_site_admin", JSON.stringify(CREDS));
+    showPanel();
+  } else { $("#loginmsg").textContent = "Invalid credentials."; }
+}
+function signOut(){
+  sessionStorage.removeItem("ccr_site_admin");
+  location.reload();
+}
+function showPanel(){
+  $("#login").style.display = "none"; $("#panel").style.display = "";
+  refresh(); setInterval(refresh, 12000);
+}
+async function refresh(){
+  var s = await gate("state", {headers: authHeaders()}).catch(function(){return null});
+  if (!s || s.error){ $("#runmsg").textContent = s && s.error ? ("⚠ " + s.error + " — sign in again") : "⚠ gate unreachable"; return; }
+  var stats = await fetch(window.DATA_API + "/api/data/stats.json").then(function(r){return r.json()}).catch(function(){return {}});
+  var hb = await gate("heartbeat", {headers: authHeaders()}).catch(function(){return null});
+  var pipe = await gate("pipeline", {headers: authHeaders()}).catch(function(){return null});
+  $("#clock").textContent = "live · " + new Date().toTimeString().slice(0,8);
+
+  /* fleet: actually-running jobs from the Mac heartbeat */
+  var running = (hb && hb.running) || [];
+  var hbAge = hb && hb.ts ? Math.round((Date.now() - new Date(hb.ts).getTime()) / 60000) : null;
+  var fleet = [["Harvest Mac", hbAge == null ? "no signal" : (hbAge < 3 ? "● online" : "● last seen " + hbAge + "m ago"), hbAge != null && hbAge < 3],
+    ["Jobs running now", running.length ? running.length : "idle", running.length > 0]];
+  if (running.length) fleet.push(["Active", running.map(function(k){return JOBS[k] ? JOBS[k][0] : k}).join(" · "), true]);
+  $("#fleet").innerHTML = fleet.map(function(c){
+    return '<div class="card"><b style="font-size:.95rem">' + c[1] + '</b><span>' + c[0] + '</span></div>';
+  }).join("");
+
+  /* overview cards */
+  var cards = [["Songs (all platforms)",fmt(stats.songs_all)],["YouTube catalog",fmt(stats.tracks)],
+    ["Artists on site",fmt(stats.artists)],["Union members",fmt(stats.datasets && stats.datasets.union_members)],
+    ["Newly verified",fmt(stats.datasets && stats.datasets.new_artists)],
+    ["Charted songs",fmt(stats.charted)],["Number ones",fmt(stats.number_ones)],
+    ["Release", pipe && pipe.status && pipe.status.release ? ("v" + pipe.status.release.version) : "—"]];
+  $("#cards").innerHTML = cards.map(function(c){return '<div class="card"><b>'+c[1]+'</b><span>'+c[0]+'</span></div>'}).join("");
+
+  /* harvest wave flags from the repo */
+  var flags = (pipe && pipe.flags) || {};
+  $("#flags").innerHTML = WAVES.map(function(w){
+    var done = !!flags[w[0]];
+    return '<span class="flag' + (done ? " done" : "") + '">' + (done ? "✓ " : "… ") + w[1] + '</span>';
+  }).join("");
+
+  /* jobs table */
+  var lastResult = {};
+  s.results.forEach(function(r){ lastResult[r.job] = r; });
+  var rows = Object.keys(JOBS).map(function(k){
+    var j = JOBS[k], on = running.indexOf(k) !== -1;
+    var lr = lastResult[k];
+    var state, cls = "";
+    if (on) { state = "running"; }
+    else if (lr && lr.note === "YouTube budget busy") { state = "busy"; }
+    else { state = "idle"; }
+    var last = lr ? ((lr.ok ? "✓ " : "✗ ") + lr.ts.slice(5,16) + " " + (lr.note || "")) : "never";
+    if (lr && !lr.ok) cls = "bad";
+    else if (lr && lr.ok) cls = "ok";
+    return '<tr><td>'+j[0]+'</td><td class="badge">'+j[1]+'</td>'+
+      '<td class="mono" style="font-size:.7rem">'+(on?'<span class="dot run"></span>':state)+'</td>'+
+      '<td class="mono ' + cls + '" style="font-size:.68rem">'+last+'</td>'+
+      '<td><button class="run" '+(on?"disabled":"")+' onclick="runJob(\''+k+'\')">Run</button></td></tr>';
+  });
+  /* running jobs first */
+  rows.sort(function(a,b){ return (b.indexOf("dot run")!==-1) - (a.indexOf("dot run")!==-1); });
+  $("#jobs tbody").innerHTML = rows.join("");
+
+  var feed = [];
+  s.queue.slice(-8).forEach(function(q){feed.push("queued  " + q.ts.slice(5,16) + "  " + q.job)});
+  s.results.slice(-10).reverse().forEach(function(r){feed.push((r.ok?"✓ ":"✗ ") + r.ts.slice(5,16) + "  " + r.job + " — " + (r.note||""))});
+  $("#feed").innerHTML = feed.join("<br>") || "nothing yet";
+}
+async function runJob(k){
+  var r = await gate("run", {method:"POST", headers:authHeaders(), body:JSON.stringify({job:k})});
+  $("#runmsg").textContent = r.error ? ("⚠ " + r.error) : ("Queued " + k + " — the harvest Mac picks it up within a minute");
+  setTimeout(refresh, 2500);
+}
+if (CREDS) showPanel();
+</script></body></html>
