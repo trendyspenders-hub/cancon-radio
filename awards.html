@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="canonical" href="https://canconradio.com/awards.html">
+<link rel="alternate" hreflang="en" href="https://canconradio.com/awards.html">
+<link rel="alternate" hreflang="fr" href="https://canconradio.com/awards.html?lang=fr">
+<link rel="alternate" hreflang="x-default" href="https://canconradio.com/awards.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://i.scdn.co https://upload.wikimedia.org https://commons.wikimedia.org https://audiomack.com https://*.audiomack.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://bandcamp.com https://w.soundcloud.com https://audiomack.com https://*.audiomack.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.vercel.app https://www.youtube.com https://cancon-data-gate.vercel.app; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com https://w.soundcloud.com">
+<script>window.DATA_API="https://cancon-data-gate.vercel.app";</script>
+<meta property="og:title" content="The Canadian Music Awards Library — CanCon Radio">
+<meta property="og:description" content="JUNO, ADISQ, ECMA, Polaris and more: searchable winners and nominees across every Canadian award in the archive, with gaps labelled honestly.">
+<meta property="og:site_name" content="CanCon Radio">
+<meta property="og:image" content="https://canconradio.com/assets/share-card.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Canadian Music Awards Library — CanCon Radio</title>
+<meta name="description" content="JUNO, ADISQ, ECMA, Polaris and more: searchable winners and nominees across every Canadian award in the archive, with gaps labelled honestly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png?v=4">
+<link rel="icon" href="assets/favicon-dark.ico?v=4" sizes="any">
+<link rel="icon" type="image/png" href="assets/icon-192.png?v=4">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=4">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="stylesheet" href="styles.fc052118.css">
+<style>
+  .aw-head{padding-top:10.5rem;padding-bottom:.4rem}
+  .aw-head .h1{font-size:clamp(2rem,4.4vw,3.8rem)}
+  .abar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:1.4rem 0 .6rem}
+  .abar input[type="search"]{flex:1;min-width:min(320px,100%);background:rgba(0,0,0,.3);
+    border:1px solid rgba(243,234,208,.25);border-radius:999px;padding:.7rem 1.2rem;
+    color:var(--cream);font:inherit;font-size:.95rem}
+  .abar input[type="search"]:focus{outline:none;border-color:var(--signal)}
+  .abar select{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--cream);background:var(--panel,#1d1712);border:1px solid rgba(243,234,208,.22);
+    border-radius:999px;padding:.5rem .9rem;cursor:pointer}
+
+  .orggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.3rem}
+  .orgcard{border:1px solid rgba(243,234,208,.13);border-radius:var(--r-lg);padding:1.25rem 1.35rem;
+    background:linear-gradient(165deg,rgba(38,33,26,.85),rgba(28,24,17,.92));transition:border-color .2s}
+  .orgcard:hover{border-color:rgba(224,69,31,.5)}
+  .orgcard h3{font-family:var(--disp);font-weight:700;font-size:1.1rem}
+  .orgcard .oc-sub{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:.35rem}
+  .orgcard p{font-size:.78rem;color:var(--cream-dim);line-height:1.55;margin-top:.5rem}
+  .orgcard .oc-years{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.8rem}
+  .orgcard .yr{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;padding:.3rem .6rem;
+    border-radius:999px;border:1px solid rgba(243,234,208,.2);color:var(--cream-dim);cursor:pointer;background:none}
+  .orgcard .yr:hover{border-color:var(--signal);color:var(--signal)}
+  .orgcard details{margin-top:.7rem}
+  .orgcard summary{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--faint);cursor:pointer}
+  .orgcard summary:hover{color:var(--signal)}
+  .oc-browse{margin-top:.9rem;display:inline-block;font-family:var(--mono);font-size:.56rem;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--signal);background:none;border:none;
+    cursor:pointer;padding:0;text-decoration:underline}
+
+  .feat3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.3rem}
+  .featc{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:10.5rem;
+    border:1px solid rgba(243,234,208,.14);border-radius:var(--r-lg);padding:1.2rem 1.3rem;cursor:pointer;
+    color:inherit;overflow:hidden;background-size:cover;background-position:center 30%;
+    background-color:rgba(20,17,12,.76);background-blend-mode:darken;transition:border-color .2s}
+  .featc:hover{border-color:rgba(224,69,31,.65)}
+  .featc .tag{font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .featc b{display:block;font-family:var(--disp);font-weight:700;font-size:1.15rem;margin:.4rem 0 .25rem;text-shadow:0 1px 10px rgba(10,8,6,.85)}
+  .featc span{font-size:.78rem;line-height:1.5;color:var(--cream-dim);text-shadow:0 1px 8px rgba(10,8,6,.9)}
+
+  .awmeta{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--faint);margin:1.4rem 0 .4rem;min-height:1rem}
+  .awmeta b{color:var(--gold);font-weight:500}
+  .yrgroup{margin:1.1rem 0 .3rem}
+  .yrgroup h4{font-family:var(--disp);font-weight:700;font-size:1.15rem;color:var(--gold)}
+  .awlist{list-style:none;padding:0;margin:.2rem 0 0}
+  .awlist li{display:grid;grid-template-columns:6.5rem 1fr auto;gap:.9rem;align-items:center;
+    padding:.6rem .5rem;border-top:1px solid rgba(243,234,208,.09)}
+  .awlist li .st{font-family:var(--mono);font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;
+    padding:.28rem .6rem;border-radius:999px;border:1px solid rgba(243,234,208,.18);color:var(--cream-dim);
+    text-align:center;white-space:nowrap}
+  .awlist li.won .st{border-color:rgba(232,197,101,.6);color:var(--gold)}
+  .awlist li.won b{color:var(--gold)}
+  .awlist li .cat{font-size:.62rem;color:var(--faint);margin-top:.15rem;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase}
+  .awlist li .wh{text-align:right;font-size:.72rem;color:var(--cream-dim)}
+  .dstep{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--gold);background:none;border:1px solid rgba(232,197,101,.45);border-radius:999px;
+    padding:.42rem .9rem;cursor:pointer}
+  .dstep:hover{background:var(--gold);color:var(--night)}
+  .anone{border:1px dashed rgba(243,234,208,.25);border-radius:var(--r-lg);padding:2rem 1.5rem;
+    text-align:center;color:var(--cream-dim);font-size:.9rem;margin-top:1rem}
+
+  .covgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.2rem}
+  .covgrid>div{border:1px solid rgba(243,234,208,.12);border-radius:var(--r-lg);padding:1.2rem 1.35rem}
+  .covgrid h4{font-family:var(--disp);font-weight:700;font-size:1rem;margin-bottom:.4rem}
+  .covgrid p{font-size:.82rem;color:var(--cream-dim);line-height:1.6}
+
+  body.day .abar input[type="search"]{background:rgba(255,255,255,.6);border-color:rgba(25,23,18,.25);color:#191712}
+  body.day .abar select{background:#f7f0df;border-color:rgba(25,23,18,.25);color:#191712}
+  body.day .orgcard{background:linear-gradient(165deg,#fbf5e6,#f3ebd6);border-color:rgba(25,23,18,.16)}
+  body.day .orgcard p{color:#57503f}
+  body.day .featc{background-color:rgba(244,237,216,.88)}
+  body.day .awlist li{border-color:rgba(25,23,18,.1)}
+  body.day .covgrid>div{border-color:rgba(25,23,18,.14)}
+  body.day .anone{border-color:rgba(25,23,18,.3)}
+  @media (max-width:900px){
+    .orggrid,.feat3,.covgrid{grid-template-columns:1fr}
+    .awlist li{grid-template-columns:5.5rem 1fr;gap:.5rem}
+    .awlist li .wh{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="wm" href="index.html"><img decoding="async" class="wmi" src="assets/wordmark-cream.png" alt="CanCon Radio"></a>
+  <details class="nmore nburger">
+      <summary class="nl" data-fr="Menu">Menu</summary>
+      <div class="nmore-menu nburger-menu">
+        <a href="radio.html" data-fr="Écouter">Listen</a>
+        <a href="discover.html" data-fr="Découvrir">Discover</a>
+        <a href="charts.html" data-fr="Palmarès">Charts</a>
+        <a href="videos.html" data-fr="Vidéos">Videos</a>
+        <a href="shows.html" data-fr="Spectacles">Shows</a>
+        <a href="blog.html" data-fr="Journal">Journal</a>
+        <a href="awards.html" data-fr="Prix">Awards</a>
+        <a href="directory.html" data-fr="Répertoire">Directory</a>
+        <a href="games.html" data-fr="Jeux">Games</a>
+        <a href="search.html" data-fr="Recherche">Search</a>
+        <a href="account.html" data-fr="Compte">Account</a>
+      </div>
+    </details>
+    <div class="nlinks">
+    <a class="nl" href="radio.html" data-fr="Écouter">Listen</a>
+    <a class="nl" href="discover.html" data-fr="Découvrir">Discover</a>
+    <a class="nl" href="charts.html" data-fr="Palmarès">Charts</a>
+    <a class="nl" href="videos.html" data-fr="Vidéos">Videos</a>
+    <a class="nl" href="shows.html" data-fr="Spectacles">Shows</a>
+    <details class="nmore">
+      <summary class="nl" data-fr="Plus">More</summary>
+      <div class="nmore-menu">
+        <a href="blog.html" data-fr="Journal">Journal</a>
+        <a class="on" href="awards.html" data-fr="Prix">Awards</a>
+        <a href="directory.html" data-fr="Répertoire">Directory</a>
+        <a href="games.html" data-fr="Jeux">Games</a>
+        <a href="advertise.html" data-fr="Annoncer">Advertise</a>
+        <a href="press.html" data-fr="Presse">Press</a>
+      </div>
+    </details>
+    <a class="nl" href="search.html" data-fr="Recherche">Search</a>
+    <a class="nbtn" href="account.html" data-fr="Compte">Account</a>
+    <button class="lang" data-lang-toggle aria-label="Switch language / Changer de langue"><b>EN</b> · FR</button>
+    <button class="nbtn theme-tgl" aria-pressed="false" aria-label="Switch to day mode" data-fr-aria="Basculer en mode jour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2.5 12h2M19.5 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+</nav>
+
+<header class="aw-head">
+  <div class="wrap">
+    <span class="eyebrow rv" data-fr="LA BIBLIOTHÈQUE DES PRIX"><i></i>THE AWARDS LIBRARY</span>
+    <h1 class="h1 rv rv-d1" style="margin-top:1.1rem" data-fr="Les honneurs de la musique<br><span class=&quot;it&quot;>canadienne.</span>">Canadian music honours,<br><span class="it">year by year.</span></h1>
+    <p class="lede rv rv-d2" style="margin-top:.9rem" data-fr="Recherchez un artiste et voyez chaque nomination documentée, toutes cérémonies confondues. Les lacunes de couverture sont indiquées honnêtement.">Search an artist and see every documented nomination across every ceremony. Coverage gaps are labelled, not hidden.</p>
+    <div class="abar rv rv-d2">
+      <input id="fQ" type="search" placeholder="Search an artist — try &quot;Anne Murray&quot;, &quot;Drake&quot;, &quot;Karkwa&quot;…" data-fr-ph="Rechercher un artiste — essayez « Anne Murray », « Drake », « Karkwa »…" aria-label="Search artists across awards" data-fr-aria="Rechercher un artiste dans les prix">
+      <select id="fAward" aria-label="Award" data-fr-aria="Prix"></select>
+      <select id="fYear" aria-label="Year" data-fr-aria="Année"></select>
+      <select id="fResult" aria-label="Result" data-fr-aria="Résultat">
+        <option value="" data-fr="Tous les résultats">All results</option>
+        <option value="won" data-fr="Gagnants seulement">Winners only</option>
+        <option value="nominated" data-fr="Nominés seulement">Nominees only</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<section class="wrap">
+  <p class="awmeta" id="awMeta" style="margin-top:0">…</p>
+  <div id="awGroups"></div>
+  <div class="anone" id="awNone" style="display:none" data-fr="Aucun résultat — essayez un autre nom ou élargissez les filtres.">No results — try another name or widen the filters.</div>
+  <button class="dstep" id="awMore" type="button" style="display:none;margin-top:1.2rem">LOAD MORE</button>
+</section>
+
+<section class="wrap">
+  <span class="eyebrow rv" data-fr="EXPLORER LES CÉRÉMONIES"><i></i>EXPLORE THE ORGANIZATIONS</span>
+  <div class="orggrid rv" id="orgGrid"></div>
+</section>
+
+<section class="wrap">
+  <span class="eyebrow rv" data-fr="SÉLECTIONS"><i></i>FEATURED COLLECTIONS</span>
+  <div class="feat3 rv" id="featGrid"></div>
+</section>
+
+<section class="wrap" style="padding-bottom:8rem">
+  <span class="eyebrow rv" data-fr="COUVERTURE ET SOURCES"><i></i>COVERAGE &amp; SOURCES</span>
+  <div class="covgrid rv">
+    <div>
+      <h4 data-fr="Ce que contient l'archive">What this archive contains</h4>
+      <p data-fr="Des enregistrements de nominations telles que publiées : artiste, catégorie, cérémonie, année et résultat (gagnant ou nominé). Les totaux varient selon les cérémonies parce que la couverture varie — pas nécessairement parce qu'il manque des données.">Nomination records as published: artist, category, ceremony, year and result (winner or nominee). Totals differ between ceremonies because coverage differs — not necessarily because data is missing.</p>
+    </div>
+    <div>
+      <h4 data-fr="Années manquantes et lacunes">Missing years and gaps</h4>
+      <p data-fr="« Année non consignée » signifie que la source consultée ne précisait pas la cérémonie : l'entrée reste visible, séparée des années datées. Une année absente de la liste signifie pas encore dans cette archive — pas qu'aucune cérémonie n'a eu lieu.">“Year not recorded” means the consulted source didn't name the ceremony: the entry stays visible, separate from dated years. A year absent from a list means not yet in this archive — not that no ceremony happened.</p>
+    </div>
+    <div>
+      <h4 data-fr="Artistes, albums, chansons, vidéos">Artists, albums, songs, videos</h4>
+      <p data-fr="Les catégories distinguent les récompenses d'artistes, d'albums, de chansons, de vidéoclips et de professionnels de l'industrie. Les crédits partagés sont regroupés sous chaque lauréat nommé.">Categories distinguish artist, album, song, music-video and industry honours. Joint credits are listed under each named recipient.</p>
+    </div>
+    <div>
+      <h4 data-fr="Statut d'une cérémonie récente">Status of a recent ceremony</h4>
+      <p data-fr="Les nominés annoncés avant les résultats apparaissent comme « Nominé »; le statut « Gagnant » n'est appliqué que lorsque le résultat est publié et vérifié.">Nominees announced before results appear as “Nominee”; “Winner” is applied only once a result is published and verified.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html"><img decoding="async" class="foot-logo" src="assets/wordmark-cream.png" alt="CanCon Radio" style="height:2.1rem;width:auto"></a>
+        <p style="font-size:.83rem;color:var(--cream-dim);margin-top:.7rem;max-width:30ch" data-fr="La carte de la musique canadienne. Chaque artiste, chaque palmarès, chaque crédit.">The map of Canadian music. Every artist, every chart, every credit.</p>
+      </div>
+      <div><h5 data-fr="La station">Station</h5><a href="radio.html" data-fr="Radio">Radio</a><a href="discover.html" data-fr="Découvrir">Discover</a><a href="charts.html" data-fr="Palmarès">Charts</a><a href="videos.html" data-fr="Vidéos">Videos</a><a href="shows.html" data-fr="Spectacles">Shows</a></div>
+      <div><h5 data-fr="Explorer">Explore</h5><a href="search.html" data-fr="Rechercher">Search</a><a href="blog.html" data-fr="Journal">Journal</a><a href="directory.html" data-fr="Répertoire">Directory</a><a href="awards.html" data-fr="Prix">Awards</a><a href="games.html" data-fr="Jeux">Games</a></div>
+      <div><h5 data-fr="La promesse">The promise</h5><span style="display:block;font-size:.83rem;color:var(--cream-dim);max-width:22ch" data-fr="CHAQUE FICHE PORTE SA SOURCE">EVERY ENTRY CARRIES ITS SOURCE</span></div>
+    </div>
+    <div class="foot-note">
+      <span>© 2026 CANCON RADIO</span>
+      <span data-fr="Partenaires : <a href=&quot;https://grantsgpt.ca&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GrantsGPT</a> · <a href=&quot;https://industrysift.lovable.app&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>IndustrySift</a>">Partners: <a href="https://grantsgpt.ca" target="_blank" rel="noopener">GrantsGPT</a> · <a href="https://industrysift.lovable.app" target="_blank" rel="noopener">IndustrySift</a></span>
+      <span data-fr="Développé par <a href=&quot;https://freelanceflint.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Freelance Flint</a>">Developed by <a href="https://freelanceflint.com" target="_blank" rel="noopener">Freelance Flint</a></span>
+      <span><a href="terms.html" style="display:inline" data-fr="Conditions ↗">Terms ↗</a> &nbsp;·&nbsp; <a href="advertise.html" style="display:inline" data-fr="Annoncer ↗">Advertise ↗</a> &nbsp;·&nbsp; <a href="index.html" style="display:inline" data-fr="← RETOUR À L'ANTENNE">← BACK TO THE FRONT</a></span>
+      <span data-fr="CHAQUE FAIT A UNE SOURCE">EVERY FACT HAS A SOURCE</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.2c564900.js"></script>
+<script>
+(function () {
+  "use strict";
+  function fr() { return document.documentElement.lang === "fr"; }
+  function t(en, f) { return fr() ? f : en; }
+  function fmt(n) { return Number(n || 0).toLocaleString(fr() ? "fr-CA" : "en-CA"); }
+  function norm(s) { return String(s || "").toLowerCase().trim(); }
+  var SHOW_LONG = {"ADISQ":"ADISQ Awards","JUNO":"JUNO Awards","CCMA":"Canadian Country Music Association Awards",
+    "ECMA":"East Coast Music Awards","CIMA":"Canadian Independent Music Awards",
+    "CFMA":"Canadian Folk Music Awards","WCMA":"Western Canadian Music Awards",
+    "Prism":"Prism Prize","GAMIQ":"GAMIQ Awards","Maple Blues":"Maple Blues Awards",
+    "Polaris":"Polaris Music Prize","IMC":"Indigenous Music Countdown",
+    "NWT Music Awards":"NWT Music Awards","MIA":"Music Industry Association Awards",
+    "RADARTS":"RADARTS Awards","ROSEQ":"ROSEQ Awards"};
+  function longOf(a) { return SHOW_LONG[a] || a; }
+
+  var state = { q: "", award: "", year: "", result: "" };
+  function readURL() {
+    var u = new URLSearchParams(location.search);
+    state.q = u.get("q") || "";
+    state.award = u.get("award") || "";
+    state.year = u.get("year") || "";
+    state.result = u.get("result") || "";
+  }
+  function writeURL() {
+    var u = new URLSearchParams();
+    if (state.q) u.set("q", state.q);
+    if (state.award) u.set("award", state.award);
+    if (state.year) u.set("year", state.year);
+    if (state.result) u.set("result", state.result);
+    history.replaceState(null, "", location.pathname + (u.toString() ? "?" + u.toString() : ""));
+  }
+
+  /* ---------- load the awards dataset (letter shards by artist) ---------- */
+  var rows = [];
+  var loaded = false;
+  function load() {
+    var letters = "abcdefghijklmnopqrstuvwxyz".split("").concat(["_other"]);
+    return Promise.all(letters.map(function (L) {
+      return fetch(window.DATA_API + "/api/data/search/awards/" + L + ".json")
+        .then(function (r) { return r.ok ? r.json() : []; })
+        .catch(function () { return []; });
+    })).then(function (chunks) {
+      rows = [];
+      chunks.forEach(function (c) { rows = rows.concat(c || []); });
+      loaded = true;
+    });
+  }
+
+  /* ---------- org cards ---------- */
+  function renderOrgs() {
+    var byAward = {};
+    rows.forEach(function (r) {
+      (byAward[r.award] = byAward[r.award] || []).push(r);
+    });
+    var grid = document.getElementById("orgGrid");
+    grid.innerHTML = "";
+    Object.keys(byAward).sort(function (a, b) { return byAward[b].length - byAward[a].length; }).forEach(function (aw) {
+      var list = byAward[aw];
+      var dated = list.filter(function (r) { return r.year != null; });
+      var undated = list.length - dated.length;
+      var years = {};
+      dated.forEach(function (r) { years[r.year] = 1; });
+      var ylist = Object.keys(years).sort();
+      var span = ylist.length ? ylist[0] + "–" + ylist[ylist.length - 1] : null;
+      var gaps = [];
+      if (ylist.length > 1) {
+        for (var y = +ylist[0]; y <= +ylist[ylist.length - 1]; y++) {
+          if (!years[y]) gaps.push(y);
+        }
+      }
+      var card = document.createElement("div");
+      card.className = "orgcard";
+      var sub = [];
+      if (span) sub.push(t("Ceremonies on file: ", "Cérémonies au fichier : ") + span);
+      sub.push(fmt(list.length) + " " + t("records", "fiches"));
+      if (undated) sub.push(undated + " " + t("undated", "sans date"));
+      card.innerHTML = "<h3></h3><div class='oc-sub'></div><p></p>";
+      card.querySelector("h3").textContent = longOf(aw);
+      card.querySelector(".oc-sub").textContent = sub.join(" · ");
+      var p = card.querySelector("p");
+      if (!ylist.length) p.textContent = t("Year not recorded for this collection — entries are kept separate from dated ceremonies.",
+                                           "Année non consignée pour cette collection — les entrées restent séparées des cérémonies datées.");
+      else if (gaps.length) p.textContent = t("Gaps in this archive: ", "Lacunes dans cette archive : ") + gaps.slice(0, 6).join(", ") + (gaps.length > 6 ? "…" : "") + ".";
+      else p.textContent = t("No year gaps in this archive.", "Aucune lacune d'année dans cette archive.");
+
+      var yearsBox = document.createElement("div");
+      yearsBox.className = "oc-years";
+      var recent = ylist.slice(-5);
+      recent.forEach(function (y) {
+        yearsBox.appendChild(yearChip(aw, y));
+      });
+      if (ylist.length > 5) {
+        var det = document.createElement("details");
+        var sum = document.createElement("summary");
+        sum.textContent = t("View all " + ylist.length + " years", "Voir toutes les années (" + ylist.length + ")");
+        det.appendChild(sum);
+        var rest = document.createElement("div");
+        rest.className = "oc-years";
+        ylist.slice(0, -5).reverse().forEach(function (y) { rest.appendChild(yearChip(aw, y)); });
+        det.appendChild(rest);
+        card.appendChild(yearsBox);
+        card.appendChild(det);
+      } else card.appendChild(yearsBox);
+
+      var browse = document.createElement("button");
+      browse.className = "oc-browse";
+      browse.type = "button";
+      browse.textContent = t("Browse the whole archive →", "Parcourir toute l'archive →");
+      browse.addEventListener("click", function () {
+        state.award = aw; state.year = "";
+        document.getElementById("fAward").value = aw;
+        document.getElementById("fYear").value = "";
+        renderBrowse(true);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      card.appendChild(browse);
+      grid.appendChild(card);
+    });
+    fillFilters();
+    renderFeat();
+  }
+  function yearChip(aw, y) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "yr";
+    var n = rows.filter(function (r) { return r.award === aw && String(r.year) === String(y); }).length;
+    b.textContent = y + " (" + n + ")";
+    b.addEventListener("click", function () {
+      state.award = aw; state.year = String(y);
+      document.getElementById("fAward").value = aw;
+      document.getElementById("fYear").value = String(y);
+      renderBrowse(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    return b;
+  }
+
+  function fillFilters() {
+    var fa = document.getElementById("fAward");
+    fa.innerHTML = "";
+    var all = document.createElement("option");
+    all.value = ""; all.textContent = t("All award shows", "Toutes les cérémonies");
+    fa.appendChild(all);
+    Object.keys(byAwardCounts()).sort().forEach(function (aw) {
+      var o = document.createElement("option");
+      o.value = aw;
+      o.textContent = longOf(aw) + " (" + fmt(byAwardCounts()[aw]) + ")";
+      fa.appendChild(o);
+    });
+    fa.value = state.award;
+    fillYears();
+  }
+  var _counts = null;
+  function byAwardCounts() {
+    if (_counts) return _counts;
+    _counts = {};
+    rows.forEach(function (r) { _counts[r.award] = (_counts[r.award] || 0) + 1; });
+    return _counts;
+  }
+  function fillYears() {
+    var fy = document.getElementById("fYear");
+    var years = {};
+    rows.forEach(function (r) {
+      if (state.award && r.award !== state.award) return;
+      if (r.year != null) years[r.year] = 1;
+    });
+    var ylist = Object.keys(years).sort();
+    var sig = state.award + "|" + ylist.length;
+    if (fy.getAttribute("data-sig") !== sig) {
+      fy.setAttribute("data-sig", sig);
+      fy.innerHTML = "";
+      var all = document.createElement("option");
+      all.value = ""; all.textContent = t("All years", "Toutes les années");
+      fy.appendChild(all);
+      ylist.forEach(function (y) {
+        var o = document.createElement("option");
+        o.value = y; o.textContent = y;
+        fy.appendChild(o);
+      });
+    }
+    fy.value = state.year;
+  }
+
+  /* ---------- featured collections ---------- */
+  function renderFeat() {
+    var FEATS = [
+      { tag: "LISTEN", tagFr: "À ÉCOUTER", n: "Listen to the winners", nf: "Écoutez les gagnants",
+        d: "Every documented winner across all ceremonies.", df: "Chaque gagnant documenté, toutes cérémonies.",
+        result: "won", award: "" },
+      { tag: "THE LONG VIEW", tagFr: "LA LONGUE VUE", n: "ADISQ, ceremony by ceremony", nf: "L'ADISQ, cérémonie par cérémonie",
+        d: "The deepest archive in the collection.", df: "L'archive la plus profonde de la collection.",
+        result: "", award: "ADISQ" },
+      { tag: "ON SCREEN", tagFr: "À L'ÉCRAN", n: "Prism Prize videos", nf: "Vidéos du Prix Prism",
+        d: "Canada's music-video honours, category by category.", df: "Les honneurs du vidéoclip canadien, catégorie par catégorie.",
+        result: "", award: "Prism" }
+    ];
+    var grid = document.getElementById("featGrid");
+    grid.innerHTML = "";
+    FEATS.forEach(function (f) {
+      var a = document.createElement("a");
+      a.className = "featc";
+      a.href = "#";
+      a.style.backgroundImage = "url(assets/scenes/card-charts.jpg)";
+      a.innerHTML = "<span class='tag'></span><b></b><span></span>";
+      a.querySelector(".tag").setAttribute("data-fr", f.tagFr);
+      a.querySelector(".tag").textContent = f.tag;
+      a.querySelector("b").setAttribute("data-fr", f.nf);
+      a.querySelector("b").textContent = f.n;
+      a.querySelector("span:last-child").setAttribute("data-fr", f.df);
+      a.querySelector("span:last-child").textContent = f.d;
+      a.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        state.result = f.result; state.award = f.award; state.year = ""; state.q = "";
+        document.getElementById("fQ").value = "";
+        document.getElementById("fAward").value = f.award;
+        document.getElementById("fResult").value = f.result;
+        fillYears();
+        renderBrowse(true);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      grid.appendChild(a);
+    });
+  }
+
+  /* ---------- browse rendering ---------- */
+  var shown = 0, PAGE = 120, current = [];
+  function compute() {
+    var qn = norm(state.q);
+    return rows.filter(function (r) {
+      if (state.award && r.award !== state.award) return false;
+      if (state.year && String(r.year) !== String(state.year)) return false;
+      if (state.result && r.result !== state.result) return false;
+      if (qn && norm(r.artist).indexOf(qn) === -1) return false;
+      return true;
+    }).sort(function (a, b) {
+      return (b.year || 0) - (a.year || 0) || norm(a.artist).localeCompare(norm(b.artist));
+    });
+  }
+  function rowEl(r) {
+    var li = document.createElement("li");
+    li.className = r.result === "won" ? "won" : "";
+    var st = document.createElement("span");
+    st.className = "st";
+    st.textContent = r.result === "won" ? t("WINNER", "GAGNANT") : t("NOMINEE", "NOMINÉ");
+    var mid = document.createElement("div");
+    var b = document.createElement("b");
+    b.textContent = r.artist;
+    var cat = document.createElement("div");
+    cat.className = "cat";
+    cat.textContent = (r.category || "") + " · " + longOf(r.award);
+    mid.appendChild(b); mid.appendChild(cat);
+    var wh = document.createElement("div");
+    wh.className = "wh";
+    wh.textContent = r.year != null ? r.year : t("Year not recorded", "Année non consignée");
+    li.appendChild(st); li.appendChild(mid); li.appendChild(wh);
+    return li;
+  }
+  function renderBrowse(scrollTop) {
+    writeURL();
+    current = compute();
+    shown = 0;
+    var groups = document.getElementById("awGroups");
+    groups.innerHTML = "";
+    document.getElementById("awNone").style.display = current.length ? "none" : "";
+    appendBrowse();
+    var meta = document.getElementById("awMeta");
+    meta.innerHTML = "";
+    var b = document.createElement("b");
+    b.textContent = fmt(current.length) + " " + t("RECORDS", "FICHES");
+    meta.appendChild(b);
+    var bits = [];
+    if (state.award) bits.push(longOf(state.award));
+    if (state.year) bits.push(state.year);
+    if (state.result === "won") bits.push(t("winners only", "gagnants seulement"));
+    if (state.result === "nominated") bits.push(t("nominees only", "nominés seulement"));
+    if (state.q) bits.push("“" + state.q + "”");
+    if (bits.length) meta.appendChild(document.createTextNode(" · " + bits.join(" · ")));
+    if (scrollTop) window.scrollTo({ top: 0 });
+  }
+  function appendBrowse() {
+    var groups = document.getElementById("awGroups");
+    var stop = Math.min(shown + PAGE, current.length);
+    var lastKey = groups.lastChild && groups.lastChild.getAttribute("data-y");
+    for (var i = shown; i < stop; i++) {
+      var r = current[i];
+      var key = r.year != null ? String(r.year) : "undated";
+      if (key !== lastKey) {
+        var g = document.createElement("div");
+        g.className = "yrgroup";
+        g.setAttribute("data-y", key);
+        var h = document.createElement("h4");
+        h.textContent = r.year != null ? r.year : t("Year not recorded", "Année non consignée");
+        g.appendChild(h);
+        var ul = document.createElement("ul");
+        ul.className = "awlist";
+        g.appendChild(ul);
+        groups.appendChild(g);
+        lastKey = key;
+      }
+      groups.lastChild.querySelector(".awlist").appendChild(rowEl(r));
+    }
+    shown = stop;
+    var more = document.getElementById("awMore");
+    more.style.display = shown < current.length ? "" : "none";
+    if (shown) more.textContent = t("LOAD MORE (" + fmt(shown) + " OF " + fmt(current.length) + ")",
+                                    "AFFICHER PLUS (" + fmt(shown) + " SUR " + fmt(current.length) + ")");
+  }
+  document.getElementById("awMore").addEventListener("click", appendBrowse);
+
+  /* ---------- controls ---------- */
+  var qTimer = null;
+  document.getElementById("fQ").addEventListener("input", function (e) {
+    clearTimeout(qTimer);
+    qTimer = setTimeout(function () { state.q = e.target.value.trim(); renderBrowse(); }, 200);
+  });
+  document.getElementById("fAward").addEventListener("change", function (e) {
+    state.award = e.target.value; state.year = "";
+    fillYears();
+    renderBrowse();
+  });
+  document.getElementById("fYear").addEventListener("change", function (e) {
+    state.year = e.target.value;
+    renderBrowse();
+  });
+  document.getElementById("fResult").addEventListener("change", function (e) {
+    state.result = e.target.value;
+    renderBrowse();
+  });
+  var langBtn = document.querySelector("[data-lang-toggle]");
+  if (langBtn) langBtn.addEventListener("click", function () {
+    setTimeout(function () { renderOrgs(); renderBrowse(); }, 0);
+  });
+
+  /* ---------- boot ---------- */
+  readURL();
+  document.getElementById("fQ").value = state.q;
+  document.getElementById("fResult").value = state.result;
+  load().then(function () {
+    renderOrgs();
+    document.getElementById("fAward").value = state.award;
+    fillYears();
+    document.getElementById("fYear").value = state.year;
+    renderBrowse();
+  });
+})();
+</script>
+</body>
+</html>
