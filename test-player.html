@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://i.scdn.co https://upload.wikimedia.org https://commons.wikimedia.org https://audiomack.com https://*.audiomack.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://bandcamp.com https://w.soundcloud.com https://audiomack.com https://*.audiomack.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.vercel.app https://www.youtube.com https://cancon-data-gate.vercel.app; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com https://w.soundcloud.com">
+<script>window.DATA_API="https://cancon-data-gate.vercel.app";</script><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Player Diagnostic — CanCon Radio</title>
+<style>
+body{background:#14100d;color:#f2e9dc;font:14px/1.5 Helvetica,Arial,sans-serif;padding:2rem;max-width:1100px;margin:auto}
+h1{font-size:1.3rem} .box{border:1px solid rgba(242,233,220,.2);border-radius:.6rem;padding:1rem;margin:1rem 0}
+.status{font:700 12px ui-monospace,monospace;padding:.3rem .6rem;border-radius:4px;display:inline-block;margin-top:.5rem}
+.st-wait{background:#444}.st-play{background:#2c7a3f}.st-fail{background:#a33327}
+button{font:inherit;padding:.5rem 1rem;border-radius:999px;border:1px solid rgba(242,233,220,.3);background:none;color:#f2e9dc;cursor:pointer}
+</style></head><body>
+<h1>YouTube embed diagnostic</h1>
+<p>This page isolates which embed style your browser accepts. Press <b>Run all tests</b>, wait ~20s, then the results show green (played), red (failed), grey (no signal). Send the owner a screenshot of this page.</p>
+<button id="go">Run all tests</button>
+<div id="report" style="margin:1rem 0;font:700 13px ui-monospace,monospace"></div>
+
+<div class="box"><b>1. Plain iframe — youtube-nocookie.com</b> (our current host)
+<iframe id="f1" width="320" height="180" src="https://www.youtube-nocookie.com/embed/dDLiVwpv89s?playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="status st-wait" id="s1">waiting</div></div>
+
+<div class="box"><b>2. Plain iframe — www.youtube.com</b> (regular host)
+<iframe id="f2" width="320" height="180" src="https://www.youtube.com/embed/dDLiVwpv89s?playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="status st-wait" id="s2">waiting</div></div>
+
+<div class="box"><b>3. IFrame API player — nocookie host</b> (our engine style)
+<div id="p3" style="width:320px;height:180px"></div>
+<div class="status st-wait" id="s3">waiting</div></div>
+
+<div class="box"><b>4. IFrame API player — regular host</b>
+<div id="p4" style="width:320px;height:180px"></div>
+<div class="status st-wait" id="s4">waiting</div></div>
+
+<script>
+var VID = 'dDLiVwpv89s';   /* Alanis Morissette - Thank U */
+var results = {};
+function setStatus(n, txt, cls) {
+  var el = document.getElementById('s' + n);
+  el.textContent = txt;
+  el.className = 'status ' + cls;
+  results[n] = txt;
+  var lines = [];
+  for (var k = 1; k <= 4; k++) if (results[k]) lines.push('test ' + k + ': ' + results[k]);
+  document.getElementById('report').innerHTML = lines.join('<br>');
+}
+/* plain iframes: we can only detect the thumbnail/error screen indirectly —
+   poll player state via postMessage is unavailable cross-origin, so instead
+   check document visibility of a "play" marker: we listen for the API players
+   (3,4) which we CAN observe. For iframes (1,2) we rely on the API twin. */
+function makeApi(n, elId, host) {
+  return new Promise(function (resolve) {
+    var t0 = Date.now();
+    var player = new YT.Player(elId, {
+      width: '320', height: '180',
+      host: host,
+      videoId: VID,
+      playerVars: { autoplay: 1, rel: 0, playsinline: 1, modestbranding: 1 },
+      events: {
+        onReady: function () { setStatus(n, 'ready — starting…', 'st-wait'); try { player.playVideo(); } catch (e) {} },
+        onStateChange: function (ev) {
+          if (ev.data === YT.PlayerState.PLAYING) { setStatus(n, 'PLAYING ✓ (' + ((Date.now()-t0)/1000).toFixed(1) + 's)', 'st-play'); resolve('playing'); }
+          if (ev.data === YT.PlayerState.PAUSED) setStatus(n, 'paused (autoplay refused — tap inside)', 'st-wait');
+        },
+        onError: function (ev) { setStatus(n, 'ERROR code ' + ev.data, 'st-fail'); resolve('error ' + ev.data); }
+      }
+    });
+    setTimeout(function () { resolve('timeout'); if (!results[n] || /waiting|ready/.test(results[n])) setStatus(n, 'no signal in 25s (blocked/stall)', 'st-fail'); }, 25000);
+  });
+}
+document.getElementById('go').addEventListener('click', function () {
+  this.disabled = true; this.textContent = 'Running…';
+  /* load the API once, then create both API players */
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+  window.onYouTubeIframeAPIReady = function () {
+    makeApi(3, 'p3', 'https://www.youtube-nocookie.com');
+    makeApi(4, 'p4', 'https://www.youtube.com');
+  };
+  /* iframes 1+2: mark that they loaded at all */
+  setTimeout(function () {
+    [1, 2].forEach(function (n) {
+      var f = document.getElementById('f' + n);
+      try { setStatus(n, f && f.contentWindow ? 'iframe loaded (see image above — playing or error screen?)' : 'iframe blocked', f && f.contentWindow ? 'st-wait' : 'st-fail'); }
+      catch (e) { setStatus(n, 'iframe present (cross-origin, check image)', 'st-wait'); }
+    });
+  }, 8000);
+});
+</script>
+</body></html>

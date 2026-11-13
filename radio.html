@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="canonical" href="https://canconradio.com/radio.html">
+<link rel="alternate" hreflang="en" href="https://canconradio.com/radio.html">
+<link rel="alternate" hreflang="fr" href="https://canconradio.com/radio.html?lang=fr">
+<link rel="alternate" hreflang="x-default" href="https://canconradio.com/radio.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://i.scdn.co https://upload.wikimedia.org https://commons.wikimedia.org https://audiomack.com https://*.audiomack.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://bandcamp.com https://w.soundcloud.com https://audiomack.com https://*.audiomack.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.vercel.app https://www.youtube.com https://cancon-data-gate.vercel.app; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com https://w.soundcloud.com">
+<script>window.DATA_API="https://cancon-data-gate.vercel.app";</script>
+<meta property="og:title" content="Radio — CanCon Radio | Canadian Music Player">
+<meta property="og:description" content="Stream Canadian music by scene, era, region and honours. Every play runs through the artist's official channel, so every listen pays them.">
+<meta property="og:site_name" content="CanCon Radio">
+<meta property="og:image" content="https://canconradio.com/assets/share-card.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radio — CanCon Radio | Canadian Music Player</title>
+<meta name="description" content="Stream Canadian music by scene, era, region and honours. Every play runs through the artist's official channel, so every listen pays them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png?v=4">
+<link rel="icon" href="assets/favicon-dark.ico?v=4" sizes="any">
+<link rel="icon" type="image/png" href="assets/icon-192.png?v=4">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=4">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="stylesheet" href="styles.fc052118.css">
+<style>
+  /* stacked deck: video on top, id row beside a small thumb, playlist full-width below */
+  .deck-stack{grid-template-columns:1fr!important;max-width:1020px}
+  .deck-stack .deck-idrow{display:flex;gap:1.4rem;align-items:flex-start;margin-top:1.4rem}
+  .deck-stack .deck-art{position:static;width:132px;height:132px;flex:none;border-radius:1rem;
+    box-shadow:0 18px 44px -18px rgba(0,0,0,.9)}
+  .deck-stack .deck-idtext{min-width:0;flex:1}
+  .deck-stack .deck-mid .h1{font-size:clamp(1.9rem,3.4vw,3rem)}
+  .deck-stack .rail{position:static;max-width:860px}
+  @media (max-width:640px){
+    .deck-stack .deck-idrow{flex-direction:column}
+    .deck-stack .deck-art{width:96px;height:96px}
+  }
+  /* the needle dial is now a clean scene grid: same .dial/.nums hooks, none of the cramp */
+  .tuner .dial{height:auto;cursor:default;margin:0}
+  .tuner .dial:active{cursor:default}
+  .tuner .dial .ticks,.tuner .dial .needle{display:none}
+  .tuner .dial .nums{position:static;display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center}
+  .tuner .dial .nums span{position:static;display:inline-block;font:inherit;font-family:var(--mono);
+    font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-dim);
+    border:1px solid rgba(243,234,208,.22);border-radius:999px;padding:.48rem .85rem;
+    cursor:pointer;transition:all .18s;transform:none;opacity:1}
+  .tuner .dial .nums span:hover{border-color:var(--signal);color:var(--signal)}
+  .tuner .dial .nums span.on{border-color:var(--signal);color:var(--signal);background:rgba(224,69,31,.12)}
+  .tuner .readout{margin-top:1rem;text-align:center}
+  .tuner .finetune{justify-content:center}
+  @media (max-width:780px){.tuner .dial .nums{justify-content:flex-start}}
+  /* real transport: app.js binds mock handlers to .transport, so the live
+     one carries its own class with the same visual rules */
+  .ccr-tr{display:flex;align-items:center;gap:.85rem;margin-top:1.8rem;flex-wrap:wrap}
+  .ccr-tr input[type=range]{width:92px;accent-color:var(--signal);align-self:center}
+  .preset{cursor:pointer}
+  .preset.on .ptile{outline:2px solid var(--signal);outline-offset:3px}
+  .pv{cursor:pointer}
+  .pv.on{border-color:var(--signal)}
+  .pv.on b{color:var(--signal)}
+  #ccrQueue .q .qa img{width:100%;height:100%;object-fit:cover;display:block}
+  /* coming-up-next panel: clean scrollable rows, nothing overlaps */
+  #ccrQueue{max-height:min(46vh,420px);overflow-y:auto;display:flex;flex-direction:column;gap:.12rem;padding-right:.35rem;margin-top:.5rem}
+  #ccrQueue .q{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:.6rem;align-items:center;
+    padding:.32rem .4rem;border-radius:.4rem;border-bottom:none;flex-wrap:nowrap}
+  #ccrQueue .q:hover{background:rgba(243,234,208,.06)}
+  #ccrQueue .q.now{outline:1px solid rgba(224,69,31,.55)}
+  #ccrQueue .q .qa{width:36px;height:36px;border-radius:.32rem;overflow:hidden;flex:none}
+  #ccrQueue .q>div{min-width:0}
+  #ccrQueue .q b{display:block;font-size:.78rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #ccrQueue .q span{display:block;font-size:.6rem;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.08rem}
+  #ccrQueue .qm{font-family:var(--mono);font-size:.58rem;color:var(--faint);margin-left:0}
+  .ccrnote{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--faint);margin-top:1rem}
+  #ccrDeckArt{width:100%;aspect-ratio:1;border-radius:var(--r-xl);overflow:hidden}
+  #ccrDeckArt svg,#ccrDeckArt img{width:100%;height:100%;object-fit:cover;display:block}
+  #ccrBar{display:none}
+  @media (max-width:780px){.ccr-tr input[type=range]{display:none}
+    .ccr-tr .tb:not(.big){display:none}.ccr-tr .tb.big{width:3.6rem;height:3.6rem}}
+  /* mobile: the needle dial is a drag interaction; stations become tappable
+     chips instead (built from the same dial state) */
+  .dial-chips{display:none;flex-wrap:wrap;gap:.35rem;margin:.2rem 0 .6rem}
+  .dial-chips .dc{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;
+    text-transform:uppercase;padding:.4rem .6rem;border:1px solid rgba(243,234,208,.25);
+    border-radius:999px;background:transparent;color:var(--cream)}
+  .dial-chips .dc.on{border-color:var(--signal);color:var(--signal)}
+  @media (max-width:780px){
+    .big-dial-sec .dial{display:none}
+    .dial-chips{display:flex}
+    .freq-win{flex-direction:row;gap:.8rem;align-items:baseline}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="wm" href="index.html"><img decoding="async" class="wmi" src="assets/wordmark-cream.png" alt="CanCon Radio"></a>
+  <details class="nmore nburger">
+      <summary class="nl" data-fr="Menu">Menu</summary>
+      <div class="nmore-menu nburger-menu">
+        <a href="radio.html" data-fr="Écouter">Listen</a>
+        <a href="discover.html" data-fr="Découvrir">Discover</a>
+        <a href="charts.html" data-fr="Palmarès">Charts</a>
+        <a href="videos.html" data-fr="Vidéos">Videos</a>
+        <a href="shows.html" data-fr="Spectacles">Shows</a>
+        <a href="blog.html" data-fr="Journal">Journal</a>
+        <a href="awards.html" data-fr="Prix">Awards</a>
+        <a href="directory.html" data-fr="Répertoire">Directory</a>
+        <a href="games.html" data-fr="Jeux">Games</a>
+        <a href="search.html" data-fr="Recherche">Search</a>
+        <a href="account.html" data-fr="Compte">Account</a>
+      </div>
+    </details>
+    <div class="nlinks">
+    <a class="nl on" href="radio.html" data-fr="Écouter">Listen</a>
+    <a class="nl" href="discover.html" data-fr="Découvrir">Discover</a>
+    <a class="nl" href="charts.html" data-fr="Palmarès">Charts</a>
+    <a class="nl" href="videos.html" data-fr="Vidéos">Videos</a>
+    <a class="nl" href="shows.html" data-fr="Spectacles">Shows</a>
+    <details class="nmore">
+      <summary class="nl" data-fr="Plus">More</summary>
+      <div class="nmore-menu">
+        <a href="blog.html" data-fr="Journal">Journal</a>
+        <a href="awards.html" data-fr="Prix">Awards</a>
+        <a href="directory.html" data-fr="Répertoire">Directory</a>
+        <a href="games.html" data-fr="Jeux">Games</a>
+        <a href="advertise.html" data-fr="Annoncer">Advertise</a>
+        <a href="press.html" data-fr="Presse">Press</a>
+      </div>
+    </details>
+    <a class="nl" href="search.html" data-fr="Recherche">Search</a>
+    <a class="nbtn" href="account.html" data-fr="Compte">Account</a>
+    <button class="lang" data-lang-toggle aria-label="Switch language / Changer de langue"><b>EN</b> · FR</button>
+    <button class="nbtn theme-tgl" aria-pressed="false" aria-label="Switch to day mode" data-fr-aria="Basculer en mode jour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2.5 12h2M19.5 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+</nav>
+
+<!-- DECK -->
+<header class="deck">
+  <div class="wrap deck-grid deck-stack">
+    <div class="deck-mid">
+      <div id="ccrStage" style="aspect-ratio:16/9;width:min(100%,860px);background:#0d0a08;border-radius:.8rem;overflow:hidden;margin-top:.4rem;display:none;position:relative;box-shadow:0 24px 60px -24px rgba(0,0,0,.9)"></div>
+      <div class="deck-idrow">
+        <div class="deck-art rv"><span id="ccrDeckArt"></span></div>
+        <div class="deck-idtext">
+          <img decoding="async" class="wmi arc-logo rv" src="assets/wordmark-cream.png" alt="CanCon Radio">
+          <span class="eyebrow rv" data-fr="PRÊT À ÉMETTRE"><i></i>READY TO BROADCAST</span>
+          <h1 class="h1 rv rv-d1" style="margin-top:.9rem" id="ccrNowTitle" data-fr="RÉGLEZ LA STATION">TUNE THE STATION</h1>
+          <p class="deck-who rv rv-d2" id="ccrNowArtist">CANCON RADIO</p>
+          <div class="chips rv rv-d2" id="ccrNowChips"></div>
+          <div id="ccrNowMeta" style="margin-top:.6rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);display:flex;flex-wrap:wrap;gap:.4rem 1.1rem"></div>
+          <div class="ccr-tr rv rv-d3">
+            <button class="tb" id="ccrPrev" aria-label="Previous" data-fr-aria="Précédent"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 20 9 12l10-8v16z"/><rect x="4.5" y="5" width="2" height="14" rx="0.6"/></svg></button>
+            <button class="tb big" id="ccrPlay" aria-label="Play" data-fr-aria="Lecture"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+            <button class="tb" id="ccrNext" aria-label="Next" data-fr-aria="Suivant"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 4l10 8-10 8V4z"/><rect x="17.5" y="5" width="2" height="14" rx="0.6"/></svg></button>
+            <input type="range" id="ccrVol" min="0" max="100" value="80" aria-label="Volume" data-fr-aria="Volume">
+          </div>
+          <p class="ccrnote" id="ccrDeckNote" data-fr="Chargement de l'index…">Loading the index…</p>
+        </div>
+      </div>
+    </div>
+    <aside class="rail rv rv-d2">
+      <h4><span data-fr="À VENIR">COMING UP NEXT</span><em id="ccrQueueCount"></em></h4>
+      <div id="ccrQueue"></div>
+    </aside>
+  </div>
+</header>
+
+<!-- BIG DIAL -->
+<section class="big-dial-sec">
+  <div class="wrap">
+    <div class="sec-head"><div>
+      <span class="eyebrow rv" data-fr="RÉGLEZ LA STATION">TUNE THE STATION</span>
+      <h2 class="h2 rv rv-d1" style="margin-top:1.1rem" data-fr="Réglez le <span class=&quot;it&quot;>cadran.</span>">Set <span class="it">the dial.</span></h2>
+    </div>
+      <p class="lede rv rv-d2" style="max-width:38ch" data-fr="Choisissez une scène ou réglez par région. Tout passe par la chaîne officielle de l'artiste : chaque écoute le paie.">Pick a scene or tune by region. Everything plays through the artist's official channel, so every play pays them.</p>
+    </div>
+    <div class="rv rv-d2">
+      <div class="eras">
+        <button class="era on" data-fr="TOUT">ALL</button><button class="era">1950s</button><button class="era">1960s</button>
+        <button class="era">1970s</button><button class="era">1980s</button><button class="era">1990s</button>
+        <button class="era">2000s</button><button class="era">2010s</button><button class="era">2020s</button>
+      </div>
+      <div class="tuner">
+        <div class="tuner-core">
+          <div class="dial" aria-valuemin="0" aria-valuemax="22" aria-valuenow="0">
+            <div class="ticks"></div>
+            <div class="nums"><span data-fr="Tout">All</span><span data-fr="Rock">Rock</span><span>Pop</span><span>Indie</span><span data-fr="Folk">Folk</span><span data-fr="Country">Country</span><span>Hip-hop</span><span>R&amp;B</span><span data-fr="Funk &amp; Disco">Funk &amp; Disco</span><span>Soul</span><span data-fr="Gospel">Gospel</span><span>Blues</span><span>Jazz</span><span data-fr="Électro">Electronic</span><span data-fr="Ambiant">Ambient</span><span data-fr="Métal">Metal</span><span>Punk</span><span>New Wave</span><span>Reggae</span><span>Latin</span><span>K-Pop &amp; Global</span><span data-fr="Classique">Classical</span><span data-fr="Autochtones">Indigenous</span></div>
+            <div class="needle"></div>
+          </div>
+          <div class="dial-chips" id="ccrDialChips" role="group" aria-label="Stations"></div>
+          <div class="readout">
+            <span><span data-fr="RÉGLÉ SUR">NOW TUNED TO</span> <b data-freq>All<em> FM</em></b></span>
+            <span id="ccrQueueTotal"></span>
+            <div class="finetune" style="display:flex;flex-wrap:wrap;gap:.4rem .9rem;align-items:center;margin-top:.7rem">
+              <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;color:var(--faint);text-transform:uppercase" data-fr="Affiner :">Fine tune:</span>
+              <span class="ft-era" style="display:flex;flex-wrap:wrap;gap:.3rem"></span>
+              <span class="ft-prov" style="display:flex;flex-wrap:wrap;gap:.3rem"></span>
+              <span class="ft-hon" style="display:flex;flex-wrap:wrap;gap:.3rem"></span>
+              <button class="ft-mv" id="ccrMvOnly" aria-pressed="false" data-fr="Vidéoclips seulement">Music videos only</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESCRIBE THE SOUND -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div>
+      <span class="eyebrow rv" data-fr="LA LIGNE DE REQUÊTES">THE REQUEST LINE</span>
+      <h2 class="h2 rv rv-d1" style="margin-top:1.1rem" data-fr="Demandez une chanson,<br><span class=&quot;it&quot;>ou un son.</span>">Ask for a song,<br><span class="it">or a sound.</span></h2>
+    </div>
+      <p class="lede rv rv-d2" style="max-width:36ch" data-fr="Un titre, un artiste, une époque, une ville, une scène. On cherche dans le catalogue et on passe la demande.">A track, an artist, an era, a city, a scene. We search the catalogue and put your request on.</p>
+    </div>
+    <div class="finder rv" style="margin-top:0">
+      <label class="box">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="#f3ead0" stroke-width="1.4"/><path d="M11 11l3.4 3.4" stroke="#f3ead0" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <input id="ccrDescIn" type="search" placeholder="franco punk from the 90s, halifax folk, juno winners from toronto…" data-fr-ph="punk franco des années 90, folk d'Halifax, lauréats JUNO de Toronto…" aria-label="Describe the sound you want" data-fr-aria="Décrivez le son recherché">
+      </label>
+      <button class="cta" id="ccrDescGo" data-fr="Trouver <span class=&quot;orb&quot;>▶</span>">Find it <span class="orb">▶</span></button>
+    </div>
+    <p class="rv" style="margin-top:.9rem;font-size:.85rem;color:var(--cream-dim)" data-fr="Nommez un son, une scène, une époque, une ville. On règle les curseurs.">Name a sound, a scene, an era, a city. We set the dials.</p>
+    <div class="dchips rv rv-d1" id="ccrDescEx" style="margin-top:1.2rem">
+      <button class="dchip">franco rock</button>
+      <button class="dchip">90s punk</button>
+      <button class="dchip">platinum pop from the 80s</button>
+      <button class="dchip">juno winners from toronto</button>
+    </div>
+    <div class="chips rv rv-d2" id="ccrDescParsed" style="margin:1.4rem 0 .5rem"></div>
+    <p class="rv" id="ccrDescNote" style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)"></p>
+    <div id="ccrDescResults" style="margin-top:1.1rem"></div>
+  </div>
+</section>
+
+<!-- PRESETS -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div>
+      <span class="eyebrow rv" data-fr="STATIONS PRÉRÉGLÉES · TOUCHEZ POUR RÉGLER">PRESET STATIONS · TAP TO TUNE</span>
+      <h2 class="h2 rv rv-d1" style="margin-top:1.1rem" data-fr="Trente-six scènes, empilées comme des disques.">Thirty-six scenes, stacked like<br>records.</h2>
+    </div></div>
+    <div class="presets rv rv-d2" id="ccrPresets">
+      <div class="preset" data-preset="northern-bars" style="--rot:-2deg"><div class="ptile"><img decoding="async" src="assets/presets/northern-bars.png" alt="Northern Bars cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 01">Preset 01</span><h3>Northern Bars</h3><p data-fr="Hip-hop et R&amp;B canadiens, d'un océan à l'autre">Canadian hip-hop &amp; R&amp;B, coast to coast</p></div>
+      <div class="preset" data-preset="maritime" style="--rot:1.5deg"><div class="ptile"><img decoding="async" src="assets/presets/maritime-kitchen-party.png" alt="Maritime Kitchen Party cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 02">Preset 02</span><h3>Maritime Kitchen Party</h3><p data-fr="Folk et country de la côte Est">Folk &amp; country from the East Coast</p></div>
+      <div class="preset" data-preset="franco" style="--rot:-1deg"><div class="ptile"><img decoding="async" src="assets/presets/franco-classics.png" alt="Franco Classics cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 03">Preset 03</span><h3>Franco Classics</h3><p data-fr="Chanson et pop du Québec, en français et en esprit">Québec chanson and pop, in French in spirit</p></div>
+      <div class="preset" data-preset="deep-cuts" style="--rot:2deg"><div class="ptile"><img decoding="async" src="assets/presets/deep-cuts.png" alt="Deep Cuts cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 04">Preset 04</span><h3>Deep Cuts</h3><p data-fr="Aucun prix ni certification au dossier : les tablettes que le hit-parade a dépassées">No awards or certifications on file: the shelves the hit parade walked past</p></div>
+      <div class="preset" data-preset="indigenous" style="--rot:-1.5deg"><div class="ptile"><img decoding="async" src="assets/presets/indigenous-voices.png" alt="Indigenous Voices cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 05">Preset 05</span><h3>Indigenous Voices</h3><p data-fr="Artistes des Premières Nations, inuits et métis">First Nations, Inuit &amp; Métis artists</p></div>
+      <div class="preset" data-preset="fresh" style="--rot:1deg"><div class="ptile"><img decoding="async" src="assets/presets/fresh-pressings.png" alt="Fresh Pressings cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 06">Preset 06</span><h3>Fresh Pressings</h3><p data-fr="Nouveautés canadiennes, 2020 et après">New Canadian music, 2020 and up</p></div>
+
+      <div class="preset" data-preset="the-sixties" style="--rot:1.2deg"><div class="ptile"><img decoding="async" src="assets/presets/the-sixties.png" alt="The Sixties cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 07">Preset 07</span><h3>The Sixties</h3><p data-fr="Le Canada d'avant le palmarès RPM : chansons de 1969 et avant">Canada before the RPM charts: songs from 1969 and earlier</p></div>
+      <div class="preset" data-preset="the-seventies" style="--rot:-1.4deg"><div class="ptile"><img decoding="async" src="assets/presets/the-seventies.png" alt="The Seventies cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 08">Preset 08</span><h3>The Seventies</h3><p data-fr="Disco, folk et rock des années 70, de 1970 à 1979">Seventies disco, folk and rock, 1970 to 1979</p></div>
+      <div class="preset" data-preset="the-eighties" style="--rot:1.6deg"><div class="ptile"><img decoding="async" src="assets/presets/the-eighties.png" alt="The Eighties cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 09">Preset 09</span><h3>The Eighties</h3><p data-fr="Synthés, arena rock et new wave, de 1980 à 1989">Synths, arena rock and new wave, 1980 to 1989</p></div>
+      <div class="preset" data-preset="muchmusic-90s" style="--rot:-1.1deg"><div class="ptile"><img decoding="async" src="assets/presets/muchmusic-90s.png" alt="MuchMusic 90s cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 10">Preset 10</span><h3>MuchMusic 90s</h3><p data-fr="L'ère du clip, de 1990 à 1999 : le son que MuchMusic passait en boucle">The video era, 1990 to 1999: the sound MuchMusic played on loop</p></div>
+      <div class="preset" data-preset="the-2000s" style="--rot:1.3deg"><div class="ptile"><img decoding="async" src="assets/presets/the-2000s.png" alt="The 2000s cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 11">Preset 11</span><h3>The 2000s</h3><p data-fr="De 2000 à 2009 : le millénaire se met à chanter">2000 to 2009: the millennium finds its voice</p></div>
+      <div class="preset" data-preset="the-2010s" style="--rot:-1.7deg"><div class="ptile"><img decoding="async" src="assets/presets/the-2010s.png" alt="The 2010s cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 12">Preset 12</span><h3>The 2010s</h3><p data-fr="De 2010 à 2019 : la dernière décennie complète au dossier">2010 to 2019: the last full decade on file</p></div>
+      <div class="preset" data-preset="golden-era" style="--rot:1.1deg"><div class="ptile"><img decoding="async" src="assets/presets/golden-era.png" alt="Golden Era cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 13">Preset 13</span><h3>Golden Era</h3><p data-fr="Hip-hop d'avant 1998 : l'âge d'or du rap canadien">Hip-hop before 1998: the golden age of Canadian rap</p></div>
+      <div class="preset" data-preset="hot-100-era" style="--rot:-1.3deg"><div class="ptile"><img decoding="async" src="assets/presets/hot-100-era.png" alt="Hot 100 Era cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 14">Preset 14</span><h3>Hot 100 Era</h3><p data-fr="La pop qui visait le sommet des palmarès, toutes époques confondues">Chart-aiming pop across every era</p></div>
+      <div class="preset" data-preset="juno-singles" style="--rot:1.5deg"><div class="ptile"><img decoding="async" src="assets/presets/juno-singles.png" alt="Juno Singles cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 15">Preset 15</span><h3>JUNO Singles</h3><p data-fr="Les artistes nommés ou primés aux JUNO et ailleurs">Artists with JUNO nominations and wins, and beyond</p></div>
+      <div class="preset" data-preset="number-ones" style="--rot:-1.2deg"><div class="ptile"><img decoding="async" src="assets/presets/number-ones.png" alt="Number Ones cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 16">Preset 16</span><h3>Number Ones</h3><p data-fr="Certifiés or, platine ou diamant au Canada">Certified gold, platinum or diamond in Canada</p></div>
+      <div class="preset" data-preset="one-hit-wonders" style="--rot:1.4deg"><div class="ptile"><img decoding="async" src="assets/presets/one-hit-wonders.png" alt="One-Hit Wonders cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 17">Preset 17</span><h3>One-Hit Wonders</h3><p data-fr="Certifiés, mais jamais nominés : la renommée sans les trophées">Certified but never nominated: fame without the trophies</p></div>
+      <div class="preset" data-preset="lost-tapes" style="--rot:-1.6deg"><div class="ptile"><img decoding="async" src="assets/presets/lost-tapes.png" alt="Lost Tapes cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 18">Preset 18</span><h3>Lost Tapes</h3><p data-fr="Avant 2000, sans prix ni certification : l'archive oubliée">Pre-2000, no awards or certifications: the forgotten archive</p></div>
+      <div class="preset" data-preset="slow-burner" style="--rot:1.2deg"><div class="ptile"><img decoding="async" src="assets/presets/slow-burner.png" alt="Slow Burner cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 19">Preset 19</span><h3>Slow Burner</h3><p data-fr="Ambiances, folk et chanson : des disques qui prennent leur temps">Ambient, folk and chanson: records that take their time</p></div>
+      <div class="preset" data-preset="left-field" style="--rot:-1.4deg"><div class="ptile"><img decoding="async" src="assets/presets/left-field.png" alt="Left Field cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 20">Preset 20</span><h3>Left Field</h3><p data-fr="Experimental, noise et électroacoustique canadiens">Canadian experimental, noise and electroacoustic</p></div>
+      <div class="preset" data-preset="indie-all-dressed" style="--rot:1.6deg"><div class="ptile"><img decoding="async" src="assets/presets/indie-all-dressed.png" alt="Indie All Dressed cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 21">Preset 21</span><h3>Indie All Dressed</h3><p data-fr="Indie et alternative de partout au pays">Indie and alternative from across the country</p></div>
+      <div class="preset" data-preset="full-send" style="--rot:-1.1deg"><div class="ptile"><img decoding="async" src="assets/presets/full-send.png" alt="Full Send cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 22">Preset 22</span><h3>Full Send</h3><p data-fr="Punk, hardcore et metal : le Canada à plein volume">Punk, hardcore and metal: Canada at full volume</p></div>
+      <div class="preset" data-preset="prairie-static" style="--rot:1.3deg"><div class="ptile"><img decoding="async" src="assets/presets/prairie-static.png" alt="Prairie Static cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 23">Preset 23</span><h3>Prairie Static</h3><p data-fr="Alberta, Saskatchewan et Manitoba, sur la route des plaines">Alberta, Saskatchewan and Manitoba, out on the plains</p></div>
+      <div class="preset" data-preset="palmares-ckoi" style="--rot:-1.5deg"><div class="ptile"><img decoding="async" src="assets/presets/palmares-ckoi.png" alt="Palmarès CKOI cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 24">Preset 24</span><h3>Palmarès CKOI</h3><p data-fr="La pop québécoise qui domine les ondes">The Québec pop that rules the airwaves</p></div>
+      <div class="preset" data-preset="en-espanol" style="--rot:1.1deg"><div class="ptile"><img decoding="async" src="assets/presets/en-espanol.png" alt="En Español cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 25">Preset 25</span><h3>En Español</h3><p data-fr="Les scènes latino-canadiennes, en espagnol">Canada's Latin scenes, in Spanish</p></div>
+      <div class="preset" data-preset="rpm-gold" style="--rot:-1.3deg"><div class="ptile"><img decoding="async" src="assets/presets/rpm-gold.png" alt="RPM Gold cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 26">Preset 26</span><h3>RPM Gold</h3><p data-fr="L'ère du palmarès RPM, 1964 à 2000 : les disques certifiés de la première ère">The RPM chart era, 1964 to 2000: certified records of the first age</p></div>
+      <div class="preset" data-preset="coup-de-coeur" style="--rot:1.5deg"><div class="ptile"><img decoding="async" src="assets/presets/coup-de-coeur.png" alt="Coup de Coeur cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 27">Preset 27</span><h3>Coup de Coeur</h3><p data-fr="La relève francophone, depuis 2000">The francophone new generation, since 2000</p></div>
+      <div class="preset" data-preset="celtic" style="--rot:-1.6deg"><div class="ptile"><img decoding="async" src="assets/presets/celtic-shores.png" alt="Celtic Shores cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 28">Preset 28</span><h3>Celtic Shores</h3><p data-fr="Celtique, folk irlandais et punk celtique des Maritimes, de Cap-Breton à Terre-Neuve">Celtic, Irish folk and Celtic punk from the Maritimes, Cape Breton to Newfoundland</p></div>
+      <div class="preset" data-preset="island" style="--rot:1.8deg"><div class="ptile"><img decoding="async" src="assets/presets/island-sound.png" alt="Island Sound cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 29">Preset 29</span><h3>Island Sound</h3><p data-fr="Reggae, dancehall et ska canadiens, la diaspora caribéenne de Toronto à Vancouver">Canadian reggae, dancehall and ska, the Caribbean diaspora from Toronto to Vancouver</p></div>
+      <div class="preset" data-preset="bhangra" style="--rot:-1.2deg"><div class="ptile"><img decoding="async" src="assets/presets/bhangra-beats.png" alt="Bhangra Beats cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 30">Preset 30</span><h3>Bhangra Beats</h3><p data-fr="Le bhangra canadien et les scènes sud-asiatiques du pays">Canadian bhangra and the country's South Asian scenes</p></div>
+      <div class="preset" data-preset="latin" style="--rot:1.4deg"><div class="ptile"><img decoding="async" src="assets/presets/latin-canada.png" alt="Latin Canada cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 31">Preset 31</span><h3>Latin Canada</h3><p data-fr="Salsa, reggaeton et musiques latines des scènes canadiennes, Montréal à Vancouver">Salsa, reggaeton and Latin sounds from Canadian scenes, Montréal to Vancouver</p></div>
+      <div class="preset" data-preset="soul" style="--rot:-1.8deg"><div class="ptile"><img decoding="async" src="assets/presets/soul-canada.png" alt="Soul Canada cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 32">Preset 32</span><h3>Soul Canada</h3><p data-fr="Soul, R&amp;B, gospel et doo-wop noirs canadiens, quatre décennies de voix">Black Canadian soul, R&amp;B, gospel and doo-wop, four decades of voices</p></div>
+      <div class="preset" data-preset="night-drive" style="--rot:1.3deg"><div class="ptile"><img decoding="async" src="assets/presets/night-drive.png" alt="Night Drive cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 33">Preset 33</span><h3>Night Drive</h3><p data-fr="Électronique, house et synthés pour la route de nuit">Electronic, house and synths for the night road</p></div>
+      <div class="preset" data-preset="low-down" style="--rot:-1.5deg"><div class="ptile"><img decoding="async" src="assets/presets/low-down.png" alt="Low Down cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 34">Preset 34</span><h3>Low Down</h3><p data-fr="Blues et jazz canadiens, du club au disque">Canadian blues and jazz, from the club to the record</p></div>
+      <div class="preset" data-preset="country-roads" style="--rot:1.1deg"><div class="ptile"><img decoding="async" src="assets/presets/country-roads.png" alt="Country Roads cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 35">Preset 35</span><h3>Country Roads</h3><p data-fr="Country, bluegrass et americana d'un océan à l'autre">Country, bluegrass and americana, coast to coast</p></div>
+      <div class="preset" data-preset="true-north" style="--rot:-1.3deg"><div class="ptile"><img decoding="async" src="assets/presets/true-north.png" alt="True North cover" loading="lazy"></div><span class="tag" data-fr="Préréglage 36">Preset 36</span><h3>True North</h3><p data-fr="Yukon, Territoires du Nord-Ouest et Nunavut : le Nord à l'antenne">Yukon, the Northwest Territories and Nunavut: the North on the air</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div>
+      <span class="eyebrow rv" data-fr="CARTE DU SIGNAL">SIGNAL MAP</span>
+      <h2 class="h2 rv rv-d1" style="margin-top:1.1rem" data-fr="Réglez par région.">Tune by region.</h2>
+    </div>
+      <p class="lede rv rv-d2" style="max-width:34ch" data-fr="Artistes placés par province et territoire, à partir de profils sourcés, jamais devinés. Touchez une région pour vous brancher.">Artists placed by province and territory, from sourced profiles, never guessed. Tap a region to tune in.</p>
+    </div>
+    <div class="sigmap rv rv-d2" id="ccrMap"></div>
+    <p style="margin-top:1.1rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;
+      text-transform:uppercase;color:var(--faint)" data-fr="Les régions sont au niveau de l'artiste, d'après des profils sourcés, jamais devinées. Les totaux viennent de l'index chargé.">Region tags are artist-level, from sourced profiles, never guessed. Counts cover the loaded index.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html"><img decoding="async" class="foot-logo" src="assets/wordmark-cream.png" alt="CanCon Radio" style="height:2.1rem;width:auto"></a>
+        <p style="font-size:.83rem;color:var(--cream-dim);margin-top:.7rem;max-width:30ch" data-fr="La carte de la musique canadienne. Chaque artiste, chaque palmarès, chaque crédit.">The map of Canadian music. Every artist, every chart, every credit.</p>
+      </div>
+      <div><h5 data-fr="La station">Station</h5><a href="radio.html" data-fr="Radio">Radio</a><a href="discover.html" data-fr="Découvrir">Discover</a><a href="charts.html" data-fr="Palmarès">Charts</a><a href="videos.html" data-fr="Vidéos">Videos</a><a href="shows.html" data-fr="Spectacles">Shows</a></div>
+      <div><h5 data-fr="Explorer">Explore</h5><a href="search.html" data-fr="Rechercher">Search</a><a href="blog.html" data-fr="Journal">Journal</a><a href="directory.html" data-fr="Répertoire">Directory</a><a href="awards.html" data-fr="Prix">Awards</a><a href="games.html" data-fr="Jeux">Games</a></div>
+      <div><h5 data-fr="La promesse">The promise</h5><span style="display:block;font-size:.83rem;color:var(--cream-dim);max-width:22ch" data-fr="L'ÉMISSION NE S'ARRÊTE JAMAIS">THE BROADCAST NEVER STOPS</span></div>
+    </div>
+    <div class="foot-note">
+      <span>© 2026 CANCON RADIO</span>
+      <span data-fr="Partenaires : <a href=&quot;https://grantsgpt.ca&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GrantsGPT</a> · <a href=&quot;https://industrysift.lovable.app&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>IndustrySift</a>">Partners: <a href="https://grantsgpt.ca" target="_blank" rel="noopener">GrantsGPT</a> · <a href="https://industrysift.lovable.app" target="_blank" rel="noopener">IndustrySift</a></span>
+      <span data-fr="Développé par <a href=&quot;https://freelanceflint.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Freelance Flint</a>">Developed by <a href="https://freelanceflint.com" target="_blank" rel="noopener">Freelance Flint</a></span>
+      <span><a href="terms.html" style="display:inline" data-fr="Conditions ↗">Terms ↗</a> &nbsp;·&nbsp; <a href="advertise.html" style="display:inline" data-fr="Annoncer ↗">Advertise ↗</a> &nbsp;·&nbsp; <a href="index.html" style="display:inline" data-fr="← RETOUR À L'ANTENNE">← BACK TO THE FRONT</a></span>
+      <span data-fr="CHAQUE FAIT A UNE SOURCE">EVERY FACT HAS A SOURCE</span>
+    </div>
+  </div>
+</footer>
+
+<!-- sticky current-track bar -->
+<div class="miniplayer" id="ccrBar" role="region" aria-label="Now playing" data-fr-aria="À l'antenne">
+  <span class="mp-art" id="ccrBarArt"></span>
+  <div class="mp-meta"><b id="ccrBarTitle"></b><span id="ccrBarWho"></span></div>
+  <div class="mp-transport" style="display:flex;gap:.45rem;align-items:center">
+    <button class="tb" id="ccrBarPrev" aria-label="Previous" data-fr-aria="Précédent"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 20 9 12l10-8v16z"/><rect x="4.5" y="5" width="2" height="14" rx="0.6"/></svg></button>
+    <button class="tb big" id="ccrBarPlay" aria-label="Play" data-fr-aria="Lecture"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+    <button class="tb" id="ccrBarNext" aria-label="Next" data-fr-aria="Suivant"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 4l10 8-10 8V4z"/><rect x="17.5" y="5" width="2" height="14" rx="0.6"/></svg></button>
+  </div>
+  <a class="mp-open" href="directory.html" data-fr="PARCOURIR LE RÉPERTOIRE ↗">BROWSE THE DIRECTORY ↗</a>
+</div>
+
+<script src="player.e5b418e2.js"></script>
+<script src="app.2c564900.js"></script>
+<script>
+(function () {
+  "use strict";
+  var LANG = function () { return document.documentElement.lang === "fr"; };
+  function bil(el, en, fr) {
+    el.setAttribute("data-en", en);
+    el.setAttribute("data-fr", fr);
+    el.innerHTML = LANG() ? fr : en;
+    return el;
+  }
+  function txt(el, s) { el.textContent = s; }
+  function el(id) { return document.getElementById(id); }
+
+  var ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+  function vinylTile(seedText) {
+    var d = document.createElement("div");
+    d.style.cssText = "width:100%;height:100%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#3a3226,#171310 72%)";
+    var lab = document.createElement("span");
+    lab.style.cssText = "font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;color:#8d8471;text-transform:uppercase";
+    lab.textContent = (seedText || "CCR").replace(/[^a-z0-9 ]/gi, "").trim().split(/\s+/).map(function (w) { return w.slice(0, 1); }).join("").slice(0, 3).toUpperCase() || "CCR";
+    d.appendChild(lab);
+    return d;
+  }
+  el("ccrDeckArt").appendChild(vinylTile("CanCon Radio"));
+  var ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+
+  function art(elm, t, seed) {
+    elm.innerHTML = "";
+    if (t && t.yt && YT_ID.test(t.yt)) {
+      var img = document.createElement("img");
+      img.loading = "lazy"; img.decoding = "async"; img.alt = "";
+      img.src = "https://i.ytimg.com/vi/" + t.yt + "/mqdefault.jpg";
+      img.onerror = function () { elm.appendChild(vinylTile(t.title + " " + t.artist)); };
+      elm.appendChild(img);
+    } else elm.appendChild(vinylTile(t && (t.title + " " + t.artist)));
+  }
+
+  /* ---------- artist pool: 8 chunks strided across the A-Z index ---------- */
+  var ARTISTS = [], ready = false;
+  var YT_ID = /^[\w-]{11}$/;   /* contract: 11-char video ids only */
+  /* Chunk count comes from stats.json when available (chunks are contiguous,
+     500 records each); otherwise fall back to fetching until a 404. */
+  (function () {
+    var note = el("ccrDeckNote");
+    function progress() {
+      if (note) bil(note, "Loading the artist index: " + ARTISTS.length.toLocaleString("en-CA") + "…",
+                           "Chargement de l'index des artistes : " + ARTISTS.length.toLocaleString("fr-CA") + "…");
+    }
+    function loadOne(n) {
+      return fetch(window.DATA_API + "/api/data/artists_" + String(n).padStart(3, "0") + ".json")
+        .then(function (r) { return r.ok ? r.json() : null; });
+    }
+    function loadAll(limit) {
+      /* parallel with a small pool: 41 sequential gate fetches took ~10s
+         before the page was usable; pooled it is ~2s */
+      var total = Math.min(limit, 999);
+      var results = new Array(total);
+      var next = 0, done = 0, pool = 8;
+      function worker() {
+        if (next >= total) return;
+        var i = next++;
+        loadOne(i).then(function (rows) {
+          results[i] = rows || [];
+          done++;
+          ARTISTS = [].concat.apply([], results.map(function (r) { return r || []; }));
+          progress();
+          if (done === total) { ready = true; onReady(); }
+          else worker();
+        }).catch(function () {
+          results[i] = [];
+          done++;
+          if (done === total) { ready = true; onReady(); }
+          else worker();
+        });
+      }
+      for (var w = 0; w < pool; w++) worker();
+    }
+    fetch(window.DATA_API + "/api/data/stats.json").then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (s) { loadAll((s && s.artists) ? Math.ceil(s.artists / 500) : 41); })
+      .catch(function () { loadAll(41); });
+  })();
+
+  /* ---------- tuning state ---------- */
+  /* dial stop order: All, Rock, Pop, Indie, Folk, Country, Hip-hop, R&B,
+     Electronic, Metal, Jazz, Punk, Soul, Indigenous, New Wave, Reggae, Classical */
+  var DIAL = [
+    null,
+    ["rock"], ["pop"], ["indie"], ["folk"], ["country"],
+    ["hip hop", "hip-hop", "rap", "trap"], ["r&b", "rhythm and blues"],
+    ["funk", "disco", "motown", "boogie"], ["soul"],
+    ["gospel", "christian", "worship"], ["blues"],
+    ["jazz", "swing"],
+    ["electronic", "electro", "techno", "house", "edm", "synth"],
+    ["ambient", "experimental", "sound art"],
+    ["metal"], ["punk"],
+    ["new wave", "synth-pop", "synthpop"],
+    ["reggae", "dancehall", "ska"],
+    ["latin", "salsa", "reggaeton", "cumbia", "bachata", "bossa", "mariachi"],
+    ["k-pop", "kpop", "j-pop", "global pop"],
+    ["classical", "opera", "orchestral"],
+    ["indigenous", "first nations", "inuit", "metis", "native"]
+  ];
+  var state = { aliases: DIAL[0], provinces: null, minYear: null, maxYear: null, noHonours: false, hasAwards: false, hasCerts: false, genreRe: null, mvOnly: false };
+  var era = null; /* e.g. 1990 */
+  var queue = [];
+
+  function genresOf(a) { return (a.genres || []).join(" ").toLowerCase(); }
+  function yearOk(a, minYear, maxYear) {
+    if (!minYear && !maxYear) return true;
+    var lists = [a.tracks, a.community_tracks, a.bandcamp_tracks, a.soundcloud_tracks];
+    for (var li = 0; li < lists.length; li++) {
+      var arr = lists[li] || [];
+      for (var ti = 0; ti < arr.length; ti++) {
+        var y = arr[ti].year;
+        if (!y) continue;
+        if (minYear && y < minYear) continue;
+        if (maxYear && y > maxYear) continue;
+        return true;
+      }
+    }
+    return false;
+  }
+  function matchArtist(a, aliases, provinces, minYear, maxYear, noHonours, hasAwards, hasCerts, genreRe) {
+    if (provinces && provinces.indexOf(a.province) === -1) return false;
+    if (noHonours && ((a.awards_won || 0) || (a.certifications || []).length)) return false;
+    if (hasAwards && !(a.awards_won || 0) && !(a.awards_nominated || 0)) return false;
+    if (hasCerts && !(a.certifications || []).length) return false;
+    if (!yearOk(a, minYear, maxYear)) return false;
+    if (genreRe && !genreRe.test(genresOf(a))) return false;
+    if (aliases && aliases.length) {
+      var g = genresOf(a);
+      var hit = false;
+      for (var i = 0; i < aliases.length; i++)
+        if (g.indexOf(aliases[i]) !== -1) { hit = true; break; }
+      if (!hit) return false;
+    }
+    return true;
+  }
+  /* music-video heuristic: official-video markers in the title win;
+     live/lyric/audio/album/podcast markers disqualify */
+  var MV_POS = /official video|music video|vidéoclip|videoclip|video clip|clip officiel|clip vidéo|\bm\/v\b|\bmv\b|\(video\)|\[video\]|vevo/i;
+  var MV_NEG = /lyric|lyrics|paroles|audio only|official audio|\baudio\b|full album|album stream|full (ep|lp)|live|acoustic|session|unplugged|cover|interview|behind the scenes|podcast|radio|visualizer|visuel|teaser|trailer|remix audio|version audio|demo|remaster/i;
+  function isMusicVideo(t) {
+    var s = (t.title || "") + " " + (t.artist || "");
+    if (MV_NEG.test(s)) return false;
+    return MV_POS.test(s);
+  }
+
+  function tracksOf(a, n) {
+    var out = [];
+    /* Radio plays YouTube only: official embeds the engine can verify and
+       auto-advance. Bandcamp/SoundCloud/Audiomack stay in the directory and
+       artist pages as data — a flagged alt-playback path exists in the
+       engine for the future but the rotation stays YouTube-only. */
+    var lists = [a.tracks, a.community_tracks];
+    for (var li = 0; li < lists.length && out.length < n; li++) {
+      var l = lists[li] || [];
+      for (var i = 0; i < l.length && out.length < n; i++) {
+        var t = l[i];
+        if (!t.yt) continue;
+        if (state.mvOnly && !isMusicVideo(t)) continue;
+        if (window.CanConDeadHas && window.CanConDeadHas(t.yt)) continue;   /* errored before, skip */
+        if (era) { if (!t.year || t.year < era || t.year > era + 9) continue; }
+        var o = { title: t.title, artist: a.name, yt: t.yt };
+        if (t.year) o.year = t.year;
+        if (t.dur) o.dur = t.dur;
+        out.push(o);
+      }
+    }
+    return out;
+  }
+  function firstTrack(a) {
+    var ts = tracksOf(a, 1);
+    return ts.length ? ts[0] : null;
+  }
+
+  function buildQueue() {
+    var q = [];
+    var deep = !!state.provinces;      // region tuning: more artists, more per artist
+    var cap = deep ? 200 : 100;
+    var per = deep ? 3 : 1;
+    for (var i = 0; i < ARTISTS.length && q.length < cap; i++) {
+      var a = ARTISTS[i];
+      if (!matchArtist(a, state.aliases, state.provinces, state.minYear, state.maxYear, state.noHonours, state.hasAwards, state.hasCerts, state.genreRe)) continue;
+      var ts = tracksOf(a, per);
+      for (var ti = 0; ti < ts.length && q.length < cap; ti++) q.push(ts[ti]);
+    }
+    return q;
+  }
+
+  /* ---------- queue UI ---------- */
+  function row(t, i, list) {
+    var r = document.createElement("div");
+    r.className = "q"; r.setAttribute("data-i", String(i));
+    var qa = document.createElement("span"); qa.className = "qa";
+    r.appendChild(qa);
+    art(qa, t, t.title + t.artist);
+    var m = document.createElement("div");
+    var b = document.createElement("b"); txt(b, t.title); m.appendChild(b);
+    var s = document.createElement("span");
+    txt(s, t.artist + (t.year ? " · " + t.year : "") + (t.dur ? " · " + fmtDur(t.dur) : ""));
+    m.appendChild(s);
+    r.appendChild(m);
+    var qm = document.createElement("button"); qm.className = "qm"; qm.type = "button";
+    qm.textContent = "♥"; qm.title = "Save to favourites";
+    qm.setAttribute("aria-label", "Save to favourites");
+    qm.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      if (window.ccrRequireAuth && !ccrRequireAuth()) return;
+      try {
+        var favs = JSON.parse(localStorage.getItem("ccr_favs") || "[]");
+        var key = t.yt ? "yt:" + t.yt : null;
+        var has = key && favs.some(function (f) { return f.yt && "yt:" + f.yt === key; });
+        if (!has) {
+          favs.push({ t: t.title, a: t.artist, y: t.year, yt: t.yt });
+          localStorage.setItem("ccr_favs", JSON.stringify(favs.slice(-500)));
+        }
+        qm.textContent = "♥";
+        qm.style.color = "var(--signal)";
+      } catch (e) { /* storage blocked */ }
+    });
+    r.appendChild(qm);
+    r.addEventListener("click", function () { CanConPlayer.playQueue(list, i); });
+    return r;
+  }
+
+  var queueShown = 14;
+  function renderQueue() {
+    var box = el("ccrQueue");
+    box.innerHTML = "";
+    queue.slice(0, queueShown).forEach(function (t, i) { box.appendChild(row(t, i, queue)); });
+    bil(el("ccrQueueCount"), "● " + queue.length + " TRACKS", "● " + queue.length + " PISTES");
+    bil(el("ccrQueueTotal"),
+      "⟳ " + queue.length + " tracks in rotation",
+      "⟳ " + queue.length + " pistes en rotation");
+    if (queue.length > queueShown) {
+      var more = document.createElement("button");
+      more.className = "xport";
+      more.style.marginTop = ".7rem";
+      more.innerHTML = (document.documentElement.lang === "fr"
+        ? "Afficher tout (" + queue.length + ") ▾" : "Show all " + queue.length + " ▾");
+      more.addEventListener("click", function () {
+        queueShown = queue.length;
+        renderQueue();
+      });
+      box.parentNode.appendChild(more);
+      more.id = "ccrQueueMore";
+    } else {
+      var old2 = document.getElementById("ccrQueueMore");
+      if (old2) old2.remove();
+    }
+  }
+
+  var pendingTune = null;
+  function tune(autoplay) {
+    if (!ready) { pendingTune = autoplay; return; }
+    queue = buildQueue();
+    renderQueue();
+    if (!queue.length) {
+      bil(el("ccrDeckNote"),
+        "No tracks match this setting in the loaded index. Try another scene or era.",
+        "Aucune piste ne correspond à ce réglage dans l'index chargé. Essayez une autre scène ou époque.");
+      return;
+    }
+    el("ccrDeckNote").innerHTML = "";
+    var nums = dial ? dial.querySelectorAll(".nums span") : [];
+    nums.forEach(function (sp, si) { sp.classList.toggle("on", si === dialIndex()); });
+    if (autoplay) {
+      wantDock = true; setLoading(true); stageEl && (stageEl.style.display = "block");
+      /* rotate the entry point every visit so each open surfaces different
+         finds — same 100-track rotation, random start, slight shuffle */
+      var rot = queue.slice();
+      for (var i = rot.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1)), tmp = rot[i]; rot[i] = rot[j]; rot[j] = tmp;
+      }
+      CanConPlayer.playQueue(rot, 0);
+      setTimeout(stageDock, 300);
+    }
+  }
+
+  var BYNAME = {};
+  function onReady() {
+    ARTISTS.forEach(function (a) { if (!BYNAME[a.name]) BYNAME[a.name] = a; });
+    buildMap();
+    var p = pendingTune; pendingTune = null;
+    if (el("ccrDeckNote")) el("ccrDeckNote").innerHTML = "";
+    tune(!!p);
+  }
+
+  /* ---------- dial + era wiring ---------- */
+  function dialIndex() {
+    /* app.js keeps aria-valuenow in sync with the needle; the old regex
+       parsed the retired "90.N" readout format */
+    var d = document.querySelector(".dial");
+    var i = d ? parseInt(d.getAttribute("aria-valuenow") || "0", 10) : 0;
+    return Math.min(DIAL.length - 1, Math.max(0, i));
+  }
+  function bindTune(elm) {
+    ["pointerup", "keydown"].forEach(function (ev) {
+      elm.addEventListener(ev, function (e) {
+        setTimeout(function () {
+          /* the chip grid has no drag: the clicked span IS the station */
+          var spans = elm.querySelectorAll(".nums span");
+          if (e && e.target) {
+            for (var k = 0; k < spans.length; k++) {
+              if (spans[k] === e.target) { elm.setAttribute("aria-valuenow", String(k)); break; }
+            }
+          }
+          state.aliases = DIAL[dialIndex()];
+          state.provinces = null; state.minYear = null; state.maxYear = null; state.noHonours = false; state.hasAwards = false; state.hasCerts = false; state.genreRe = null;
+          clearPresetOn(); clearMapOn();
+          /* readout shows the scene name: "ROCK FM", not "All FM" */
+          var nums = dial ? dial.querySelectorAll(".nums span") : [];
+          var idx = dialIndex();
+          var freq = document.querySelector(".readout [data-freq]");
+          if (nums[idx] && freq) freq.innerHTML = nums[idx].textContent + "<em> FM</em>";
+          nums.forEach(function (sp, si) { sp.classList.toggle("on", si === idx); });
+          /* surface the sub-filters whenever a scene is picked */
+          var ft = document.querySelector(".finetune");
+          if (ft) {
+            ft.style.transition = "none";
+            ft.style.boxShadow = "0 0 0 2px rgba(224,69,31,.65)";
+            setTimeout(function () {
+              ft.style.transition = "box-shadow 1.2s ease";
+              ft.style.boxShadow = "0 0 0 0 rgba(224,69,31,0)";
+            }, 60);
+          }
+          tune(true);
+        }, 0);
+      });
+    });
+  }
+  var dial = document.querySelector(".dial");
+  if (dial) bindTune(dial);
+
+  /* arrival tuning: ?station=N pre-selects that dial stop (homepage knob) */
+  (function () {
+    var p = new URLSearchParams(location.search).get("station");
+    if (p === null || !dial) return;
+    var i = Math.min(DIAL.length - 1, Math.max(0, parseInt(p, 10) || 0));
+    dial.setAttribute("aria-valuenow", String(i));
+    state.aliases = DIAL[i];
+    var nums = dial.querySelectorAll(".nums span");
+    var freq = document.querySelector(".readout [data-freq]");
+    if (nums[i] && freq) freq.innerHTML = nums[i].textContent + "<em> FM</em>";
+    var chips = document.querySelectorAll("#ccrDialChips .dc");
+    if (chips[i]) {
+      chips.forEach(function (c) { c.classList.remove("on"); });
+      chips[i].classList.add("on");
+    }
+  })();
+
+  /* mobile station chips mirror the dial: same DIAL state, same tune path */
+  (function () {
+    var box = el("ccrDialChips");
+    if (!box) return;
+    var labels = Array.prototype.map.call(
+      document.querySelectorAll(".dial .nums span"), function (s) { return s.textContent.trim(); });
+    labels.forEach(function (lab, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "dc" + (i === dialIndex() ? " on" : "");
+      b.textContent = lab;
+      b.addEventListener("click", function () {
+        state.aliases = DIAL[i];
+        state.provinces = null; state.minYear = null; state.maxYear = null;
+        state.noHonours = false; state.hasAwards = false; state.hasCerts = false;
+        state.genreRe = null;
+        if (dial) dial.setAttribute("aria-valuenow", String(i));
+        var freq = document.querySelector(".readout [data-freq]");
+        if (freq) freq.innerHTML = lab.replace(/&/g, "&amp;") + "<em> FM</em>";
+        Array.prototype.forEach.call(box.children, function (c, k) {
+          c.classList.toggle("on", k === i);
+        });
+        clearPresetOn(); clearMapOn();
+        tune(true);
+      });
+      box.appendChild(b);
+    });
+  })();
+
+  document.querySelector(".eras").addEventListener("click", function () {
+    setTimeout(function () {
+      var on = document.querySelector(".eras .era.on");
+      var v = on ? on.textContent.trim().toUpperCase() : "ALL";
+      var m = v.match(/(\d{4})S/);
+      era = m ? parseInt(m[1], 10) : null;
+      tune(true);
+    }, 0);
+  });
+
+  /* ---------- presets ---------- */
+  var PRESETS = {
+    "northern-bars": { aliases: ["hip hop", "hip-hop", "rap", "trap", "r&b"] },
+    "maritime": { aliases: ["folk", "country"], provinces: ["NS", "NB", "NL", "PE"] },
+    "franco": { aliases: ["chanson", "francophone", "french"], provinces: ["QC"] },
+    "deep-cuts": { noHonours: true },
+    "indigenous": { genreRe: /indigenous|first nations|inuit|metis|native/ },
+    "fresh": { minYear: 2020 },
+    "celtic": { genreRe: /celtic|irish/ },
+    "island": { genreRe: /reggae|dancehall|ska/ },
+    "bhangra": { genreRe: /bhangra|punjabi|desi/ },
+    "latin": { genreRe: /latin|salsa|reggaeton|cumbia|bossa|mariachi/ },
+    "soul": { genreRe: /soul|r&b|gospel|doo-wop|doo wop|funk/ },
+    "the-sixties": { maxYear: 1969 },
+    "the-seventies": { minYear: 1970, maxYear: 1979 },
+    "the-eighties": { minYear: 1980, maxYear: 1989 },
+    "muchmusic-90s": { minYear: 1990, maxYear: 1999 },
+    "the-2000s": { minYear: 2000, maxYear: 2009 },
+    "the-2010s": { minYear: 2010, maxYear: 2019 },
+    "golden-era": { aliases: ["hip hop", "hip-hop", "rap"], maxYear: 1997 },
+    "hot-100-era": { genreRe: /pop|dance-pop|teen pop|electropop/ },
+    "juno-singles": { hasAwards: true },
+    "number-ones": { hasCerts: true },
+    "one-hit-wonders": { hasCerts: true, noHonours: true },
+    "lost-tapes": { maxYear: 1999, noHonours: true },
+    "slow-burner": { genreRe: /ambient|folk|singer-songwriter|acoustic|slowcore|country/ },
+    "left-field": { genreRe: /experimental|noise|avant-garde|electroacoustic|sound art/ },
+    "indie-all-dressed": { aliases: ["indie", "indie rock", "alternative"] },
+    "full-send": { genreRe: /punk|hardcore|metal|thrash|grindcore|screamo/ },
+    "prairie-static": { provinces: ["AB", "SK", "MB"] },
+    "palmares-ckoi": { aliases: ["pop"], provinces: ["QC"] },
+    "en-espanol": { genreRe: /latin|reggaeton|salsa|cumbia|spanish|espanol|mariachi/ },
+    "rpm-gold": { maxYear: 2000, hasCerts: true },
+    "coup-de-coeur": { aliases: ["chanson", "francophone", "french"], minYear: 2000 },
+    "night-drive": { genreRe: /electronic|house|techno|synth|dance|edm|drum and bass|trance/ },
+    "low-down": { genreRe: /blues|jazz|swing/ },
+    "country-roads": { genreRe: /country|bluegrass|americana|western|honky/ },
+    "true-north": { provinces: ["YT", "NT", "NU"] }
+  };
+  function clearPresetOn() {
+    document.querySelectorAll("#ccrPresets .preset.on").forEach(function (p) { p.classList.remove("on"); });
+  }
+  el("ccrPresets").addEventListener("click", function (e) {
+    var p = e.target.closest(".preset");
+    if (!p) return;
+    var spec = PRESETS[p.getAttribute("data-preset")];
+    if (!spec) return;
+    state.aliases = spec.aliases || null;
+    state.provinces = spec.provinces || null;
+    state.minYear = spec.minYear || null;
+    state.maxYear = spec.maxYear || null;
+    state.noHonours = !!spec.noHonours;
+    state.hasAwards = !!spec.hasAwards;
+    state.hasCerts = !!spec.hasCerts;
+    state.genreRe = spec.genreRe || null;
+    clearPresetOn(); p.classList.add("on"); clearMapOn();
+    tune(true);
+  });
+
+  /* ---------- visible fine tune: era / province / honours chips ---------- */
+  (function () {
+    var wrap = document.querySelector(".finetune");
+    if (!wrap) return;
+    function chip(label, title, fn) {
+      var b = document.createElement("button");
+      b.className = "dchip ft";
+      b.textContent = label;
+      b.title = title || "";
+      b.style.fontSize = ".6rem";
+      b.addEventListener("click", function () {
+        var on = b.classList.contains("on");
+        b.parentNode.querySelectorAll(".dchip").forEach(function (c) { c.classList.remove("on"); });
+        if (!on) b.classList.add("on");
+        fn(!on, b);
+      });
+      return b;
+    }
+    var eraBox = wrap.querySelector(".ft-era"),
+        provBox = wrap.querySelector(".ft-prov"),
+        honBox = wrap.querySelector(".ft-hon");
+    function applyFineTune() {
+      era = eraBox.querySelector(".on") ? parseInt(eraBox.querySelector(".on").getAttribute("data-era"), 10) : null;
+      var pv = provBox.querySelector(".on");
+      state.provinces = pv ? [pv.getAttribute("data-pv")] : null;
+      var hw = honBox.querySelector(".on");
+      state.hasAwards = !!hw && hw.getAttribute("data-h") === "awards";
+      state.hasCerts = !!hw && hw.getAttribute("data-h") === "certs";
+      state.aliases = null; state.genreRe = null; state.noHonours = false;
+      state.minYear = null; state.maxYear = null;
+      clearPresetOn(); clearMapOn();
+      tune(true);
+    }
+    [["ALL", null], ["60s", 1960], ["70s", 1970], ["80s", 1980], ["90s", 1990], ["00s", 2000], ["10s", 2010], ["20s", 2020]]
+      .forEach(function (e) {
+        var b = chip(e[0], "Era", function () { applyFineTune(); });
+        if (e[1]) b.setAttribute("data-era", String(e[1]));
+        eraBox.appendChild(b);
+      });
+    [["ALL", null], ["YT","YT"],["NT","NT"],["NU","NU"],["BC","BC"],["AB","AB"],["SK","SK"],["MB","MB"],["ON","ON"],["QC","QC"],["NB","NB"],["PE","PE"],["NS","NS"],["NL","NL"]]
+      .forEach(function (e) {
+        var b = chip(e[0], "Province or territory", function () { applyFineTune(); });
+        if (e[1]) b.setAttribute("data-pv", e[1]);
+        provBox.appendChild(b);
+      });
+    [["ANY", null], ["AWARD-NOMINATED", "awards"], ["CERTIFIED", "certs"]].forEach(function (e) {
+      var b = chip(e[0], "Honours", function () { applyFineTune(); });
+      if (e[1]) b.setAttribute("data-h", e[1]);
+      honBox.appendChild(b);
+    });
+  })();
+
+  /* ---------- signal map ---------- */
+  var PROVINCES = ["YT", "NT", "NU", "BC", "AB", "SK", "MB", "ON", "QC", "NB", "PE", "NS", "NL"];
+  function buildMap() {
+    var map = el("ccrMap");
+    var counts = {};
+    ARTISTS.forEach(function (a) { if (a.province) counts[a.province] = (counts[a.province] || 0) + 1; });
+    function tuneProv(c, el) {
+      var wasOn = el.classList.contains("on");
+      clearMapOn();
+      if (!wasOn) {
+        el.classList.add("on");
+        el.style.fill = "rgba(224,69,31,.55)";
+        state.provinces = [c];
+      } else {
+        state.provinces = null;
+      }
+      clearPresetOn();
+      /* readout names the region: "BC FM" */
+      var freq = document.querySelector(".readout [data-freq]");
+      if (freq) freq.innerHTML = (state.provinces ? state.provinces[0] : (dial ? (dial.querySelectorAll(".nums span")[dialIndex()] || {}).textContent : "All")) + "<em> FM</em>";
+      tune(true);
+    }
+    fetch("assets/canada.svg").then(function (r) { return r.ok ? r.text() : null; }).then(function (svg) {
+      if (!svg) throw new Error("no svg");
+      map.innerHTML = svg;
+      var svgEl = map.querySelector("svg");
+      svgEl.setAttribute("width", "100%");
+      svgEl.removeAttribute("height");
+      svgEl.setAttribute("viewBox", "0 0 1000 1000");
+      var pts = svgEl.querySelector("#points, #label_points");
+      map.insertAdjacentHTML("beforeend", '<p id="ccrMapHint" style="font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:.6rem"></p>');
+      PROVINCES.forEach(function (c) {
+        var p = svgEl.querySelector("#CA" + c);
+        if (!p) return;
+        p.setAttribute("data-pv", c);
+        p.style.fill = "rgba(243,234,208,.08)";
+        p.style.stroke = "rgba(243,234,208,.45)";
+        p.style.strokeWidth = "1.4";
+        p.style.cursor = "pointer";
+        p.style.transition = "fill .15s";
+        p.addEventListener("mouseenter", function () {
+          if (!p.classList.contains("on")) p.style.fill = "rgba(224,69,31,.32)";
+          var hint = el("ccrMapHint");
+          if (hint) hint.textContent = c + " · " + (counts[c] || 0).toLocaleString(LANG() ? "fr-CA" : "en-CA") + (LANG() ? " artistes — cliquez pour régler" : " artists — click to tune");
+        });
+        p.addEventListener("mouseleave", function () {
+          if (!p.classList.contains("on")) p.style.fill = "rgba(243,234,208,.08)";
+        });
+        p.addEventListener("click", function () { tuneProv(c, p); });
+      });
+    }).catch(function () {
+      /* fallback: tile grid */
+      PROVINCES.forEach(function (c) {
+        var d = document.createElement("div");
+        d.className = "pv"; d.setAttribute("data-pv", c);
+        var b = document.createElement("b"); txt(b, c); d.appendChild(b);
+        var s2 = document.createElement("span"); s2.className = "ct";
+        txt(s2, (counts[c] || 0).toLocaleString(LANG() ? "fr-CA" : "en-CA"));
+        d.appendChild(s2);
+        d.addEventListener("click", function () { tuneProv(c, d); });
+        map.appendChild(d);
+      });
+    });
+  }
+  function clearMapOn() {
+    document.querySelectorAll("#ccrMap .on").forEach(function (p) {
+    p.classList.remove("on");
+    if (p.style) p.style.fill = "rgba(243,234,208,.08)";
+  });
+  }
+
+  /* ---------- video stage + loading feedback ---------- */
+  var wantDock = false, stageEl = document.getElementById("ccrStage"), stageVisible = false;
+  /* the engine is created INSIDE this stage on the first play click — a
+     player born in a visible mount is what keeps YouTube's hidden-player
+     protection from killing every video (see player.js ensurePlayer) */
+  window.cccrEngineMount = stageEl;
+  function stageDock() {
+    if (!stageEl || !window.CanConPlayer) return;
+    if (wantDock && CanConPlayer.current() && CanConPlayer.dock(stageEl)) {
+      stageEl.style.display = "block";
+      var iframe = stageEl.querySelector("iframe");
+      if (iframe) iframe.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0";
+    }
+  }
+  function stageHide() {
+    if (stageEl) stageEl.style.display = "none";
+    if (window.CanConPlayer && CanConPlayer.undock) CanConPlayer.undock();
+  }
+  /* Keep the engine born in the stage forever: moving a live YouTube iframe
+     (even a same-document reparent) resets its stream. The bottom bar is
+     the "small player": it stays hidden while the stage is on screen and
+     appears when the stage scrolls away. */
+  function syncBar() {
+    var show = !stageVisible && CanConPlayer.current();
+    var sticky = document.getElementById("ccr-sticky");
+    if (sticky) sticky.style.display = show ? "flex" : "none";
+    var bar = el("ccrBar");
+    if (bar) bar.style.display = show ? "" : "none";
+  }
+  if (stageEl && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      stageVisible = entries[0].isIntersecting;
+      syncBar();
+    }, { threshold: 0.2 }).observe(stageEl);
+  }
+  if (stageEl) stageEl.addEventListener("click", function () {
+    if (!window.CanConPlayer) return;
+    if (CanConPlayer.userUnmute) CanConPlayer.userUnmute();
+    CanConPlayer.play();
+  });
+  function setLoading(on) {
+    ["ccrPlay", "ccrBarPlay"].forEach(function (id) {
+      var b = el(id);
+      if (!b) return;
+      if (on) {
+        b.dataset.icon = b.innerHTML;
+        b.innerHTML = "<span style=\"letter-spacing:2px;font-weight:700\">\u2026\u2026\u2026</span>";
+      } else if (b.dataset.icon) {
+        b.innerHTML = b.dataset.icon;
+        delete b.dataset.icon;
+      }
+    });
+  }
+
+  /* ---------- player events: deck, sticky bar, rows ---------- */
+  function setPlayIcons(playing) {
+    [el("ccrPlay"), el("ccrBarPlay")].forEach(function (b) {
+      if (!b) return;
+      b.innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
+      b.setAttribute("aria-label", playing ? "Pause" : "Play");
+      b.setAttribute("data-fr-aria", playing ? "Pause" : "Lecture");
+    });
+  }
+
+  var noteSticky = false;   /* blocked/error notes survive track changes */
+  CanConPlayer.on("track", function (t) {
+    setLoading(false);
+    if (el("ccrDeckNote") && !noteSticky) el("ccrDeckNote").innerHTML = "";
+    if (t && t.yt) stageDock(); else stageHide();   /* no stale video when a non-YouTube source is current */
+    syncBar();
+    txt(el("ccrNowTitle"), t.title);
+    art(el("ccrDeckArt"), t, t.title + t.artist);
+    var chips = el("ccrNowChips");
+    chips.innerHTML = "";
+    var rec = BYNAME[t.artist] || null;
+    var fr = document.documentElement.lang === "fr";
+    var PNM = {ON:"Ontario",BC:"British Columbia",QC:"Québec",NS:"Nova Scotia",NB:"New Brunswick",
+      PE:"PEI",NL:"N&L",MB:"Manitoba",SK:"Saskatchewan",AB:"Alberta",YT:"Yukon",NT:"NWT",NU:"Nunavut"};
+    var src = t.yt ? "YouTube" : (t.bc ? "Bandcamp" : (t.sc ? "SoundCloud" : ""));
+    [t.year, rec && rec.province ? (PNM[rec.province] || rec.province) : null, src]
+      .forEach(function (v) {
+        if (!v) return;
+        var c = document.createElement("span"); c.className = "chip"; txt(c, String(v));
+        chips.appendChild(c);
+      });
+    (rec && rec.genres ? rec.genres.slice(0, 3) : []).forEach(function (g) {
+      var c = document.createElement("span"); c.className = "chip"; txt(c, g);
+      chips.appendChild(c);
+    });
+    var meta = [];
+    if (rec && ((rec.awards_won || 0) || (rec.awards_nominated || 0)))
+      meta.push(fr ? (rec.awards_won + " prix · " + rec.awards_nominated + " nominations")
+                   : (rec.awards_won + " wins · " + rec.awards_nominated + " nominations"));
+    if (rec && rec.certifications && rec.certifications.length)
+      meta.push(fr ? "certifié " + rec.certifications.join(", ")
+                   : "certified " + rec.certifications.join(", "));
+    if (t.album) meta.push(fr ? "de l'album " + t.album : "from the album " + t.album);
+    var mbox = el("ccrNowMeta");
+    mbox.innerHTML = "";
+    if (meta.length) {
+      mbox.textContent = meta.join("  ·  ");
+      mbox.style.display = "";
+    } else mbox.style.display = "none";
+    var who = el("ccrNowArtist");
+    who.innerHTML = "";
+    var wa = document.createElement("a");
+    wa.href = "/artist/" + (rec ? rec.slug : String(t.artist || "").toLowerCase()
+      .normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")) + "/";
+    wa.style.cssText = "color:inherit;text-decoration:none";
+    wa.setAttribute("data-en", (t.artist || "").toUpperCase());
+    wa.setAttribute("data-fr", (t.artist || "").toUpperCase());
+    wa.textContent = (t.artist || "").toUpperCase();
+    who.appendChild(wa);
+    /* sticky bar — syncBar() decides visibility (only when stage is away) */
+    syncBar();
+    art(el("ccrBarArt"), t, t.title + t.artist);
+    txt(el("ccrBarTitle"), t.title);
+    txt(el("ccrBarWho"), t.artist || "");
+    /* highlight the queue row */
+    document.querySelectorAll("#ccrQueue .q").forEach(function (r) {
+      r.classList.toggle("now", r.getAttribute("data-i") === String(indexOf(t)));
+    });
+  });
+  function fmtDur(s) { return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }
+  function indexOf(t) { return queue.indexOf(t); }
+
+  CanConPlayer.on("state", function (s) {
+    if (s === "playing") noteSticky = false;
+    if (s === "blocked" || s === "error" || s === "muted") noteSticky = true;
+    if (s === "playing" || s === "error") setLoading(false);
+    if (s === "muted") {
+      /* gestureless start: video is rolling silently; any tap restores sound */
+      setPlayIcons(true);
+      document.body.classList.add("playing");
+      if (el("ccrDeckNote")) {
+        el("ccrDeckNote").setAttribute("data-en", "Playing muted — tap the play button or the video for sound.");
+        el("ccrDeckNote").setAttribute("data-fr", "Lecture en sourdine — touchez le bouton lecture ou la vidéo pour le son.");
+        el("ccrDeckNote").textContent = el("ccrDeckNote").getAttribute(document.documentElement.lang === "fr" ? "data-fr" : "data-en");
+      }
+    }
+    if (s === "blocked") {
+      setPlayIcons(false);
+      document.body.classList.remove("playing");
+      /* Safari refuses postMessage play even with a gesture — but a tap
+         INSIDE the iframe always works. Surface the stage so there is a
+         video to tap. */
+      wantDock = true;
+      stageEl && (stageEl.style.display = "block");
+      stageDock();
+    }
+    if (s === "blocked" && el("ccrDeckNote")) {
+      el("ccrDeckNote").setAttribute("data-en", "Tap the video once to start the sound.");
+      el("ccrDeckNote").setAttribute("data-fr", "Touchez la vidéo une fois pour le son.");
+      el("ccrDeckNote").textContent = el("ccrDeckNote").getAttribute(document.documentElement.lang === "fr" ? "data-fr" : "data-en");
+    }
+    if (s === "error" && el("ccrDeckNote")) {
+      var ecode = window.__lastYTError && window.__lastYTError.code;
+      el("ccrDeckNote").setAttribute("data-en", "Many tracks in a row will not play (YouTube error" + (ecode ? " " + ecode : "") + "). Your network may be blocking YouTube, or this scene's videos are restricted. Try another station, tap the video, or reload.");
+      el("ccrDeckNote").setAttribute("data-fr", "Plusieurs titres de suite refusent de jouer (erreur YouTube" + (ecode ? " " + ecode : "") + "). Votre réseau bloque peut-être YouTube, ou les vidéos de cette scène sont restreintes. Essayez une autre station, touchez la vidéo ou rechargez.");
+      el("ccrDeckNote").textContent = el("ccrDeckNote").getAttribute(document.documentElement.lang === "fr" ? "data-fr" : "data-en");
+    }
+    if (s === "playing") { stageDock(); setPlayIcons(true); document.body.classList.add("playing"); syncBar(); }
+    else if (s === "paused" || s === "ended" || s === "error") { setPlayIcons(false); document.body.classList.remove("playing"); }
+  });
+
+  function pressPlay() {
+    if (!ready) {           /* index still streaming in — remember the intent */
+      pendingTune = true;
+      if (el("ccrDeckNote")) bil(el("ccrDeckNote"), "Loading the index — playback starts in a moment…",
+        "Chargement de l'index — la lecture démarre dans un instant…");
+      return;
+    }
+    if (CanConPlayer.current()) CanConPlayer.toggle();
+    else if (queue.length) {
+      wantDock = true; setLoading(true); stageEl && (stageEl.style.display = "block");
+      /* rotate on every fresh start, not only autoplay */
+      var rot = queue.slice();
+      for (var i = rot.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1)), tmp = rot[i]; rot[i] = rot[j]; rot[j] = tmp;
+      }
+      CanConPlayer.playQueue(rot, 0);
+      setTimeout(stageDock, 300);
+    }
+    else tune(true);        /* nothing queued yet: build from the current dial */
+  }
+  el("ccrPlay").addEventListener("click", pressPlay);
+  el("ccrBarPlay").addEventListener("click", pressPlay);
+  el("ccrNext").addEventListener("click", function () { CanConPlayer.next(); });
+  el("ccrBarNext").addEventListener("click", function () { CanConPlayer.next(); });
+  el("ccrPrev").addEventListener("click", function () { CanConPlayer.prev(); });
+  el("ccrBarPrev").addEventListener("click", function () { CanConPlayer.prev(); });
+
+  var vol = el("ccrVol");
+  try {
+    var sv = parseInt(localStorage.getItem("ccr_volume"), 10);
+    if (!isNaN(sv)) vol.value = String(Math.min(100, Math.max(0, sv)));
+  } catch (e) {}
+  vol.addEventListener("input", function () { CanConPlayer.setVolume(parseInt(vol.value, 10)); });
+
+  /* ---------- describe the sound (real matching over loaded chunks) ---------- */
+  var CITIES = {toronto:"ON",montreal:"QC","montréal":"QC",vancouver:"BC",ottawa:"ON",halifax:"NS",
+    winnipeg:"MB",calgary:"AB",edmonton:"AB",quebec:"QC",saskatoon:"SK",regina:"SK",victoria:"BC",
+    moncton:"NB",fredericton:"NB",charlottetown:"PE",whitehorse:"YT",yellowknife:"NT",iqualuit:"NU",
+    london:"ON",hamilton:"ON",guelph:"ON",kitchener:"ON",kingston:"ON",sudbury:"ON",galt:"ON",
+    laval:"QC",longueuil:"QC","cape breton":"NS","st. john's":"NL","st johns":"NL"};
+  var PROV_NAMES = {ontario:"ON","british columbia":"BC",alberta:"AB",manitoba:"MB","nova scotia":"NS",
+    "new brunswick":"NB",newfoundland:"NL",saskatchewan:"SK",yukon:"YT","northwest territories":"NT",
+    nunavut:"NU","prince edward island":"PE",quebec:"QC","québec":"QC"};
+  var STOPWORDS = {from:"",the:"",des:"",de:"",du:"",la:"",le:"",les:"",et:"",and:"",in:"",sur:"",
+    a:"",an:"",music:"",musique:"",canadian:"",canadien:"",canadienne:"",slow:"",lent:""};
+
+  function describe(raw) {
+    var note = el("ccrDescNote"), parsed = el("ccrDescParsed"), results = el("ccrDescResults");
+    parsed.innerHTML = ""; results.innerHTML = "";
+    if (!ready) {
+      bil(note, "The index is still loading, try again in a moment.",
+              "L'index charge encore, réessayez dans un instant.");
+      return;
+    }
+    var q = raw.toLowerCase().replace(/['’]/g, "").replace(/[.,!?;:]/g, " ");
+    var tokens = q.split(/\s+/).filter(Boolean);
+    var aliases = [], decades = [], province = null, franco = false, award = false,
+        certs = [], criteria = [];
+
+    /* two-word place names first */
+    for (var i = 0; i < tokens.length - 1; i++) {
+      var bi = tokens[i] + " " + tokens[i + 1];
+      if (CITIES[bi] || PROV_NAMES[bi]) {
+        province = CITIES[bi] || PROV_NAMES[bi];
+        tokens.splice(i, 2); i--; criteria.push(bi);
+      }
+    }
+    tokens.forEach(function (w) {
+      var m = w.match(/^(19|20)(\d)0s$/);            /* 1990s, 2020s */
+      if (!m) m = w.match(/^([1-9])0s$/) && ["", "19", w.charAt(0)];  /* 90s */
+      if (m) { decades.push(parseInt(m[1] + m[2] + "0", 10)); criteria.push(w); return; }
+      if (w === "franco" || w === "francophone" || w === "francophones") { franco = true; criteria.push(w); return; }
+      if (/^(juno|award|awards|winner|winners|win|wins)$/.test(w)) { award = true; criteria.push("award winners"); return; }
+      if (/^(gold|or)$/.test(w)) { certs.push("gold"); criteria.push(w); return; }
+      if (/^(platinum|platine)$/.test(w)) { certs.push("platinum"); criteria.push(w); return; }
+      if (/^(diamond|diamant)$/.test(w)) { certs.push("diamond"); criteria.push(w); return; }
+      if (CITIES[w] || PROV_NAMES[w]) { province = CITIES[w] || PROV_NAMES[w]; criteria.push(w); return; }
+      if (STOPWORDS[w] !== undefined) return;
+      aliases.push(w); criteria.push(w);
+    });
+
+    if (!aliases.length && !decades.length && !province && !franco && !award && !certs.length) {
+      bil(note, "No matches in the loaded index.", "Aucune correspondance dans l'index chargé.");
+      return;
+    }
+    parsed.innerHTML = "";
+    criteria.slice(0, 6).forEach(function (c) {
+      var ch = document.createElement("span"); ch.className = "chip on"; txt(ch, c);
+      parsed.appendChild(ch);
+    });
+
+    /* genre vocabulary for loose alias matching */
+    var vocab = {};
+    ARTISTS.forEach(function (a) { (a.genres || []).forEach(function (g) { vocab[g.toLowerCase()] = 1; }); });
+    function aliasHits(g) {
+      return aliases.every(function (al) {
+        if (g.indexOf(al) !== -1) return true;
+        return Object.keys(vocab).some(function (v) {
+          return (v.indexOf(al) !== -1 || al.indexOf(v) !== -1) && g.indexOf(v) !== -1;
+        });
+      });
+    }
+    var matches = [];
+    for (var ai = 0; ai < ARTISTS.length && matches.length < 12; ai++) {
+      var a = ARTISTS[ai], g = genresOf(a);
+      if (aliases.length && !aliasHits(g)) continue;
+      if (franco && !(/francophone|chanson|french/.test(g) || a.province === "QC")) continue;
+      if (award && !(a.awards_won > 0)) continue;
+      if (certs.length && !certs.every(function (c) { return (a.certifications || []).indexOf(c) !== -1; })) continue;
+      if (province && a.province !== province) continue;
+      if (decades.length) {
+        var yrs = [];
+        [a.tracks, a.community_tracks, a.bandcamp_tracks, a.soundcloud_tracks].forEach(function (l) {
+          (l || []).forEach(function (t) { if (t.year) yrs.push(t.year); });
+        });
+        if (!yrs.some(function (y) { return decades.indexOf(Math.floor(y / 10) * 10) !== -1; })) continue;
+      }
+      var t = firstTrackNoEra(a);
+      if (t) matches.push(t);
+    }
+    if (!matches.length) {
+      bil(note, "No matches in the loaded index.", "Aucune correspondance dans l'index chargé.");
+      return;
+    }
+    bil(note, matches.length + " matches from the loaded index.",
+             matches.length + " correspondances dans l'index chargé.");
+    matches.forEach(function (t, i) { results.appendChild(row(t, i, matches)); });
+  }
+  function firstTrackNoEra(a) {
+    var lists = [a.tracks, a.community_tracks, a.bandcamp_tracks, a.soundcloud_tracks];
+    for (var li = 0; li < lists.length; li++) {
+      var l = lists[li] || [];
+      for (var i = 0; i < l.length; i++) {
+        var t = l[i];
+        var o = { title: t.title, artist: a.name };
+        if (t.yt) o.yt = t.yt;
+        else if (t.bc !== undefined && t.bc !== null) { o.bc = t.bc; o.bc_type = t.bc_type; }
+        else if (t.sc) o.sc = t.sc;
+        else continue;
+        if (t.year) o.year = t.year;
+        return o;
+      }
+    }
+    return null;
+  }
+
+  el("ccrDescGo").addEventListener("click", function () { describe(el("ccrDescIn").value.trim()); });
+  el("ccrDescIn").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") describe(el("ccrDescIn").value.trim());
+  });
+  el("ccrDescEx").addEventListener("click", function (e) {
+    var b = e.target.closest(".dchip");
+    if (!b) return;
+    el("ccrDescIn").value = b.textContent.trim();
+    describe(b.textContent.trim());
+  });
+})();
+</script>
+</body>
+</html>
