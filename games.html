@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="canonical" href="https://canconradio.com/games.html">
+<link rel="alternate" hreflang="en" href="https://canconradio.com/games.html">
+<link rel="alternate" hreflang="fr" href="https://canconradio.com/games.html?lang=fr">
+<link rel="alternate" hreflang="x-default" href="https://canconradio.com/games.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://i.scdn.co https://upload.wikimedia.org https://commons.wikimedia.org https://audiomack.com https://*.audiomack.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://bandcamp.com https://w.soundcloud.com https://audiomack.com https://*.audiomack.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.vercel.app https://www.youtube.com https://cancon-data-gate.vercel.app; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com https://w.soundcloud.com">
+<script>window.DATA_API="https://cancon-data-gate.vercel.app";</script>
+<meta property="og:title" content="Canadian Music Games — Trivia, Quizzes & Brackets | CanCon Radio">
+<meta property="og:description" content="Ten free Canadian music games powered by the station's index: Higher/Lower, Pin the Province, clip quizzes, brackets, the Discovery Pokédex and more.">
+<meta property="og:site_name" content="CanCon Radio">
+<meta property="og:image" content="https://canconradio.com/assets/share-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canadian Music Games — Trivia, Quizzes & Brackets | CanCon Radio</title>
+<meta name="description" content="Ten free Canadian music games powered by the station's index: Higher/Lower, Pin the Province, clip quizzes, brackets, the Discovery Pokédex and more.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png?v=4">
+<link rel="icon" href="assets/favicon-dark.ico?v=4" sizes="any">
+<link rel="icon" type="image/png" href="assets/icon-192.png?v=4">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=4">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.fc052118.css">
+<style>
+  .gcards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.6rem 0 .4rem}
+  .gcard{border:1px solid rgba(243,234,208,.13);border-radius:var(--r-lg);padding:1.15rem 1.25rem;
+    background:linear-gradient(165deg,rgba(38,33,26,.85),rgba(28,24,17,.92))}
+  .gcard h4{font-family:var(--disp);font-weight:700;font-size:1rem}
+  .gcard p{font-size:.76rem;color:var(--cream-dim);margin-top:.3rem;line-height:1.5}
+  .gcard .gg{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.8rem}
+  .gcard .gg button{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+    padding:.35rem .7rem;border-radius:999px;border:1px solid rgba(243,234,208,.2);background:none;
+    color:var(--cream-dim);cursor:pointer}
+  .gcard .gg button:hover{border-color:var(--signal);color:var(--signal)}
+  @media (max-width:820px){.gcards{grid-template-columns:1fr}}
+  body.day .gcard{background:linear-gradient(165deg,#fbf5e6,#f3ebd6);border-color:rgba(25,23,18,.16)}
+  body.day .gcard p{color:#57503f}
+  body.day .gcard .gg button{color:#55503f;border-color:rgba(25,23,18,.25)}
+  .gtabs{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.6rem 0 1.2rem}
+  .gtab{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:.5rem .85rem;border-radius:999px;border:1px solid rgba(243,234,208,.22);
+    background:none;color:var(--cream-dim);cursor:pointer;transition:all .2s}
+  .gtab.on{border-color:var(--signal);color:var(--signal)}
+  .gtab:hover{border-color:var(--signal)}
+  .gpane{display:none;border:1px solid rgba(243,234,208,.14);border-radius:var(--r-lg);
+    padding:clamp(1.2rem,2.6vw,2rem);background:linear-gradient(165deg,rgba(255,255,255,.02),transparent);margin-top:.4rem}
+  .gpane.on{display:block}
+  .ghead{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1.1rem}
+  .ghead h3{font-size:1.35rem;margin:0}
+  .gscore{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase}
+  .gbtn{font:inherit;font-size:.85rem;padding:.6rem 1.15rem;border-radius:.55rem;cursor:pointer;
+    border:1px solid rgba(243,234,208,.28);background:none;color:var(--cream);transition:all .2s}
+  .gbtn:hover{border-color:var(--signal);color:var(--signal)}
+  .gbtn.big{background:var(--signal);border-color:var(--signal);color:#fff;font-weight:700}
+  .gbtn:disabled{opacity:.35;cursor:default}
+  .gbtn.right{background:#2c7a3f;border-color:#2c7a3f;color:#fff}
+  .gbtn.wrong{border-color:var(--signal);color:var(--signal)}
+  .grow2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  .gopt{text-align:left;font-size:1rem;padding:.9rem 1.1rem}
+  .gopt small{display:block;font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--faint);margin-top:.25rem}
+  .gmsg{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--gold);margin-top:1rem;min-height:1.2em}
+  .cammask{position:relative;aspect-ratio:16/9;max-width:520px;background:#0d0a08;border-radius:.6rem;overflow:hidden}
+  .cammask iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .dexgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.7rem;margin-top:1rem}
+  .dex{border:1px solid rgba(243,234,208,.14);border-radius:.6rem;padding:.8rem .9rem}
+  .dex b{font-size:.95rem}
+  .dexbar{height:5px;border-radius:3px;background:rgba(243,234,208,.12);margin-top:.5rem;overflow:hidden}
+  .dexbar i{display:block;height:100%;background:var(--signal);border-radius:3px}
+  .dex small{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
+  .bracket{display:flex;flex-direction:column;gap:.5rem;margin-top:1rem}
+  .bmatch{display:grid;grid-template-columns:1fr auto 1fr;gap:.6rem;align-items:stretch}
+  .bmatch .gbtn{flex:1}
+  .bingo{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:1rem}
+  .bcell{border:1px solid rgba(243,234,208,.2);border-radius:.5rem;min-height:86px;padding:.6rem;
+    font-size:.72rem;line-height:1.35;display:flex;flex-direction:column;justify-content:space-between;gap:.3rem}
+  .bcell.done{border-color:#2c7a3f;background:rgba(44,122,63,.12)}
+  .bcell b{font-size:.6rem;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+  .cluerow{display:flex;gap:.6rem;flex-wrap:wrap;margin:.55rem 0}
+  .clue{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+    border:1px solid rgba(243,234,208,.2);border-radius:999px;padding:.32rem .7rem;color:var(--cream-dim)}
+  .clue.reveal{border-color:var(--signal);color:var(--signal)}
+  .ginput{background:rgba(0,0,0,.3);border:1px solid rgba(243,234,208,.25);border-radius:999px;
+    padding:.65rem 1.1rem;color:var(--cream);font:inherit;font-size:.95rem;width:min(100%,380px)}
+  .ginput:focus{outline:none;border-color:var(--signal)}
+  .cmap{width:min(100%,560px)}
+  .cmap path{fill:rgba(243,234,208,.07);stroke:rgba(243,234,208,.35);stroke-width:1.2;cursor:pointer;transition:fill .15s}
+  .cmap path:hover{fill:rgba(224,69,31,.35)}
+  .cmap text{font-family:var(--mono);font-size:11px;fill:var(--cream-dim);pointer-events:none;text-anchor:middle}
+  body.day .cmap path{fill:rgba(25,23,18,.07);stroke:rgba(25,23,18,.4)}
+  body.day .cmap text{fill:#57503f}
+  .pinresult{font-size:.9rem;margin-top:.8rem}
+  @media (max-width:720px){.grow2{grid-template-columns:1fr}.bingo{grid-template-columns:repeat(2,1fr)}.bmatch{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="wm" href="index.html"><img decoding="async" class="wmi" src="assets/wordmark-cream.png" alt="CanCon Radio"></a>
+  <details class="nmore nburger">
+      <summary class="nl" data-fr="Menu">Menu</summary>
+      <div class="nmore-menu nburger-menu">
+        <a href="radio.html" data-fr="Écouter">Listen</a>
+        <a href="discover.html" data-fr="Découvrir">Discover</a>
+        <a href="charts.html" data-fr="Palmarès">Charts</a>
+        <a href="videos.html" data-fr="Vidéos">Videos</a>
+        <a href="shows.html" data-fr="Spectacles">Shows</a>
+        <a href="blog.html" data-fr="Journal">Journal</a>
+        <a href="awards.html" data-fr="Prix">Awards</a>
+        <a href="directory.html" data-fr="Répertoire">Directory</a>
+        <a href="games.html" data-fr="Jeux">Games</a>
+        <a href="search.html" data-fr="Recherche">Search</a>
+        <a href="account.html" data-fr="Compte">Account</a>
+      </div>
+    </details>
+    <div class="nlinks">
+    <a class="nl" href="radio.html" data-fr="Écouter">Listen</a>
+    <a class="nl" href="discover.html" data-fr="Découvrir">Discover</a>
+    <a class="nl" href="charts.html" data-fr="Palmarès">Charts</a>
+    <a class="nl" href="videos.html" data-fr="Vidéos">Videos</a>
+    <a class="nl" href="shows.html" data-fr="Spectacles">Shows</a>
+    <details class="nmore">
+      <summary class="nl on" data-fr="Plus">More</summary>
+      <div class="nmore-menu">
+        <a href="blog.html" data-fr="Journal">Journal</a>
+        <a href="awards.html" data-fr="Prix">Awards</a>
+        <a href="directory.html" data-fr="Répertoire">Directory</a>
+        <a href="games.html" data-fr="Jeux">Games</a>
+        <a href="advertise.html" data-fr="Annoncer">Advertise</a>
+        <a href="press.html" data-fr="Presse">Press</a>
+      </div>
+    </details>
+    <a class="nl" href="search.html" data-fr="Recherche">Search</a>
+    <a class="nbtn" href="account.html" data-fr="Compte">Account</a>
+    <button class="lang" data-lang-toggle aria-label="Switch language / Changer de langue"><b>EN</b> · FR</button>
+    <button class="nbtn theme-tgl" aria-pressed="false" aria-label="Switch to day mode" data-fr-aria="Basculer en mode jour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2.5 12h2M19.5 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+</nav>
+
+<header class="arc">
+  <div class="wrap">
+    <img decoding="async" class="wmi arc-logo rv" src="assets/wordmark-cream.png" alt="CanCon Radio">
+    <span class="eyebrow rv"><i></i>THE GAME ROOM · METADATA-POWERED</span>
+    <div class="arc-head">
+      <h1 class="h1 rv rv-d1">Ten games.<br><span class="it">Every fact Canadian.</span></h1>
+      <p class="lede rv rv-d2">Higher/Lower, map pins, clip quizzes, brackets, the Discovery Pokédex and a Wordle-style deduction game — all powered by the station's own index. No accounts needed; scores live on this device.</p>
+    </div>
+    <p class="rv rv-d2" id="gLoad" style="font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:1rem">Loading the index…</p>
+
+    <div class="gcards rv rv-d3" id="gCards"></div>
+    <div class="gtabs rv rv-d3" id="gTabs"></div>
+    <section class="gpane" id="pane-hl"></section>
+    <section class="gpane" id="pane-pin"></section>
+    <section class="gpane" id="pane-trivia"></section>
+    <section class="gpane" id="pane-dex"></section>
+    <section class="gpane" id="pane-bracket"></section>
+    <section class="gpane" id="pane-clip"></section>
+    <section class="gpane" id="pane-genre"></section>
+    <section class="gpane" id="pane-battle"></section>
+    <section class="gpane" id="pane-bingo"></section>
+    <section class="gpane" id="pane-wordle"></section>
+  </div>
+</header>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html"><img decoding="async" class="foot-logo" src="assets/wordmark-cream.png" alt="CanCon Radio" style="height:2.1rem;width:auto"></a>
+        <p style="font-size:.83rem;color:var(--cream-dim);margin-top:.7rem;max-width:30ch">The map of Canadian music. Every artist, every chart, every credit.</p>
+      </div>
+      <div><h5 data-fr="La station">Station</h5><a href="radio.html" data-fr="Radio">Radio</a><a href="discover.html" data-fr="Découvrir">Discover</a><a href="charts.html" data-fr="Palmarès">Charts</a><a href="videos.html" data-fr="Vidéos">Videos</a><a href="shows.html" data-fr="Spectacles">Shows</a></div>
+      <div><h5 data-fr="Explorer">Explore</h5><a href="search.html" data-fr="Rechercher">Search</a><a href="blog.html" data-fr="Journal">Journal</a><a href="directory.html" data-fr="Répertoire">Directory</a><a href="awards.html" data-fr="Prix">Awards</a><a href="games.html" data-fr="Jeux">Games</a></div>
+      <div><h5>The promise</h5><span style="display:block;font-size:.83rem;color:var(--cream-dim);max-width:22ch">EVERY PLAY PAYS THE ARTIST</span></div>
+    </div>
+    <div class="foot-note">
+      <span>© 2026 CANCON RADIO</span>
+      <span>Developed by <a href="https://freelanceflint.com" target="_blank" rel="noopener">Freelance Flint</a></span>
+      <span>EVERY FACT HAS A SOURCE</span>
+    </div>
+  </div>
+</footer>
+
+<script src="player.e5b418e2.js"></script>
+<script src="app.2c564900.js"></script>
+<script src="passport.8ceb346a.js"></script>
+<script>
+(function () {
+  "use strict";
+  function fr() { return document.documentElement.lang === "fr"; }
+  function t(en, f) { return fr() ? f : en; }
+  function el(id) { return document.getElementById(id); }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function nextBtn(parent, fn) {
+    var nb = document.createElement("button");
+    nb.className = "gbtn"; nb.style.marginTop = ".9rem";
+    nb.textContent = t("Next →", "Suivant →");
+    nb.addEventListener("click", function () { nb.remove(); fn(); });
+    parent.appendChild(nb);
+    return nb;
+  }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+  function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem(k) || "null"); localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } }
+
+  /* ---------- data: the artist index ---------- */
+  var ART = [], ready = false;
+  (function () {
+    function loadOne(n) {
+      return fetch(window.DATA_API + "/api/data/artists_" + String(n).padStart(3, "0") + ".json")
+        .then(function (r) { return r.ok ? r.json() : null; });
+    }
+    function loadAll(total) {
+      var results = new Array(total), next = 0, done = 0, pool = 8;
+      function worker() {
+        if (next >= total) return;
+        var i = next++;
+        loadOne(i).then(function (rows) {
+          results[i] = rows || []; done++;
+          ART = [].concat.apply([], results.map(function (r) { return r || []; }));
+          el("gLoad").textContent = t("Loading the index: ", "Chargement de l'index : ") + ART.length.toLocaleString("en-CA") + "…";
+          if (done === total) { ready = true; el("gLoad").textContent = ""; onData(); }
+          else worker();
+        }).catch(function () { results[i] = []; done++; if (done === total) { ready = true; el("gLoad").textContent = ""; onData(); } else worker(); });
+      }
+      for (var w = 0; w < pool; w++) worker();
+    }
+    fetch(window.DATA_API + "/api/data/stats.json").then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (s) { loadAll((s && s.artists) ? Math.ceil(s.artists / 500) : 41); })
+      .catch(function () { loadAll(41); });
+  })();
+
+  function withTracks() { return ART.filter(function (a) { return (a.tracks || []).some(function (tr) { return tr.yt; }); }); }
+  function trackCount(a) { return (a.tracks || []).length + (a.community_tracks || []).length; }
+  function debut(a) {
+    var yrs = (a.tracks || []).concat(a.community_tracks || []).map(function (x) { return x.year; }).filter(Boolean);
+    return yrs.length ? Math.min.apply(null, yrs) : null;
+  }
+  function awardsN(a) { return (a.awards_won || 0) + (a.awards_nominated || 0); }
+  function genreStr(a) { return (a.genres || []).join(", "); }
+  function provName(p) {
+    return { BC: "British Columbia", AB: "Alberta", SK: "Saskatchewan", MB: "Manitoba", ON: "Ontario",
+      QC: "Quebec", NB: "New Brunswick", PE: "Prince Edward Island", NS: "Nova Scotia",
+      NL: "Newfoundland & Labrador", YT: "Yukon", NT: "Northwest Territories", NU: "Nunavut" }[p] || p || "—";
+  }
+  var PROVS = ["YT", "NT", "NU", "BC", "AB", "SK", "MB", "ON", "QC", "NB", "PE", "NS", "NL"];
+
+  /* ---------- played stamps (feeds Pokédex + Bingo) ---------- */
+  function stamps() { return ls("ccr_played") || {}; }
+  function stampArtist(a) {
+    if (!a || !a.name) return;
+    var s = stamps();
+    s[a.name.toLowerCase()] = { p: a.province || "", g: (a.genres || [])[0] || "", y: debut(a), wk: weekKey() };
+    ls("ccr_played", s);
+  }
+  if (window.CanConPlayer) CanConPlayer.on("track", function (tr) {
+    if (tr && tr.artist) { var a = ART.find(function (x) { return x.name === tr.artist; }); stampArtist(a); }
+  });
+
+  /* ---------- clip engine (one hidden YT player) ---------- */
+  var clipP = null, clipReady = false, clipTimer = null;
+  function ensureClip(cb) {
+    if (clipP) return cb && cb();
+    var tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+    window.onYouTubeIframeAPIReady = function () {
+      var host = document.createElement("div");
+      host.style.cssText = "position:fixed;right:12px;bottom:120px;width:300px;height:170px;z-index:70;background:#000;border-radius:.5rem;overflow:hidden";
+      host.id = "gClipBox";
+      document.body.appendChild(host);
+      clipP = new YT.Player("gClipBox", {
+        width: "300", height: "170",
+        host: "https://www.youtube-nocookie.com",
+        playerVars: { rel: 0, playsinline: 1, modestbranding: 1 },
+        events: {
+          onReady: function () { clipReady = true; cb && cb(); },
+          onStateChange: function (ev) { if (ev.data === 1 && clipP.setVolume) { try { clipP.setVolume(85); } catch (e) {} } }
+        }
+      });
+    };
+  }
+  function playClip(ytid, start, dur) {
+    if (!clipReady) return;
+    clearTimeout(clipTimer);
+    try {
+      clipP.seekTo(start, true);
+      clipP.playVideo();
+      clipP.setVolume(85);
+    } catch (e) { return; }
+    clipTimer = setTimeout(function () { try { clipP.pauseVideo(); } catch (e) {} }, (dur || 6) * 1000);
+  }
+  function stopClip() { clearTimeout(clipTimer); if (clipP) try { clipP.pauseVideo(); } catch (e) {} }
+  function randomClip() {
+    var cands = withTracks();
+    for (var tries = 0; tries < 30; tries++) {
+      var a = pick(cands);
+      var trs = (a.tracks || []).concat(a.community_tracks || []).filter(function (x) { return x.yt && x.dur && x.dur > 40; });
+      if (!trs.length) continue;
+      var tr = pick(trs);
+      return { a: a, tr: tr, start: 8 + Math.floor(Math.random() * Math.max(10, Math.min(120, tr.dur - 25))) };
+    }
+    return null;
+  }
+
+  /* ================= 1. HIGHER / LOWER ================= */
+  var hlScore = ls("g_hl_score") || 0, hlStreak = 0;
+  function paneHL() {
+    var p = el("pane-hl");
+    p.innerHTML = "";
+    var head = document.createElement("div"); head.className = "ghead";
+    head.innerHTML = "<h3>Higher / Lower</h3>";
+    var sc = document.createElement("span"); sc.className = "gscore"; sc.id = "hlScore";
+    head.appendChild(sc); p.appendChild(head);
+    var board = document.createElement("div"); board.id = "hlBoard"; p.appendChild(board);
+    var msg = document.createElement("p"); msg.className = "gmsg"; msg.id = "hlMsg"; p.appendChild(msg);
+    hlPaint();
+  }
+  var hlA = null, hlB = null, hlMode = null;
+  function hlQuestion() {
+    var modes = [
+      { k: "tracks", q: t("Who has more tracks on file?", "Qui a plus de pistes au dossier ?"), v: trackCount },
+      { k: "awards", q: t("Who has more award honours on file (wins + nominations)?", "Qui compte plus d’honneurs (prix + nominations) ?"), v: awardsN },
+      { k: "debut", q: t("Whose earliest recording on file is older?", "Qui a l’enregistrement le plus ancien au dossier ?"), v: function (a) { return -(debut(a) || 9999); } }
+    ];
+    hlMode = pick(modes);
+    var c = ART.filter(function (a) { return trackCount(a) > 0; });
+    hlA = pick(c); hlB = pick(c);
+    if (hlA === hlB || hlA.name === hlB.name) return hlQuestion();
+    if (hlMode.v(hlA) === hlMode.v(hlB)) return hlQuestion();
+  }
+  function hlPaint() {
+    if (!ART.length) {           /* index still streaming in: paint politely, don't recurse */
+      var b0 = el("hlBoard");
+      if (b0) b0.innerHTML = "<p style='color:var(--cream-dim)'>" +
+        (document.documentElement.lang === "fr" ? "Chargement de l'index…" : "Loading the index…") + "</p>";
+      el("hlMsg").textContent = "";
+      return;
+    }
+    hlQuestion();
+    el("hlScore").textContent = t("Score ", "Score ") + hlScore + (hlStreak > 1 ? " · " + hlStreak + " in a row" : "");
+    el("hlMsg").textContent = "";
+    var b = el("hlBoard"); b.innerHTML = "";
+    var q = document.createElement("p"); q.style.fontSize = "1.05rem"; q.textContent = hlMode.q; b.appendChild(q);
+    var grid = document.createElement("div"); grid.className = "grow2"; grid.style.marginTop = "1rem";
+    [hlA, hlB].forEach(function (a, i) {
+      var btn = document.createElement("button");
+      btn.className = "gbtn gopt";
+      btn.innerHTML = "";
+      var nm = document.createElement("span"); nm.textContent = a.name; btn.appendChild(nm);
+      var meta = document.createElement("small");
+      meta.textContent = genreStr(a) || (a.province || "");
+      btn.appendChild(meta);
+      var extra = document.createElement("small");
+      extra.textContent = i === 0 ? (hlMode.k === "debut" ? "first: " + (debut(a) || "?") : hlMode.k + ": " + hlMode.v(a)) : "???";
+      extra.id = "hlx" + i;
+      btn.appendChild(extra);
+      btn.addEventListener("click", function () { hlAnswer(i === 0); });
+      grid.appendChild(btn);
+    });
+    b.appendChild(grid);
+  }
+  function hlAnswer(choseA) {
+    var aWin = hlMode.v(hlA) > hlMode.v(hlB);
+    var right = (choseA === aWin);
+    el("hlx1").textContent = hlMode.k === "debut" ? "first: " + (debut(hlB) || "?") : hlMode.k + ": " + hlMode.v(hlB);
+    el("hlMsg").textContent = right
+      ? t("Right. ", "Exact. ") + hlA.name + (hlMode.k === "debut" ? " (" + debut(hlA) + ")" : "") + " vs " + hlB.name + (hlMode.k === "debut" ? " (" + debut(hlB) + ")" : "")
+      : t("Wrong — ", "Raté — ") + hlA.name + (hlMode.k === "debut" ? " (" + debut(hlA) + ")" : "") + " vs " + hlB.name + (hlMode.k === "debut" ? " (" + debut(hlB) + ")" : "");
+    hlScore = right ? hlScore + 1 : 0;
+    hlStreak = right ? hlStreak + 1 : 0;
+    ls("g_hl_score", hlScore);
+    el("hlScore").textContent = t("Score ", "Score ") + hlScore;
+    stampArtist(right ? hlA : hlB); stampArtist(right ? hlB : hlA);
+    nextBtn(el("hlMsg").parentNode, hlPaint);
+  }
+
+  /* ================= 2. PIN THE HOMETOWN ================= */
+  var pinScore = ls("g_pin_score") || { total: 0, n: 0 };
+  var pinCur = null;
+  var PROV_PT = { YT: [100, 100], NT: [230, 105], NU: [430, 140], BC: [90, 250], AB: [185, 255], SK: [270, 260], MB: [345, 265], ON: [440, 290], QC: [545, 275], NB: [560, 390], PE: [600, 375], NS: [585, 420], NL: [500, 440] };
+  function panePin() {
+    var p = el("pane-pin");
+    p.innerHTML = "";
+    var head = document.createElement("div"); head.className = "ghead";
+    head.innerHTML = "<h3>Pin the Province</h3>";
+    var sc = document.createElement("span"); sc.className = "gscore";
+    sc.textContent = t("Average error: ", "Erreur moyenne : ") + (pinScore.n ? Math.round(pinScore.total / pinScore.n) + " km" : "—");
+    head.appendChild(sc); p.appendChild(head);
+    var who = document.createElement("p"); who.id = "pinWho"; who.style.fontSize = "1.1rem"; p.appendChild(who);
+    var map = document.createElement("div"); map.id = "pinMap"; p.appendChild(map);
+    var res = document.createElement("p"); res.className = "pinresult"; res.id = "pinRes"; p.appendChild(res);
+    var next = document.createElement("button"); next.className = "gbtn"; next.id = "pinNext";
+    next.textContent = t("Skip ›", "Passer ›"); next.style.marginTop = ".6rem";
+    next.addEventListener("click", pinAsk);
+    p.appendChild(next);
+    pinAsk();
+  }
+  function pinAsk() {
+    var cands = ART.filter(function (a) { return a.province && PROV_PT[a.province]; });
+    pinCur = pick(cands);
+    el("pinWho").innerHTML = "<b>" + pinCur.name + "</b> · <span style='color:var(--cream-dim)'>" + (genreStr(pinCur) || t("no genre on file", "genre inconnu")) + "</span>";
+    el("pinRes").textContent = t("Tap their home province or territory on the map.", "Touchez leur province ou territoire d'origine sur la carte.");
+    el("pinMap").innerHTML =
+      '<svg class="cmap" viewBox="0 0 660 520" role="group" aria-label="Map of Canada">' +
+      PROVS.map(function (pv) {
+        var pt = PROV_PT[pv];
+        return '<g><circle cx="' + pt[0] + '" cy="' + pt[1] + '" r="30" data-pv="' + pv + '"></circle>' +
+               '<text x="' + pt[0] + '" y="' + (pt[1] + 44) + '">' + pv + '</text></g>';
+      }).join("").replace(/<circle/g, "<path d=\"\" data-x=\"1\" /><circle style=\"fill:rgba(243,234,208,.07);stroke:rgba(243,234,208,.35)\" ") +
+      "</svg>";
+    // simpler: rebuild cleanly
+    el("pinMap").innerHTML = '<svg class="cmap" viewBox="0 0 660 520" role="group" aria-label="Map of Canada">' +
+      PROVS.map(function (pv) {
+        var pt = PROV_PT[pv];
+        return '<path data-pv="' + pv + '" d="M' + (pt[0] - 34) + ' ' + (pt[1] - 26) +
+          ' h68 v52 h-68 Z"></path><text x="' + pt[0] + '" y="' + (pt[1] + 44) + '">' + pv + '</text>';
+      }).join("") + "</svg>";
+    el("pinMap").querySelectorAll("path").forEach(function (pathEl) {
+      pathEl.addEventListener("click", function () { pinGuess(pathEl.getAttribute("data-pv")); });
+    });
+  }
+  function provDist(a, b) {
+    var A = PROV_PT[a], B = PROV_PT[b];
+    if (!A || !B) return 4000;
+    var dx = (A[0] - B[0]) * 12, dy = (A[1] - B[1]) * 16; /* rough km scale */
+    return Math.round(Math.sqrt(dx * dx + dy * dy));
+  }
+  function pinGuess(pv) {
+    var d = provDist(pv, pinCur.province);
+    var hit = pv === pinCur.province;
+    pinScore.total += d; pinScore.n += 1; ls("g_pin_score", pinScore);
+    el("pinRes").innerHTML = (hit ? "✓ " : "→ ") + "<b>" + pinCur.name + "</b> " +
+      t("is from", "vient de") + " <b>" + provName(pinCur.province) + "</b>" +
+      (hit ? "" : " — " + d.toLocaleString("en-CA") + " km " + t("off", "de décalage")) + ".";
+    stampArtist(pinCur);
+  }
+
+  /* ================= 3. AWARD TRIVIA ================= */
+  var trScore = ls("g_tr_score") || 0, awardRows = null;
+  function paneTrivia() {
+    var p = el("pane-trivia");
+    p.innerHTML = "";
+    var head = document.createElement("div"); head.className = "ghead";
+    head.innerHTML = "<h3>" + t("Who Took Home the Hardware?", "Qui a remporté le prix ?") + "</h3>";
+    var sc = document.createElement("span"); sc.className = "gscore"; sc.id = "trScore";
+    sc.textContent = t("Score ", "Score ") + trScore; head.appendChild(sc); p.appendChild(head);
+    var box = document.createElement("div"); box.id = "trBox";
+    box.innerHTML = "<p style='color:var(--cream-dim)'>" + t("Loading award archive…", "Chargement des prix…") + "</p>";
+    p.appendChild(box);
+    if (!awardRows) {
+      Promise.all(["a", "j", "e"].map(function (l) {
+        return fetch(window.DATA_API + "/api/data/search/awards/" + l + ".json").then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; });
+      })).then(function (chunks) {
+        awardRows = [].concat.apply([], chunks).filter(function (r) { return r.result === "won"; });
+        trAsk();
+      });
+    } else trAsk();
+  }
+  var trQ = null;
+  function trAsk() {
+    if (!awardRows || !awardRows.length) return;
+    var win = pick(awardRows);
+    if (!win || !win.artist) return trAsk();
+    var names = ART.map(function (a) { return a.name; });
+    var distract = shuffle(names).filter(function (n) { return n && n !== win.artist; }).slice(0, 3);
+    if (distract.length < 3) return trAsk();
+    trQ = { win: win, opts: shuffle([win.artist].concat(distract)) };
+    var box = el("trBox"); box.innerHTML = "";
+    var q = document.createElement("p"); q.style.fontSize = "1.1rem";
+    q.textContent = t("Who won ", "Qui a remporté ") + win.award + " — " + win.category +
+      (win.year ? " (" + win.year + ")" : "") + "?";
+    box.appendChild(q);
+    var grid = document.createElement("div"); grid.className = "grow2"; grid.style.marginTop = "1rem";
+    trQ.opts.forEach(function (nm) {
+      var b = document.createElement("button");
+      b.className = "gbtn gopt"; b.textContent = nm;
+      b.addEventListener("click", function () {
+        var right = nm === trQ.win.artist;
+        grid.querySelectorAll("button").forEach(function (x) {
+          if (x.textContent === trQ.win.artist) x.classList.add("right");
+          else if (x === b) x.classList.add("wrong");
+          x.disabled = true;
+        });
+        if (right) { trScore++; ls("g_tr_score", trScore); el("trScore").textContent = t("Score ", "Score ") + trScore; }
+        var a = ART.find(function (x) { return x.name === trQ.win.artist; });
+        stampArtist(a);
+        nextBtn(box, trAsk);
+      });
+      grid.appendChild(b);
+    });
+    box.appendChild(grid);
+  }
+
+  /* ================= 4. DISCOVERY POKÉDEX ================= */
+  function paneDex() {
+    var p = el("pane-dex");
+    p.innerHTML = "";
+    var head = document.createElement("div"); head.className = "ghead";
+    head.innerHTML = "<h3>" + t("The Record Crate", "Pokédex de la découverte") + "</h3>";
+    p.appendChild(head);
+    var note = document.createElement("p");
+    note.style.cssText = "font-size:.85rem;color:var(--cream-dim);max-width:60ch;line-height:1.6";
+    note.textContent = t("Every artist you play on the radio, the TV, or in these games gets stamped. Fill the map — every province and territory has its own roster.",
+      "Chaque artiste joué à la radio, à la télé ou dans ces jeux est tamponné. Remplissez la carte — chaque province et territoire a sa propre liste.");
+    p.appendChild(note);
+    var grid = document.createElement("div"); grid.className = "dexgrid"; grid.id = "dexGrid";
+    p.appendChild(grid);
+    var s = stamps();
+    var totalFound = 0, totalAll = 0;
+    PROVS.forEach(function (pv) {
+      var roster = ART.filter(function (a) { return a.province === pv; });
+      var found = roster.filter(function (a) { return s[a.name.toLowerCase()]; }).length;
+      totalFound += found; totalAll += roster.length;
+      var cell = document.createElement("div"); cell.className = "dex";
+      var pct = roster.length ? Math.round(100 * found / roster.length) : 0;
+      cell.innerHTML = "<b>" + provName(pv) + "</b><br><small>" +
+        found.toLocaleString("en-CA") + " / " + roster.length.toLocaleString("en-CA") + " " +
+        t("discovered", "découverts") + (pct === 100 && roster.length ? " · ★" : "") + "</small>" +
+        '<div class="dexbar"><i style="width:' + pct + '%"></i></div>';
+      grid.appendChild(cell);
+    });
+    var sum = document.createElement("p");
+    sum.style.cssText = "margin-top:1.2rem;font-size:.95rem";
+    sum.innerHTML = "<b>" + totalFound.toLocaleString("en-CA") + "</b> / " + totalAll.toLocaleString("en-CA") +
+      " " + t("Canadian artists discovered on this device.", "artistes canadiens découverts sur cet appareil.");
+    p.appendChild(sum);
+  }
+
+  /* ================= 5. BRACKET ================= */
+  function weekKey() { var d = new Date(); return d.getFullYear() + "-w" + Math.floor((d - new Date(d.getFullYear(), 0, 1)) / 6048e5); }
+  function paneBracket() {
+    var p = el("pane-bracket");
+    p.innerHTML = "";
+    var head = document.createElement("div"); head.className = "ghead";
+    head.innerHTML = "<h3>" + t("Discovery Bracket", "Braquet de découvertes") + "</h3>";
+    var sc = document.createElement("span"); sc.className = "gscore"; sc.textContent = weekKey();
+    head.appendChild(sc); p.appendChild(head);
+    var st = ls("g_bracket");
+    if (!st || st.week !== weekKey()) {
+      st = { week: weekKey(), round: shuffle(withTracks().slice()).slice(0, 64), winners: [] };
+      ls("g_bracket", st);
+    }
+    var box = document.createElement("div"); box.id = "brBox"; p.appendChild(box);
+    brPaint(st);
+  }
+  function brPaint(st) {
+    var box = el("brBox"); box.innerHTML = "";
+    var remaining = st.round.slice(st.winners.length * 2);
+    var done = st.winners.length * 2 >= st.round.length;
+    if (done) {
+      var champ = st.winners.length === 1 ? st.winners[0] : null;
+      if (st.round.length === 1 && st.winners.length) champ = st.winners[0];
+      if (champ) {
+        box.innerHTML = "<p style='font-size:1.3rem'>🏆 <b>" + champ.name + "</b> — " + t("champion of the week!", "champion de la semaine !") + "</p>" +
+          "<p style='color:var(--cream-dim);font-size:.85rem;margin-top:.5rem'>" + (genreStr(champ) || "") + "</p>";
+        var again = document.createElement("button"); again.className = "gbtn"; again.style.marginTop = "1rem";
+        again.textContent = t("Start a new bracket", "Nouveau braquet");
+        again.addEventListener("click", function () { ls("g_bracket", null); paneBracket(); });
+        box.appendChild(again);
+        stampArtist(champ);
+        return;
+      }
+      /* next round */
+      st.round = st.winners; st.winners = [];
+      ls("g_bracket", st);
+      remaining = st.round;
+    }
+    var progress = document.createElement("p");
+    progress.style.cssText = "font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)";
+    progress.textContent = t("Round of " + st.round.length + " · " + Math.floor(remaining.length / 2) + " matchups left",
+      "Tournoi de " + st.round.length + " · " + Math.floor(remaining.length / 2) + " duels restants");
+    box.appendChild(progress);
+    for (var i = 0; i + 1 < remaining.length + (st.winners.length * 2 - st.round.length ? 0 : 0); i += 2) {
+      (function (a, b) {
+        var m = document.createElement("div"); m.className = "bmatch";
+        [a, b].forEach(function (x) {
+          var btn = document.createElement("button");
+          btn.className = "gbtn gopt";
+          btn.innerHTML = "<span>" + x.name + "</span><small>" + (genreStr(x) || x.province || "") + "</small>";
+          btn.addEventListener("click", function () {
+            st.winners.push(x); ls("g_bracket", st);
+            stampArtist(x); stampArtist(x === a ? b : a);
+            brPaint(st);
+          });
+          m.appendChild(btn);
+        });
+        var vs = document.createElement("span");
+        vs.style.cssText = "align-self:center;font-family:var(--mono);font-size:.6rem;color:var(--faint)";
+        vs.textContent = "VS";
+        m.appendChild(vs);
+        box.appendChild(m);
+      })(remaining[i], remaining[i + 1]);
+    }
+  }
+
+  /* ================= 6. CLIP QUIZ (Heardle-ish) ================= */
+  var cqScore = ls("g_cq_score") || 0;
+  function paneClip() {
+    var p = el("pane-clip");
+    p.innerHTML = "";
+    var head = document.createElement("div"); head.className = "ghead";
+    head.innerHTML = "<h3>" + t("Name That Track", "Devine le titre") + "</h3>";
+    var sc = document.createElement("span"); sc.className = "gscore"; sc.id = "cqScore";
+    sc.textContent = t("Score ", "Score ") + cqScore; head.appendChild(sc); p.appendChild(head);
+    var box = document.createElement("div"); box.id = "cqBox"; p.appendChild(box);
+    cqAsk();
+  }
+  var cqQ = null;
+  function cqAsk() {
+    ensureClip();
+    cqQ = randomClip();
+    var box = el("cqBox"); box.innerHTML = "";
+    if (!cqQ) { box.innerHTML = "<p>Index still loading…</p>"; return; }
+    var row = document.createElement("div"); row.style.cssText = "display:flex;gap:.6rem;align-items:center;flex-wrap:wrap";
+    var play = document.createElement("button"); play.className = "gbtn big";
+    play.textContent = "▶ " + t("Play the clip", "Écouter l'extrait");
+    play.addEventListener("click", function () { ensureClip(function () { playClip(cqQ.tr.yt, cqQ.start, 6); }); });
+    row.appendChild(play);
+    var hint = document.createElement("span");
+    hint.style.cssText = "font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--faint);text-transform:uppercase";
+    hint.textContent = t("6 seconds · anywhere in the song", "6 secondes · n'importe où dans la chanson");
+    row.appendChild(hint);
+    box.appendChild(row);
+    var pool = withTracks().filter(function (a) { return a.name !== cqQ.a.name; });
+    var opts = shuffle([{ name: cqQ.a.name, title: cqQ.tr.title }].concat(shuffle(pool).slice(0, 3).map(function (a) {
+      var trs = (a.tracks || []).concat(a.community_tracks || []).filter(function (x) { return x.yt; });
+      return trs.length ? { name: a.name, title: trs[0].title } : null;
+    }).filter(Boolean)));
+    cqQ.opts = opts;
+    var grid = document.createElement("div"); grid.className = "grow2"; grid.style.marginTop = "1rem";
+    opts.forEach(function (o) {
+      var b = document.createElement("button");
+      b.className = "gbtn gopt";
+      b.innerHTML = "<span>“" + (o.title || "") + "”</span><small>" + o.name + "</small>";
+      b.addEventListener("click", function () {
+        stopClip();
+        var right = o.name === cqQ.a.name;
+        grid.querySelectorAll("button").forEach(function (x) {
+          if (x.querySelector("small").textContent === cqQ.a.name) x.classList.add("right");
+          else if (x === b) x.classList.add("wrong");
+          x.disabled = true;
+        });
+        if (right) { cqScore++; ls("g_cq_score", cqScore); el("cqScore").textContent = t("Score ", "Score ") + cqScore; }
+        stampArtist(cqQ.a);
+        nextBtn(box, cqAsk);
+      });
+      grid.appendChild(b);
+    });
+    box.appendChild(grid);
+  }
+
+  /* ================= 7. GENRE DETECTIVE ================= */
+  var gdScore = ls("g_gd_score") || 0;
+  function paneGenre() {
+    var p = el("pane-genre");
+    p.innerHTML = "";
+    var head = document.createElement("div"); head.className = "ghead";
+    head.innerHTML = "<h3>" + t("Genre Detective", "Détective de genre") + "</h3>";
+    var sc = document.createElement("span"); sc.className = "gscore"; sc.id = "gdScore";
+    sc.textContent = t("Score ", "Score ") + gdScore; head.appendChild(sc); p.appendChild(head);
+    var box = document.createElement("div"); box.id = "gdBox"; p.appendChild(box);
+    gdAsk();
+  }
+  var gdQ = null;
+  function gdAsk() {
+    ensureClip();
+    gdQ = null;
+    var cands = withTracks().filter(function (a) { return (a.genres || []).length; });
+    for (var i = 0; i < 40 && !gdQ; i++) {
+      var a = pick(cands);
+      var trs = (a.tracks || []).concat(a.community_tracks || []).filter(function (x) { return x.yt && x.dur && x.dur > 40; });
+      if (trs.length) gdQ = { a: a, tr: pick(trs), start: 8 + Math.floor(Math.random() * 60) };
+    }
+    var box = el("gdBox"); box.innerHTML = "";
+    if (!gdQ) { box.innerHTML = "<p>Index still loading…</p>"; return; }
+    var play = document.createElement("button"); play.className = "gbtn big";
+    play.textContent = "▶ " + t("Play the clip", "Écouter l'extrait");
+    play.addEventListener("click", function () { ensureClip(function () { playClip(gdQ.tr.yt, gdQ.start, 7); }); });
+    box.appendChild(play);
+    var right = (gdQ.a.genres || [])[0];
+    var gpool = ["rock", "pop", "hip hop", "electronic", "country", "folk", "jazz", "blues", "metal", "punk", "r&b", "reggae"];
+    var opts = shuffle([right].concat(shuffle(gpool.filter(function (g) { return g !== right; })).slice(0, 3)));
+    var grid = document.createElement("div"); grid.className = "grow2"; grid.style.marginTop = "1rem";
+    opts.forEach(function (g) {
+      var b = document.createElement("button"); b.className = "gbtn gopt";
+      b.textContent = g;
+      b.addEventListener("click", function () {
+        stopClip();
+        var ok = g === right;
+        grid.querySelectorAll("button").forEach(function (x) {
+          if (x.textContent === right) x.classList.add("right");
+          else if (x === b) x.classList.add("wrong");
+          x.disabled = true;
+        });
+        if (ok) { gdScore++; ls("g_gd_score", gdScore); el("gdScore").textContent = t("Score ", "Score ") + gdScore; }
+        stampArtist(gdQ.a);
+        nextBtn(box, gdAsk);
+      });
+      grid.appendChild(b);
+    });
+    box.appendChild(grid);
+    var hint = document.createElement("p");
+    hint.style.cssText = "margin-top:.9rem;font-size:.85rem;color:var(--cream-dim)";
+    hint.textContent = gdQ.a.name + " — " + t("where are they from, sonically?", "d'où viennent-ils, musicalement ?");
+    box.appendChild(hint);
+  }
+
+  /* ================= 8. TWO-SONG BATTLE ================= */
+  var elo = ls("g_elo") || {};
+  function eloOf(n) { return elo[n] || 1000; }
+  function paneBattle() {
+    var p = el("pane-battle");
+    p.innerHTML = "";
+    var head = document.createElement("div"); head.className = "ghead";
+    head.innerHTML = "<h3>" + t("Two-Song Battle", "Combat de deux chansons") + "</h3>";
+    var sc = document.createElement("span"); sc.className = "gscore";
+    sc.textContent = Object.keys(elo).length + " " + t("rated", "cotés");
+    head.appendChild(sc); p.appendChild(head);
+    var note = document.createElement("p");
+    note.style.cssText = "font-size:.85rem;color:var(--cream-dim);max-width:58ch";
+    note.textContent = t("Listen to both, pick the one you'd spin again. Votes feed a local Elo ladder — the platform's trend chart, crowd-sourced by you.",
+      "Écoutez les deux, choisissez celle que vous repasserait. Les votes alimentent un classement Elo local.");
+    p.appendChild(note);
+    var box = document.createElement("div"); box.id = "btBox"; p.appendChild(box);
+    btAsk();
+  }
+  var btQ = null;
+  function btAsk() {
+    if (!ART.length) {          /* no index yet: paint a wait note, don't recurse */
+      var bx = el("btBox");
+      if (bx) bx.innerHTML = "<p style='color:var(--cream-dim)'>Loading the index…</p>";
+      return;
+    }
+    ensureClip();
+    btQ = { a: randomClip(), b: null };
+    btQ.b = randomClip();
+    if (!btQ.a || !btQ.b) return;
+    if (btQ.a.tr.yt === btQ.b.tr.yt) return btAsk();
+    var box = el("btBox"); box.innerHTML = "";
+    var grid = document.createElement("div"); grid.className = "grow2";
+    [["a", "A"], ["b", "B"]].forEach(function (side) {
+      var q = btQ[side[0]];
+      var cell = document.createElement("div");
+      cell.style.cssText = "border:1px solid rgba(243,234,208,.14);border-radius:.7rem;padding:1.1rem";
+      var nm = document.createElement("p"); nm.innerHTML = "<b>" + q.a.name + "</b><br><span style='color:var(--cream-dim);font-size:.9rem'>“" + q.tr.title + "”</span>";
+      cell.appendChild(nm);
+      var play = document.createElement("button"); play.className = "gbtn"; play.style.marginTop = ".7rem";
+      play.textContent = "▶ " + t("Play " + side[1], "Écouter " + side[1]);
+      play.addEventListener("click", function () { ensureClip(function () { playClip(q.tr.yt, q.start, 8); }); });
+      cell.appendChild(play);
+      var vote = document.createElement("button"); vote.className = "gbtn big"; vote.style.marginTop = ".6rem"; vote.style.marginLeft = ".5rem";
+      vote.textContent = "♥ " + t("This one", "Celle-ci");
+      vote.addEventListener("click", function () {
+        stopClip();
+        var wa = vote.textContent.indexOf("♥") !== -1;
+        var A = btQ.a.a, B = btQ.b.a;
+        var ea = 1 / (1 + Math.pow(10, (eloOf(B.name) - eloOf(A.name)) / 400));
+        var winner = side[0] === "a" ? A : B, loser = side[0] === "a" ? B : A;
+        elo[winner.name] = Math.round(eloOf(winner.name) + 32 * (1 - (side[0] === "a" ? ea : 1 - ea)));
+        elo[loser.name] = Math.round(eloOf(loser.name) + 32 * (0 - (side[0] === "a" ? ea : 1 - ea)));
+        ls("g_elo", elo);
+        stampArtist(A); stampArtist(B);
+        btAsk();
+      });
+      cell.appendChild(vote);
+      grid.appendChild(cell);
+    });
+    box.appendChild(grid);
+    var board = document.createElement("div"); board.style.marginTop = "1.4rem";
+    var top = Object.keys(elo).sort(function (x, y) { return elo[y] - elo[x]; }).slice(0, 10);
+    board.innerHTML = "<p style='font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)'>" +
+      t("Local ladder — top 10", "Échelle locale — top 10") + "</p>" +
+      top.map(function (n, i) { return "<p style='font-size:.9rem;margin:.3rem 0'>" + (i + 1) + ". <b>" + n + "</b> · " + elo[n] + "</p>"; }).join("");
+    box.appendChild(board);
+  }
+
+  /* ================= 9. DISCOVERY BINGO ================= */
+  function weekBingo() {
+    var cells = [
+      { id: "yt", lab: t("Yukon artist", "Artiste du Yukon"), test: function (s) { return s.p === "YT"; } },
+      { id: "nu", lab: t("Nunavut or NWT artist", "Artiste du Nunavut ou des TNO"), test: function (s) { return s.p === "NU" || s.p === "NT"; } },
+      { id: "atl", lab: t("Atlantic artist", "Artiste de l'Atlantique"), test: function (s) { return ["NB", "PE", "NS", "NL"].indexOf(s.p) !== -1; } },
+      { id: "qc", lab: t("Quebec artist", "Artiste du Québec"), test: function (s) { return s.p === "QC"; } },
+      { id: "on", lab: t("Ontario artist", "Artiste de l'Ontario"), test: function (s) { return s.p === "ON"; } },
+      { id: "prairie", lab: t("Prairie artist", "Artiste des Prairies"), test: function (s) { return ["MB", "SK", "AB"].indexOf(s.p) !== -1; } },
+      { id: "bc", lab: t("BC artist", "Artiste de la CB"), test: function (s) { return s.p === "BC"; } },
+      { id: "old", lab: t("First recorded before 1980", "Premier enregistrement avant 1980"), test: function (s) { return s.y && s.y < 1980; } },
+      { id: "new", lab: t("First recorded in the 2020s", "Premier enregistrement en 2020"), test: function (s) { return s.y && s.y >= 2020; } },
+      { id: "aw", lab: t("Award-nominated", "Mis en nomination"), test: function (s, name) { var a = ART.find(function (x) { return x.name.toLowerCase() === name; }); return a && awardsN(a) > 0; } },
+      { id: "gen3", lab: t("Played 3 different genres", "3 genres joués"), test: function (s, name, all) {
+        var gs = {}; Object.keys(all).forEach(function (k) { if (all[k].g) gs[all[k].g] = 1; });
+        return Object.keys(gs).length >= 3; } },
+      { id: "dj", lab: t("Played 5 different provinces", "5 provinces jouées"), test: function (s, name, all) { var ps = {}; Object.keys(all).forEach(function (k) { if (all[k].p) ps[all[k].p] = 1; }); return Object.keys(ps).length >= 5; } }
+    ];
+    return cells;
+  }
+  function paneBingo() {
+    var p = el("pane-bingo");
+    p.innerHTML = "";
+    var head = document.createElement("div"); head.className = "ghead";
+    head.innerHTML = "<h3>" + t("Discovery Bingo — week ", "Bingo de la découverte — semaine ") + weekKey() + "</h3>";
+    p.appendChild(head);
+    var note = document.createElement("p");
+    note.style.cssText = "font-size:.85rem;color:var(--cream-dim);max-width:58ch";
+    note.textContent = t("Play music anywhere on the site to stamp the card. Line not required — fill what you can before Sunday.",
+      "Jouez de la musique n'importe où sur le site pour tamponner la carte.");
+    p.appendChild(note);
+    var grid = document.createElement("div"); grid.className = "bingo";
+    var s = stamps(), wk = weekKey(), sw = {};
+    Object.keys(s).forEach(function (k) { if (s[k].wk === wk) sw[k] = s[k]; });
+    s = sw;
+    weekBingo().forEach(function (c) {
+      var done = Object.keys(s).some(function (k) { try { return c.test(s[k], k, s); } catch (e) { return false; } });
+      var cell = document.createElement("div");
+      cell.className = "bcell" + (done ? " done" : "");
+      cell.innerHTML = "<b>" + (done ? "✓ " : "") + t("square", "case") + "</b><span>" + c.lab + "</span>";
+      grid.appendChild(cell);
+    });
+    p.appendChild(grid);
+    var allDone = grid.querySelectorAll(".bcell").length > 0 && grid.querySelectorAll(".bcell:not(.done)").length === 0;
+    if (allDone && window.ccrFlag) ccrFlag("bingoFull");
+  }
+
+  /* ================= 10. GUESS THE ARTIST (Wordle-style) ================= */
+  var gaWins = ls("g_ga_wins") || 0;
+  function paneWordle() {
+    var p = el("pane-wordle");
+    p.innerHTML = "";
+    var head = document.createElement("div"); head.className = "ghead";
+    head.innerHTML = "<h3>" + t("Guess the Artist", "Devine l'artiste") + "</h3>";
+    var sc = document.createElement("span"); sc.className = "gscore";
+    sc.textContent = gaWins + " " + t("solved", "résolus"); head.appendChild(sc); p.appendChild(head);
+    var note = document.createElement("p");
+    note.style.cssText = "font-size:.85rem;color:var(--cream-dim);max-width:58ch";
+    note.textContent = t("Five guesses. Each wrong guess reveals another clue from the station's own metadata: province → genre → first-recording decade → first letter.",
+      "Cinq essais. Chaque raté révèle un indice des métadonnées : province → genre → décennie → première lettre.");
+    p.appendChild(note);
+    var box = document.createElement("div"); box.id = "gaBox"; p.appendChild(box);
+    gaAsk();
+  }
+  var gaQ = null;
+  function gaAsk() {
+    var cands = ART.filter(function (a) { return a.province && (a.genres || []).length && debut(a); });
+    gaQ = { a: pick(cands), tries: 0, revealed: 0, done: false };
+    gaPaint();
+  }
+  function gaClues() {
+    var a = gaQ.a;
+    return [
+      t("Province: ", "Province : ") + provName(a.province),
+      t("Genre: ", "Genre : ") + (a.genres || [])[0],
+      t("First recorded: ", "Premier enregistrement : ") + Math.floor(debut(a) / 10) * 10 + "s",
+      t("First letter: ", "Première lettre : ") + a.name.charAt(0).toUpperCase(),
+      t("Name: ", "Nom : ") + a.name.replace(/\S/g, "●").replace(/^(.).*/, "$1" + "●".repeat(a.name.length - 1))
+    ];
+  }
+  function gaPaint(msg) {
+    var box = el("gaBox"); box.innerHTML = "";
+    var clues = document.createElement("div"); clues.className = "cluerow";
+    gaClues().forEach(function (c, i) {
+      var sp = document.createElement("span");
+      sp.className = "clue" + (i <= gaQ.revealed ? " reveal" : "");
+      sp.textContent = i <= gaQ.revealed ? c : t("clue " + (i + 1), "indice " + (i + 1));
+      clues.appendChild(sp);
+    });
+    box.appendChild(clues);
+    if (msg) { var m = document.createElement("p"); m.className = "gmsg"; m.textContent = msg; box.appendChild(m); }
+    if (gaQ.done) {
+      var again = document.createElement("button"); again.className = "gbtn big"; again.style.marginTop = ".8rem";
+      again.textContent = t("Play again", "Rejouer");
+      again.addEventListener("click", gaAsk);
+      box.appendChild(again);
+      return;
+    }
+    var row = document.createElement("div"); row.style.cssText = "display:flex;gap:.5rem;margin-top:.9rem;flex-wrap:wrap";
+    var inp = document.createElement("input");
+    inp.className = "ginput"; inp.id = "gaInp";
+    inp.placeholder = t("Type an artist name…", "Tapez un nom d'artiste…");
+    inp.setAttribute("list", "gaList");
+    var dl = document.createElement("datalist"); dl.id = "gaList";
+    ART.forEach(function (a) { var o = document.createElement("option"); o.value = a.name; dl.appendChild(o); });
+    var go = document.createElement("button"); go.className = "gbtn big"; go.textContent = t("Guess", "Deviner");
+    function submit() {
+      var v = inp.value.trim().toLowerCase();
+      if (!v) return;
+      if (v === gaQ.a.name.toLowerCase()) {
+        gaQ.done = true; gaWins++; ls("g_ga_wins", gaWins);
+        stampArtist(gaQ.a);
+        gaPaint(t("Solved in " + (gaQ.tries + 1) + (gaQ.tries ? " tries" : " try") + " — it's ", "Trouvé en " + (gaQ.tries + 1) + " essai(s) — c'est ") + gaQ.a.name + ".");
+      } else {
+        gaQ.tries += 1;
+        if (gaQ.tries >= 5) {
+          gaQ.done = true;
+          gaPaint(t("Out of guesses — it was ", "Plus d'essais — c'était ") + gaQ.a.name + ".");
+        } else {
+          gaQ.revealed = gaQ.tries;
+          gaPaint(t("Not " + inp.value + ". ", "Pas " + inp.value + ". ") + t("Clue unlocked.", "Nouvel indice débloqué."));
+          var again2 = box.querySelector("#gaInp"); if (again2) again2.focus();
+        }
+      }
+    }
+    go.addEventListener("click", submit);
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter") submit(); });
+    row.appendChild(inp); row.appendChild(dl); row.appendChild(go);
+    box.appendChild(row);
+  }
+
+  /* ---------- tabs ---------- */
+  var TABS = [
+    ["hl", "Higher / Lower"], ["pin", t("Pin the Province", "Épingle la province")],
+    ["trivia", t("Award Trivia", "Jeu des prix")], ["dex", t("The Record Crate", "Le bac à disques")],
+    ["bracket", t("Bracket", "Braquet")], ["clip", t("Name That Track", "Devine le titre")],
+    ["genre", t("Genre Detective", "Détective de genre")], ["battle", t("Two-Song Battle", "Combat musical")],
+    ["bingo", t("Bingo", "Bingo")], ["wordle", t("Guess the Artist", "Devine l'artiste")]
+  ];
+  var PANES = { hl: paneHL, pin: panePin, trivia: paneTrivia, dex: paneDex, bracket: paneBracket,
+    clip: paneClip, genre: paneGenre, battle: paneBattle, bingo: paneBingo, wordle: paneWordle };
+  var tabBar = el("gTabs");
+  TABS.forEach(function (tb, i) {
+    var b = document.createElement("button");
+    b.className = "gtab" + (i === 0 ? " on" : "");
+    b.textContent = tb[1];
+    b.setAttribute("data-g", tb[0]);
+    b.addEventListener("click", function () {
+      stopClip();
+      tabBar.querySelectorAll(".gtab").forEach(function (x) { x.classList.remove("on"); });
+      b.classList.add("on");
+      document.querySelectorAll(".gpane").forEach(function (pn) { pn.classList.remove("on"); });
+      var pane = el("pane-" + tb[0]);
+      pane.classList.add("on");
+      PANES[tb[0]]();
+      pane.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    });
+    tabBar.appendChild(b);
+  });
+  el("pane-hl").classList.add("on");
+
+  /* game cards: grouped entry points that open the matching tab */
+  (function () {
+    var GROUPS = [
+      { n: t("Listen & guess", "Écoute et devine"), d: t("Name That Track and Genre Detective — sound on.", "Devine le titre et Détective de genre — son activé."),
+        games: ["clip", "genre"] },
+      { n: t("Test your knowledge", "Teste tes connaissances"), d: t("Higher/Lower, Award Trivia and Pin the Province.", "Plus ou moins, jeu des prix et Épingle la province."),
+        games: ["hl", "trivia", "pin"] },
+      { n: t("Explore & choose", "Explore et choisis"), d: t("The Record Crate, brackets, battles, bingo and Guess the Artist.", "Le bac à disques, braquets, combats, bingo et Devine l'artiste."),
+        games: ["dex", "bracket", "battle", "bingo", "wordle"] }
+    ];
+    var cards = el("gCards");
+    GROUPS.forEach(function (g) {
+      var c = document.createElement("div");
+      c.className = "gcard";
+      var h4 = document.createElement("h4"); h4.textContent = g.n;
+      var p = document.createElement("p"); p.textContent = g.d;
+      var row = document.createElement("div"); row.className = "gg";
+      g.games.forEach(function (gid) {
+        var tab = TABS.filter(function (tb) { return tb[0] === gid; })[0];
+        if (!tab) return;
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = tab[1];
+        b.addEventListener("click", function () {
+          var tbtn = tabBar.querySelector('[data-g="' + gid + '"]');
+          if (tbtn) tbtn.click();
+        });
+        row.appendChild(b);
+      });
+      c.appendChild(h4); c.appendChild(p); c.appendChild(row);
+      cards.appendChild(c);
+    });
+  })();
+
+  function onData() {
+    /* index ready: paint the open pane so games that need data work */
+    var on = document.querySelector(".gtab.on");
+    if (on) PANES[on.getAttribute("data-g")]();
+  }
+  /* paint first pane immediately (games re-paint themselves when data lands) */
+  paneHL();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="canonical" href="https://canconradio.com/charts.html">
+<link rel="alternate" hreflang="en" href="https://canconradio.com/charts.html">
+<link rel="alternate" hreflang="fr" href="https://canconradio.com/charts.html?lang=fr">
+<link rel="alternate" hreflang="x-default" href="https://canconradio.com/charts.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://i.scdn.co https://upload.wikimedia.org https://commons.wikimedia.org https://audiomack.com https://*.audiomack.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://bandcamp.com https://w.soundcloud.com https://audiomack.com https://*.audiomack.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.vercel.app https://www.youtube.com https://cancon-data-gate.vercel.app; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com https://w.soundcloud.com">
+<script>window.DATA_API="https://cancon-data-gate.vercel.app";</script>
+<meta property="og:title" content="Canadian Music Charts — Every Week Since 1964 | CanCon Radio">
+<meta property="og:description" content="Choose a chart, choose a date, press play. RPM weekly issues 1964–2000, Canadian Hot 100 and Albums number ones, !earshot campus charts, and year-end lists — every placing sourced.">
+<meta property="og:site_name" content="CanCon Radio">
+<meta property="og:image" content="https://canconradio.com/assets/share-card.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canadian Music Charts — Every Week Since 1964 | CanCon Radio</title>
+<meta name="description" content="Choose a chart, choose a date, press play. RPM weekly issues 1964–2000, Canadian Hot 100 and Albums number ones, !earshot campus charts, and year-end lists — every placing sourced.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Spectral:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png?v=4">
+<link rel="icon" href="assets/favicon-dark.ico?v=4" sizes="any">
+<link rel="icon" type="image/png" href="assets/icon-192.png?v=4">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=4">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="stylesheet" href="styles.fc052118.css">
+<style>
+  .charts-head{padding-top:10.5rem;padding-bottom:.6rem}
+  .charts-head .h1{font-size:clamp(2rem,4.2vw,3.6rem)}
+  .cbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:1.4rem 0 .6rem}
+  .cbar select{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--cream);background:var(--panel,#1d1712);border:1px solid rgba(243,234,208,.22);
+    border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+  .cbar select:focus{outline:1px solid var(--signal)}
+  .cbar input[type="search"]{flex:1;min-width:min(300px,100%);background:rgba(0,0,0,.3);
+    border:1px solid rgba(243,234,208,.25);border-radius:999px;padding:.6rem 1.1rem;
+    color:var(--cream);font:inherit;font-size:.92rem}
+  .cbar input[type="search"]:focus{outline:none;border-color:var(--signal)}
+  .cvtabs{display:flex;gap:.4rem;margin:.9rem 0 .2rem;flex-wrap:wrap}
+  .cvtab{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--cream-dim);background:none;border:1px solid rgba(243,234,208,.2);border-radius:999px;
+    padding:.42rem .95rem;cursor:pointer}
+  .cvtab:hover{color:var(--cream);border-color:rgba(224,69,31,.55)}
+  .cvtab.on{background:var(--signal);border-color:var(--signal);color:#f3ead0}
+  .cancon-toggle{margin-left:auto}
+  .cancon-toggle::before{content:"☑ ";color:var(--gold)}
+  .cancon-toggle.off::before{content:"☐ "}
+  .cvtab:disabled{opacity:.4;cursor:default;text-decoration:line-through}
+  .datenav{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.8rem 0 .2rem}
+  .dstep{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--gold);background:none;border:1px solid rgba(232,197,101,.45);border-radius:999px;
+    padding:.42rem .9rem;cursor:pointer}
+  .dstep:hover{background:var(--gold);color:var(--night)}
+  .dstep:disabled{opacity:.35;cursor:default}
+  .dstep:disabled:hover{background:none;color:var(--gold)}
+  .srcnote{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--faint);margin:.7rem 0 0}
+  .srcnote a{color:var(--gold)}
+
+  .featrec{display:grid;grid-template-columns:220px 1fr;gap:1.6rem;align-items:end;
+    border:1px solid rgba(243,234,208,.14);border-radius:var(--r-lg);padding:1.4rem 1.6rem;
+    margin:1.6rem 0 .4rem;background:linear-gradient(165deg,rgba(38,33,26,.85),rgba(28,24,17,.92))}
+  .featrec .fr-art{aspect-ratio:1;border-radius:.7rem;overflow:hidden;background:#0d0a08;
+    border:1px solid rgba(243,234,208,.14)}
+  .featrec .fr-art img{width:100%;height:100%;object-fit:cover;display:block}
+  .featrec .fr-art .atile{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+    font:700 .7rem/1 var(--mono,monospace);letter-spacing:.16em;color:#8d8471}
+  .featrec .tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--signal)}
+  .featrec h2{font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,2.2vw,1.9rem);margin:.5rem 0 .3rem}
+  .featrec .fr-who{color:var(--cream-dim);font-size:.95rem}
+  .featrec .fr-meta{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold);margin-top:.55rem}
+  .featrec .fr-ctas{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+  .fplay{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.62rem;
+    letter-spacing:.14em;text-transform:uppercase;color:#f6ead6;background:var(--signal);border:none;
+    border-radius:999px;padding:.58rem 1.05rem;cursor:pointer}
+  .fplay:hover{background:var(--signal-deep)}
+  .fghost{background:none;border:1px solid rgba(224,69,31,.5);color:var(--signal)}
+  .fghost:hover{background:rgba(224,69,31,.12)}
+
+  .chartlist{list-style:none;padding:0;margin:1.2rem 0 0}
+  .chrow{display:grid;grid-template-columns:4.2rem 1fr auto;gap:1rem;align-items:center;
+    padding:.85rem 1rem;border-top:1px solid rgba(243,234,208,.1)}
+  .chrow:last-child{border-bottom:1px solid rgba(243,234,208,.1)}
+  .chrow:hover{background:rgba(243,234,208,.03)}
+  .chrow .rk{font-family:var(--disp);font-weight:700;font-size:1.7rem;color:var(--cream);
+    text-align:right;line-height:1}
+  .chrow.first .rk{color:var(--gold)}
+  .chrow .mid h4{font-size:.98rem;font-weight:500;line-height:1.3}
+  .chrow .mid .who{font-size:.8rem;color:var(--cream-dim);margin-top:.15rem}
+  .chrow .mid .mv{font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--faint);margin-top:.3rem}
+  .chrow .mv .up{color:#7fae6a}
+  .chrow .mv .down{color:var(--signal)}
+  .chrow .mv .new{color:var(--gold)}
+  .chrow .act{display:flex;gap:.45rem;align-items:center}
+  .chrow .pl,.srcb{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+    background:none;border:1px solid rgba(232,197,101,.45);color:var(--gold);border-radius:999px;
+    padding:.4rem .8rem;cursor:pointer;text-decoration:none;white-space:nowrap}
+  .chrow .pl:hover{background:var(--gold);color:var(--night)}
+  .chrow .pl.na{border-color:rgba(243,234,208,.18);color:var(--faint);cursor:default}
+  .chrow .pl.na:hover{background:none;color:var(--faint)}
+  .srcb{border-color:rgba(243,234,208,.22);color:var(--cream-dim)}
+  .srcb:hover{border-color:rgba(224,69,31,.6);color:var(--cream);background:none}
+
+  .cmeta{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--faint);margin:1.1rem 0 .2rem;min-height:1rem}
+  .cmeta b{color:var(--gold);font-weight:500}
+  .cnone{border:1px dashed rgba(243,234,208,.25);border-radius:var(--r-lg);padding:2rem 1.5rem;
+    text-align:center;color:var(--cream-dim);font-size:.9rem;margin-top:1rem}
+
+  .covgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.2rem}
+  .covgrid>div{border:1px solid rgba(243,234,208,.12);border-radius:var(--r-lg);padding:1.2rem 1.35rem}
+  .covgrid h4{font-family:var(--disp);font-weight:700;font-size:1rem;margin-bottom:.4rem}
+  .covgrid p{font-size:.82rem;color:var(--cream-dim);line-height:1.6}
+  .birthrow{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:1.1rem}
+  .birthrow input{width:7rem;background:rgba(0,0,0,.3);border:1px solid rgba(243,234,208,.25);
+    border-radius:999px;padding:.55rem 1rem;color:var(--cream);font:inherit;font-size:.9rem;text-align:center}
+  .bloglink{display:inline-block;margin-top:1.4rem;font-family:var(--mono);font-size:.62rem;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;
+    border-bottom:1px solid rgba(232,197,101,.4);padding-bottom:.2rem}
+
+  body.day .cbar select{background:#f7f0df;border-color:rgba(25,23,18,.25);color:#191712}
+  body.day .cbar input[type="search"]{background:rgba(255,255,255,.6);border-color:rgba(25,23,18,.25);color:#191712}
+  body.day .cvtab{color:#55503f;border-color:rgba(25,23,18,.25)}
+  body.day .cvtab.on{color:#f6ead6}
+  body.day .featrec{background:linear-gradient(165deg,#fbf5e6,#f3ebd6);border-color:rgba(25,23,18,.16)}
+  body.day .chrow{border-color:rgba(25,23,18,.12)}
+  body.day .chrow:hover{background:rgba(25,23,18,.04)}
+  body.day .chrow .mid .who{color:#57503f}
+  body.day .covgrid>div{border-color:rgba(25,23,18,.14)}
+  body.day .cnone{border-color:rgba(25,23,18,.3)}
+  body.day .birthrow input{background:rgba(255,255,255,.6);border-color:rgba(25,23,18,.25);color:#191712}
+
+  @media (max-width:820px){
+    .featrec{grid-template-columns:1fr;gap:1rem}
+    .featrec .fr-art{max-width:240px}
+    .covgrid{grid-template-columns:1fr}
+    .chrow{grid-template-columns:3rem 1fr auto;gap:.6rem;padding:.7rem .4rem}
+    .chrow .rk{font-size:1.3rem}
+    .chrow .mv{display:none}
+  }
+</style>
+</head>
+<body class="docked">
+
+<nav class="nav">
+  <a class="wm" href="index.html"><img decoding="async" class="wmi" src="assets/wordmark-cream.png" alt="CanCon Radio"></a>
+  <details class="nmore nburger">
+      <summary class="nl" data-fr="Menu">Menu</summary>
+      <div class="nmore-menu nburger-menu">
+        <a href="radio.html" data-fr="Écouter">Listen</a>
+        <a href="discover.html" data-fr="Découvrir">Discover</a>
+        <a href="charts.html" data-fr="Palmarès">Charts</a>
+        <a href="videos.html" data-fr="Vidéos">Videos</a>
+        <a href="shows.html" data-fr="Spectacles">Shows</a>
+        <a href="blog.html" data-fr="Journal">Journal</a>
+        <a href="awards.html" data-fr="Prix">Awards</a>
+        <a href="directory.html" data-fr="Répertoire">Directory</a>
+        <a href="games.html" data-fr="Jeux">Games</a>
+        <a href="search.html" data-fr="Recherche">Search</a>
+        <a href="account.html" data-fr="Compte">Account</a>
+      </div>
+    </details>
+    <div class="nlinks">
+    <a class="nl" href="radio.html" data-fr="Écouter">Listen</a>
+    <a class="nl" href="discover.html" data-fr="Découvrir">Discover</a>
+    <a class="nl on" href="charts.html" data-fr="Palmarès">Charts</a>
+    <a class="nl" href="videos.html" data-fr="Vidéos">Videos</a>
+    <a class="nl" href="shows.html" data-fr="Spectacles">Shows</a>
+    <details class="nmore">
+      <summary class="nl" data-fr="Plus">More</summary>
+      <div class="nmore-menu">
+        <a href="blog.html" data-fr="Journal">Journal</a>
+        <a href="awards.html" data-fr="Prix">Awards</a>
+        <a href="directory.html" data-fr="Répertoire">Directory</a>
+        <a href="games.html" data-fr="Jeux">Games</a>
+        <a href="advertise.html" data-fr="Annoncer">Advertise</a>
+        <a href="press.html" data-fr="Presse">Press</a>
+      </div>
+    </details>
+    <a class="nl" href="search.html" data-fr="Recherche">Search</a>
+    <a class="nbtn" href="account.html" data-fr="Compte">Account</a>
+    <button class="lang" data-lang-toggle aria-label="Switch language / Changer de langue"><b>EN</b> · FR</button>
+    <button class="nbtn theme-tgl" aria-pressed="false" aria-label="Switch to day mode" data-fr-aria="Basculer en mode jour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2.5 12h2M19.5 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+</nav>
+
+<header class="charts-head">
+  <div class="wrap">
+    <span class="eyebrow rv" data-fr="LA MACHINE À REMONTER LE TEMPS"><i></i>THE NATIONAL CHARTS</span>
+    <h1 class="h1 rv rv-d1" style="margin-top:1.1rem" data-fr="Choisissez un palmarès.<br><span class=&quot;it&quot;>Choisissez une date.</span>">Choose a chart.<br><span class="it">Choose a date.</span></h1>
+    <p class="lede rv rv-d2" style="margin-top:.9rem" data-fr="RPM semaine par semaine de 1964 à 2000, les numéros un canadiens, les palmarès campus d'!earshot et les listes de fin d'année. Chaque position garde sa source.">RPM week by week from 1964 to 2000, Canadian number ones, !earshot campus charts and year-end lists. Every placing keeps its source.</p>
+    <div id="ccrNP" style="display:none;margin:0.9rem 0 0;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)"></div>
+  </div>
+</header>
+
+<section class="wrap" id="chartsApp" style="padding-bottom:8rem">
+  <div class="cbar rv">
+    <select id="fSrc" aria-label="Chart" data-fr-aria="Palmarès">
+      <option value="rpm" data-fr="RPM · 1964–2000">RPM · 1964–2000</option>
+      <option value="canadian-hot-100" data-fr="Canadian Hot 100">Canadian Hot 100</option>
+      <option value="canadian-albums" data-fr="Albums canadiens">Canadian Albums</option>
+      <option value="campus" data-fr="Campus !earshot">!earshot campus</option>
+      <option value="hot-100" data-fr="Billboard US · numéros un d'artistes canadiens">US Billboard · Canadian-act #1s</option>
+    </select>
+    <select id="fRpmChart" style="display:none" aria-label="RPM chart" data-fr-aria="Palmarès RPM"></select>
+    <select id="fCampusChart" style="display:none" aria-label="Campus chart" data-fr-aria="Palmarès campus"></select>
+    <select id="fSort" aria-label="Sort" data-fr-aria="Tri">
+      <option value="" id="sortDefault">Default order</option>
+      <option value="az" data-fr="Artiste / titre A à Z">Artist / title A to Z</option>
+    </select>
+    <input id="fQ" type="search" placeholder="Search this chart…" data-fr-ph="Rechercher dans ce palmarès…" aria-label="Search this chart" data-fr-aria="Rechercher dans ce palmarès">
+  </div>
+
+  <div class="cvtabs" role="tablist" id="viewTabs">
+    <button class="cvtab" data-view="weekly" role="tab" data-fr="Classement hebdo">Weekly chart</button>
+    <button class="cvtab" data-view="ones" role="tab" data-fr="Numéros un">Number ones</button>
+    <button class="cvtab" data-view="yearend" role="tab" data-fr="Fin d'année">Year-end</button>
+    <button class="cvtab" data-view="certs" role="tab" data-fr="Or &amp; platine">Gold &amp; Platinum</button>
+    <button class="cvtab cancon-toggle" id="fCancon" type="button" data-fr="Artistes canadiens seulement">Canadian artists only</button>
+  </div>
+
+  <div class="datenav" id="dateNav">
+    <button class="dstep" id="dPrev" type="button">← <span data-fr="précédent">prev</span></button>
+    <select id="fYear" aria-label="Year" data-fr-aria="Année"></select>
+    <select id="fIssue" aria-label="Issue date" data-fr-aria="Date du numéro" style="max-width:11rem"></select>
+    <button class="dstep" id="dNext" type="button"><span data-fr="suivant">next</span> →</button>
+    <button class="dstep" id="dLatest" type="button" data-fr="Dernier numéro disponible">Latest available issue</button>
+  </div>
+  <p class="srcnote" id="srcNote"></p>
+
+  <div class="featrec" id="featRec"></div>
+
+  <p class="cmeta" id="cMeta"></p>
+  <ul class="chartlist" id="cList"></ul>
+  <div class="cnone" id="cNone" style="display:none"></div>
+  <button class="dstep" id="cMore" type="button" style="display:none;margin-top:1.2rem">LOAD MORE</button>
+
+  <span class="eyebrow rv" style="margin-top:3rem" data-fr="EXPLORER UN AUTRE MOMENT"><i></i>EXPLORE ANOTHER MOMENT</span>
+  <div class="birthrow rv">
+    <label for="fBirth" style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-dim)" data-fr="Les palmarès de votre année de naissance :">The charts from your birth year:</label>
+    <input id="fBirth" type="number" min="1950" max="2026" placeholder="1978">
+    <button class="dstep" id="dBirthGo" type="button" data-fr="Y ALLER">GO</button>
+  </div>
+  <a class="bloglink" href="blog/rpm-magazine-canada-chart-authority.html" data-fr="→ Lire : RPM, l'autorité des palmarès canadiens">→ Read: RPM, Canada's chart authority</a>
+
+  <span class="eyebrow rv" style="margin-top:3rem" data-fr="COUVERTURE ET SOURCES"><i></i>COVERAGE &amp; SOURCES</span>
+  <div class="covgrid rv">
+    <div>
+      <h4 data-fr="RPM (1964–2000)">RPM (1964–2000)</h4>
+      <p data-fr="Tous les artistes — canadiens ou non — parus dans les palmarès hebdomadaires de RPM : Top Singles, AC, Cancon, rock/alternatif, country et plus. Numérisation via Bibliothèque et Archives Canada; les lacunes du dépôt restent des lacunes.">Every artist — Canadian or not — as printed in RPM's weekly charts: Top Singles, AC, Cancon, rock/alternative, country and more. Digitized via Library and Archives Canada; gaps in the scanned record remain gaps here.</p>
+    </div>
+    <div>
+      <h4 data-fr="Canadian Hot 100, Albums et Billboard US">Canadian Hot 100, Albums &amp; US Billboard</h4>
+      <p data-fr="Les numéros un documentés seulement : ce ne sont pas des classements hebdomadaires complets. Les numéros un du Hot 100 américain regroupent les artistes canadiens qui ont dominé ce palmarès.">Documented number ones only — not complete weekly charts. US Billboard #1s collect the Canadian acts that topped that chart.</p>
+    </div>
+    <div>
+      <h4 data-fr="Campus !earshot">!earshot campus</h4>
+      <p data-fr="Classements hebdomadaires des radios campus canadiennes (Top 50 national, IMC et palmarès par genre). Tous les artistes diffusés y figurent, peu importe leur pays.">Weekly Canadian campus-radio charts (national Top 50, IMC and genre charts). Every artist played appears, regardless of country.</p>
+    </div>
+    <div>
+      <h4 data-fr="Or &amp; platine et fin d'année">Gold &amp; Platinum, year-end</h4>
+      <p data-fr="Les certifications mesurent des ventes, pas des positions : elles ont leur propre vue. Les listes de fin d'année proviennent de RPM et des sondages qui lui ont succédé.">Certifications measure sales, not positions — they get their own view. Year-end lists come from RPM and the surveys that followed it.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html"><img decoding="async" class="foot-logo" src="assets/wordmark-cream.png" alt="CanCon Radio" style="height:2.1rem;width:auto"></a>
+        <p style="font-size:.83rem;color:var(--cream-dim);margin-top:.7rem;max-width:30ch" data-fr="La carte de la musique canadienne. Chaque artiste, chaque palmarès, chaque crédit.">The map of Canadian music. Every artist, every chart, every credit.</p>
+      </div>
+      <div><h5 data-fr="La station">Station</h5><a href="radio.html" data-fr="Radio">Radio</a><a href="discover.html" data-fr="Découvrir">Discover</a><a href="charts.html" data-fr="Palmarès">Charts</a><a href="videos.html" data-fr="Vidéos">Videos</a><a href="shows.html" data-fr="Spectacles">Shows</a></div>
+      <div><h5 data-fr="Explorer">Explore</h5><a href="search.html" data-fr="Rechercher">Search</a><a href="blog.html" data-fr="Journal">Journal</a><a href="directory.html" data-fr="Répertoire">Directory</a><a href="awards.html" data-fr="Prix">Awards</a><a href="games.html" data-fr="Jeux">Games</a></div>
+      <div><h5 data-fr="La promesse">The promise</h5><span style="display:block;font-size:.83rem;color:var(--cream-dim);max-width:22ch" data-fr="CHAQUE POSITION PORTE SA SOURCE">EVERY PLACING KEEPS ITS SOURCE</span></div>
+    </div>
+    <div class="foot-note">
+      <span>© 2026 CANCON RADIO</span>
+      <span data-fr="Partenaires : <a href=&quot;https://grantsgpt.ca&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GrantsGPT</a> · <a href=&quot;https://industrysift.lovable.app&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>IndustrySift</a>">Partners: <a href="https://grantsgpt.ca" target="_blank" rel="noopener">GrantsGPT</a> · <a href="https://industrysift.lovable.app" target="_blank" rel="noopener">IndustrySift</a></span>
+      <span data-fr="Développé par <a href=&quot;https://freelanceflint.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Freelance Flint</a>">Developed by <a href="https://freelanceflint.com" target="_blank" rel="noopener">Freelance Flint</a></span>
+      <span><a href="terms.html" style="display:inline" data-fr="Conditions ↗">Terms ↗</a> &nbsp;·&nbsp; <a href="advertise.html" style="display:inline" data-fr="Annoncer ↗">Advertise ↗</a> &nbsp;·&nbsp; <a href="index.html" style="display:inline" data-fr="← RETOUR À L'ANTENNE">← BACK TO THE FRONT</a></span>
+      <span data-fr="CHAQUE FAIT A UNE SOURCE">EVERY FACT HAS A SOURCE</span>
+    </div>
+  </div>
+</footer>
+
+<script src="player.e5b418e2.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  if (!window.CanConPlayer) return;
+  CanConPlayer.on("track", function (tr) {
+    var np = document.getElementById("ccrNP");
+    if (!np) return;
+    np.style.display = "";
+    np.textContent = (document.documentElement.lang === "fr" ? "EN LECTURE : " : "NOW PLAYING: ") +
+      (tr.title || "") + " · " + (tr.artist || "");
+  });
+});
+</script>
+<script src="app.2c564900.js"></script>
+<script>
+(function () {
+  "use strict";
+  function fr() { return document.documentElement.lang === "fr"; }
+  function t(en, f) { return fr() ? f : en; }
+  function fmt(n) { return Number(n || 0).toLocaleString(fr() ? "fr-CA" : "en-CA"); }
+  function norm(s) { return String(s || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim(); }
+  function esc(s) { return String(s == null ? "" : s); }
+
+  var SOURCES = {
+    "rpm":            { label: function () { return t("RPM", "RPM"); },
+      weekly: true, ones: true, charts: ["Top Singles", "Adult Contemporary", "Canadian Content (Cancon)", "Rock/Alternative", "Country Singles", "Dance/Urban", "Top Albums/CDs", "Country Albums/CDs"] },
+    "canadian-hot-100": { label: function () { return t("CANADIAN HOT 100", "HOT 100 CANADIEN"); },
+      weekly: false, ones: true, charts: null },
+    "canadian-albums": { label: function () { return t("CANADIAN ALBUMS", "ALBUMS CANADIENS"); },
+      weekly: false, ones: true, charts: null },
+    "campus":         { label: function () { return t("!EARSHOT CAMPUS", "CAMPUS !EARSHOT"); },
+      weekly: true, ones: true,
+      charts: [["national_top50", "National Top 50"], ["imc", "IMC"], ["hiphop_top10", "Hip-hop"], ["folk_top10", "Folk"], ["electronic_top10", "Electronic"], ["loud_top10", "Loud"]] },
+    "hot-100":        { label: function () { return t("US BILLBOARD — CANADIAN ACTS", "BILLBOARD US — ARTISTES CANADIENS"); },
+      weekly: false, ones: true, charts: null }
+  };
+  function defSub(srcId) {
+    var ch = SOURCES[srcId].charts;
+    if (!ch) return "";
+    return Array.isArray(ch[0]) ? ch[0][0] : ch[0];
+  }
+  var state = { src: "rpm", view: "weekly", sub: "Top Singles", year: "", issue: "", sort: "", q: "", can: "1" };
+  var PAGE = 100, shown = 0, filtered = [];
+
+  function readURL() {
+    var u = new URLSearchParams(location.search);
+    var s = u.get("src");
+    if (s && SOURCES[s]) state.src = s;
+    var v = u.get("view");
+    state.view = (v === "weekly" || v === "ones" || v === "yearend" || v === "certs") ? v : "";
+    if (!state.view) state.view = SOURCES[state.src].weekly ? "weekly" : "ones";
+    state.sub = u.get("sub") || defSub(state.src);
+    state.year = u.get("year") || "";
+    state.issue = u.get("issue") || "";
+    state.sort = u.get("sort") || "";
+    state.q = u.get("q") || "";
+    state.can = u.get("can") === "0" ? "0" : "1";
+  }
+  function writeURL() {
+    var u = new URLSearchParams();
+    if (state.src !== "rpm") u.set("src", state.src);
+    u.set("view", state.view);
+    var ds = defSub(state.src);
+    if (state.sub && state.sub !== ds) u.set("sub", state.sub);
+    if (state.year) u.set("year", state.year);
+    if (state.issue) u.set("issue", state.issue);
+    if (state.sort) u.set("sort", state.sort);
+    if (state.q) u.set("q", state.q);
+    if (state.can !== "1") u.set("can", state.can);
+    history.replaceState(null, "", location.pathname + "?" + u.toString());
+  }
+
+  /* ---------- datasets ---------- */
+  var manifest = null;
+  var manifestPromise = fetch(window.DATA_API + "/api/data/search/manifest.json")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (m) { manifest = m || { datasets: {} }; })
+    .catch(function () { manifest = { datasets: {} }; });
+  var letters = "abcdefghijklmnopqrstuvwxyz".split("").concat(["_other"]);
+  var dsCache = {};
+  function loadDataset(id) {
+    if (dsCache[id]) return dsCache[id];
+    dsCache[id] = manifestPromise.then(function () {
+      var parts = (manifest.datasets[id] || {}).parts || {};
+      return Promise.all(letters.map(function (letter) {
+        var files = [letter + ".json"];
+        for (var i = 1; i < (parts[letter] || 1); i++) files.push(letter + "." + i + ".json");
+        return Promise.all(files.map(function (f) {
+          return fetch(window.DATA_API + "/api/data/search/" + id + "/" + f)
+            .then(function (r) { return r.ok ? r.json() : []; })
+            .catch(function () { return []; });
+        })).then(function (chunks) { return chunks.reduce(function (a, c) { return a.concat(c); }, []); });
+      })).then(function (shards) { return shards.reduce(function (a, s) { return a.concat(s); }, []); });
+    });
+    return dsCache[id];
+  }
+  function normRow(r, srcHint) {
+    if (r.certification !== undefined) {
+      return { t: r.title || "", a: r.artist || "", y: r.year != null ? r.year : null,
+               certification: r.certification, src: "certs" };
+    }
+    if (r.artist !== undefined || r.title !== undefined) {
+      return { t: r.title || "", a: r.artist || "", chart: r.chart || "", d: r.week || "", r: r.rank != null ? r.rank : null, src: "campus" };
+    }
+    return { t: r.t || "", a: r.a || "", chart: r.c || "", d: r.d || "", r: r.r != null ? r.r : null,
+             y: r.y != null ? r.y : (r.year != null ? r.year : null), k: r.k || null, src: srcHint || r.c || "",
+             certification: r.certification || null };
+  }
+
+  /* ---------- strict play resolution ---------- */
+  function letterOf(s) { var c = norm(s).charAt(0); return /[a-z]/.test(c) ? c : "_other"; }
+  var shardCache = {};
+  function loadShard(letter) {
+    if (!shardCache[letter]) shardCache[letter] = fetch(window.DATA_API + "/api/data/search/tracks/" + letter + ".json")
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .catch(function () { return []; });
+    return shardCache[letter];
+  }
+  function resolveTrack(title, artist) {
+    if (!title) return Promise.resolve(null);
+    return loadShard(letterOf(title)).then(function (rows) {
+      var nt = norm(title), na = norm(artist);
+      /* strict: exact title AND artist match either direction — never title-only */
+      return rows.filter(function (r) { return norm(r.t) === nt; })
+                 .filter(function (r) {
+                   var ra = norm(r.a);
+                   return na && (ra.indexOf(na) !== -1 || na.indexOf(ra) !== -1);
+                 })[0] || null;
+    });
+  }
+  function playRow(btn, title, artist) {
+    if (!window.CanConPlayer) return;
+    btn.textContent = "…";
+    resolveTrack(title, artist).then(function (hit) {
+      if (hit) {
+        CanConPlayer.playQueue([{ yt: hit.i, title: hit.t, artist: hit.a }], 0);
+        btn.textContent = "▶";
+      } else {
+        btn.textContent = t("not available", "indisponible");
+        btn.classList.add("na");
+        setTimeout(function () { btn.textContent = "▶"; btn.classList.remove("na"); }, 2200);
+      }
+    });
+  }
+
+  /* ---------- source links ---------- */
+  function srcUrl(row) {
+    var d = row.d || "";
+    if (row.src === "rpm") return "https://www.bac-lac.gc.ca/eng/discover/films-videos-sound-recordings/rpm/Pages/list.aspx";
+    if (row.src === "canadian-hot-100") return "https://www.billboard.com/charts/canadian-hot-100/" + d + "/";
+    if (row.src === "canadian-albums") return "https://www.billboard.com/charts/canadian-albums/" + d + "/";
+    if (row.src === "hot-100") return "https://www.billboard.com/charts/hot-100/" + d + "/";
+    if (row.src === "campus") return "https://www.earshot.org/charts/";
+    return null;
+  }
+
+  /* ---------- issue index ---------- */
+  var issueIndex = {};
+  function buildIssues(rows, srcId, sub) {
+    var key = srcId + "|" + sub;
+    if (issueIndex[key]) return issueIndex[key];
+    var set = {};
+    rows.forEach(function (r) {
+      if (sub && r.chart !== sub) return;
+      if (r.d) set[r.chart + "|" + r.d] = { chart: r.chart, d: r.d };
+    });
+    issueIndex[key] = Object.keys(set).map(function (k) { return set[k]; })
+      .sort(function (a, b) { return a.d < b.d ? -1 : 1; });
+    return issueIndex[key];
+  }
+
+  function historyFor(rows, row) {
+    var same = rows.filter(function (r) {
+      return r.chart === row.chart && norm(r.t) === norm(row.t) &&
+             norm(r.a) === norm(row.a) && r.d < row.d;
+    }).sort(function (a, b) { return a.d < b.d ? -1 : 1; });
+    var prev = same.length ? same[same.length - 1] : null;
+    var peak = row.r;
+    same.concat([row]).forEach(function (r) { if (r.r != null && (peak == null || r.r < peak)) peak = r.r; });
+    return { prev: prev, weeks: same.length + 1, peak: peak };
+  }
+
+  /* ---------- rendering ---------- */
+  var listEl = document.getElementById("cList"),
+      metaEl = document.getElementById("cMeta"),
+      moreBtn = document.getElementById("cMore"),
+      noneEl = document.getElementById("cNone"),
+      featEl = document.getElementById("featRec"),
+      srcNote = document.getElementById("srcNote"),
+      fIssue = document.getElementById("fIssue"),
+      fYear = document.getElementById("fYear");
+  function clearFeat() { featEl.style.display = "none"; }
+
+  function rowEl(row, opts) {
+    opts = opts || {};
+    var li = document.createElement("li");
+    li.className = "chrow" + (row.r === 1 ? " first" : "");
+    var rk = document.createElement("span");
+    rk.className = "rk";
+    rk.textContent = row.r != null ? "#" + row.r : (row.y || "—");
+    li.appendChild(rk);
+    var mid = document.createElement("div");
+    mid.className = "mid";
+    var h4 = document.createElement("h4");
+    h4.textContent = row.t || "—";
+    var who = document.createElement("div");
+    who.className = "who";
+    who.textContent = row.a || "";
+    mid.appendChild(h4); mid.appendChild(who);
+    if (opts.mv) {
+      var mv = document.createElement("div");
+      mv.className = "mv";
+      mv.innerHTML = opts.mv;
+      mid.appendChild(mv);
+    }
+    li.appendChild(mid);
+    var act = document.createElement("div");
+    act.className = "act";
+    var pb = document.createElement("button");
+    pb.className = "pl"; pb.type = "button"; pb.textContent = "▶";
+    pb.setAttribute("aria-label", t("Play ", "Lire ") + (row.t || ""));
+    pb.addEventListener("click", function () { playRow(pb, row.t, row.a); });
+    act.appendChild(pb);
+    var su = srcUrl(row);
+    if (su) {
+      var a = document.createElement("a");
+      a.className = "srcb"; a.href = su; a.target = "_blank"; a.rel = "noopener";
+      a.textContent = t("View source ↗", "Source ↗");
+      act.appendChild(a);
+    }
+    li.appendChild(act);
+    return li;
+  }
+
+  function renderSlice() {
+    var stop = Math.min(shown + PAGE, filtered.length);
+    for (var i = shown; i < stop; i++) listEl.appendChild(filtered[i].el);
+    shown = stop;
+    moreBtn.style.display = shown < filtered.length ? "" : "none";
+    if (shown) {
+      moreBtn.textContent = t("LOAD MORE (" + fmt(shown) + " OF " + fmt(filtered.length) + ")",
+                              "AFFICHER PLUS (" + fmt(shown) + " SUR " + fmt(filtered.length) + ")");
+    }
+  }
+  function renderAll() {
+    listEl.innerHTML = "";
+    shown = 0;
+    noneEl.style.display = filtered.length ? "none" : "";
+    renderSlice();
+  }
+  function setMeta(main, extra) {
+    metaEl.innerHTML = "";
+    var b = document.createElement("b");
+    b.textContent = main;
+    metaEl.appendChild(b);
+    if (extra) metaEl.appendChild(document.createTextNode(" " + extra));
+  }
+
+  function renderFeat(row, caption) {
+    if (!row) { clearFeat(); return; }
+    featEl.style.display = "";
+    featEl.innerHTML = "";
+    var art = document.createElement("div");
+    art.className = "fr-art";
+    var img = document.createElement("img");
+    img.alt = "";
+    resolveTrack(row.t, row.a).then(function (hit) {
+      if (hit && hit.i) img.src = "https://i.ytimg.com/vi/" + hit.i + "/hqdefault.jpg";
+      else {
+        var tile = document.createElement("div");
+        tile.className = "atile";
+        tile.textContent = "#1";
+        if (img.parentNode === art) art.removeChild(img);
+        art.appendChild(tile);
+      }
+    });
+    art.appendChild(img);
+    featEl.appendChild(art);
+    var body = document.createElement("div");
+    var tag = document.createElement("span");
+    tag.className = "tag";
+    tag.textContent = caption;
+    var h2 = document.createElement("h2");
+    h2.textContent = row.t || "—";
+    var who = document.createElement("div");
+    who.className = "fr-who";
+    who.textContent = row.a || "";
+    var meta = document.createElement("div");
+    meta.className = "fr-meta";
+    meta.textContent = [row.d, SOURCES[state.src] ? SOURCES[state.src].label() : "", row.chart].filter(Boolean).join(" · ");
+    var ctas = document.createElement("div");
+    ctas.className = "fr-ctas";
+    var pb = document.createElement("button");
+    pb.className = "fplay"; pb.type = "button";
+    pb.textContent = "▸ " + t("PLAY THE #1", "LIRE LE NUMÉRO UN");
+    pb.addEventListener("click", function () { playRow(pb, row.t, row.a); });
+    ctas.appendChild(pb);
+    var su = srcUrl(row);
+    if (su) {
+      var a = document.createElement("a");
+      a.className = "fghost fplay"; a.href = su; a.target = "_blank"; a.rel = "noopener";
+      a.textContent = t("VIEW SOURCE ↗", "SOURCE ↗");
+      ctas.appendChild(a);
+    }
+    body.appendChild(tag); body.appendChild(h2); body.appendChild(who);
+    body.appendChild(meta); body.appendChild(ctas);
+    featEl.appendChild(body);
+  }
+
+  /* ---------- views ---------- */
+  function currentRows() {
+    if (state.view === "certs") return loadDataset("certs");
+    if (state.view === "yearend") return loadDataset("yearend");
+    if (state.view === "weekly") return state.src === "rpm" ? loadDataset("rpm") : loadDataset("campus");
+    return loadDataset("ones");
+  }
+  function matchQ(row) {
+    if (!state.q) return true;
+    var hay = norm([row.t, row.a].join(" "));
+    return state.q.split(/\s+/).every(function (w) { return hay.indexOf(norm(w)) !== -1; });
+  }
+
+  /* Canadian-artist filter: RPM/campus charted the whole market; the site is
+     CanCon, so weekly views default to directory artists only. */
+  var canSet = null, canPromise = null;
+  function loadCan() {
+    if (canSet) return Promise.resolve(canSet);
+    if (!canPromise) canPromise = fetch(window.DATA_API + "/api/data/canadian_artists.json")
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (a) { canSet = new Set(a); return canSet; })
+      .catch(function () { canSet = new Set(); return canSet; });
+    return canPromise;
+  }
+  function isCanadian(artist) {
+    if (!canSet) return true;               /* set not loaded yet: don't hide rows */
+    var parts = norm(artist).split(/\s+(?:feat|ft|with|and|&)\s+|\s*\/\s*|\s*,\s*/);
+    return parts.some(function (p) { return canSet.has(p.trim()); });
+  }
+
+  function render() {
+    writeURL();
+    var srcDef = SOURCES[state.src];
+    document.querySelectorAll("#viewTabs .cvtab").forEach(function (b) {
+      var v = b.getAttribute("data-view");
+      var ok = v === "certs" || v === "yearend" || (v === "weekly" ? srcDef.weekly : srcDef.ones);
+      b.disabled = !ok;
+      b.classList.toggle("on", v === state.view);
+    });
+    var fRpm = document.getElementById("fRpmChart"),
+        fCampus = document.getElementById("fCampusChart");
+    fRpm.style.display = (state.view === "weekly" && state.src === "rpm") ? "" : "none";
+    fCampus.style.display = (state.view === "weekly" && state.src === "campus") ? "" : "none";
+    var canBtn = document.getElementById("fCancon");
+    canBtn.style.display = state.view === "weekly" ? "" : "none";
+    canBtn.classList.toggle("on", state.can === "1");
+    canBtn.classList.toggle("off", state.can !== "1");
+    document.getElementById("dateNav").style.display = state.view === "certs" || state.view === "yearend" ? "none" : "";
+    fIssue.style.display = state.view === "weekly" ? "" : "none";
+    document.getElementById("dLatest").style.display = state.view === "weekly" ? "" : "none";
+
+    metaEl.textContent = t("LOADING…", "CHARGEMENT…");
+    listEl.innerHTML = "";
+    moreBtn.style.display = "none";
+    clearFeat();
+
+    currentRows().then(function (raw) {
+      var rows = raw.map(function (r) { return normRow(r, ""); });
+      if (state.view === "certs") return renderCerts(rows);
+      if (state.view === "yearend") return renderYearEnd(rows);
+      if (state.view === "weekly") return loadCan().then(function () { renderWeekly(rows); });
+      return renderOnes(rows);
+    });
+  }
+
+  function renderWeekly(rows) {
+    var sub = state.sub || defSub(state.src);
+    rows = rows.filter(function (r) { return r.chart === sub; });
+    var issues = buildIssues(rows, state.src, sub);
+    if (!issues.length) {
+      setMeta(t("No weekly issues on file for this chart.", "Aucun numéro hebdo au fichier pour ce palmarès."));
+      noneEl.style.display = "";
+      noneEl.textContent = t("No weekly issues on file yet.", "Aucun numéro hebdo disponible pour l'instant.");
+      return;
+    }
+    var sel = null;
+    if (state.issue) sel = issues.filter(function (i) { return i.d === state.issue; })[0] || null;
+    if (!sel) {
+      if (state.year) sel = issues.filter(function (i) { return i.d.slice(0, 4) === state.year; }).pop();
+      if (!sel) sel = issues[issues.length - 1];   /* latest available issue, not "this week" */
+    }
+    state.issue = sel.d;
+    state.year = sel.d.slice(0, 4);
+    fIssue.innerHTML = "";
+    issues.filter(function (i) { return i.d.slice(0, 4) === state.year; }).forEach(function (i) {
+      var o = document.createElement("option");
+      o.value = i.d; o.textContent = i.d;
+      fIssue.appendChild(o);
+    });
+    fIssue.value = sel.d;
+    fillYearSelect(issues.map(function (i) { return i.d.slice(0, 4); }));
+
+    var idx = issues.indexOf(sel);
+    document.getElementById("dPrev").disabled = idx <= 0;
+    document.getElementById("dNext").disabled = idx >= issues.length - 1;
+
+    var issueRows = rows.filter(function (r) { return r.chart === sel.chart && r.d === sel.d && matchQ(r); })
+      .sort(function (a, b) { return (a.r || 999) - (b.r || 999); });
+    var totalBeforeCan = issueRows.length;
+    if (state.can === "1") issueRows = issueRows.filter(function (r) { return isCanadian(r.a); });
+    srcNote.innerHTML = t("Source: ", "Source : ") + (state.src === "rpm"
+      ? '<a href="https://www.bac-lac.gc.ca/eng/discover/films-videos-sound-recordings/rpm/Pages/list.aspx" target="_blank" rel="noopener">RPM weekly via Library and Archives Canada ↗</a>'
+      : '<a href="https://www.earshot.org/charts/" target="_blank" rel="noopener">!earshot campus charts ↗</a>');
+
+    filtered = issueRows.map(function (r) {
+      var h = historyFor(rows, r);
+      var mv;
+      if (h.prev) {
+        var d = (h.prev.r || 99) - (r.r || 99);
+        mv = d > 0 ? '<span class="up">▲ ' + d + "</span>"
+          : d < 0 ? '<span class="down">▼ ' + (-d) + "</span>"
+          : "—";
+      } else mv = '<span class="new">● NEW</span>';
+      mv += " · " + t("weeks", "sem.") + " " + h.weeks + " · " + t("peak", "sommet") + " #" + h.peak;
+      return { el: rowEl(r, { mv: mv }) };
+    });
+    if (state.sort === "az") {
+      filtered.sort(function (a, b) {
+        var ra = a.el.querySelector("h4").textContent, rb = b.el.querySelector("h4").textContent;
+        return ra.localeCompare(rb);
+      });
+    }
+    renderAll();
+    setMeta(fmt(issueRows.length) + " " + t("PLACINGS", "POSITIONS"),
+      "· " + sel.chart + " · " + sel.d +
+      (state.can === "1" ? t(" · Canadian artists", " · artistes canadiens") : "") +
+      (state.q ? " · “" + state.q + "”" : "") +
+      (state.can === "1" && totalBeforeCan !== issueRows.length ? " (" + fmt(totalBeforeCan) + " " + t("total", "au total") + ")" : ""));
+    noneEl.textContent = t("No placings match — try clearing the search.", "Aucune position ne correspond — essayez d'effacer la recherche.");
+    var featPool = issueRows.length ? issueRows : null;
+    renderFeat(featPool ? (featPool.filter(function (r) { return r.r === 1; })[0] || featPool[0]) : null,
+      t("NUMBER ONE THIS ISSUE", "NUMÉRO UN DE CE NUMÉRO"));
+  }
+
+  function renderOnes(rows) {
+    rows = rows.filter(function (r) { return r.src === state.src && matchQ(r); })
+      .sort(function (a, b) { return a.d < b.d ? -1 : 1; });
+    fillYearSelect(rows.map(function (r) { return (r.d || "").slice(0, 4); }));
+    var pool = state.year ? rows.filter(function (r) { return (r.d || "").slice(0, 4) === state.year; }) : rows;
+    if (state.sort === "az") pool = pool.slice().sort(function (a, b) { return norm(a.a).localeCompare(norm(b.a)) || norm(a.t).localeCompare(norm(b.t)); });
+    else pool = pool.slice().reverse();
+    filtered = pool.map(function (r) { return { el: rowEl(r, {}) }; });
+    renderAll();
+    srcNote.innerHTML = t("Documented number ones only — complete weekly charts are not part of this archive. ",
+                          "Numéros un documentés seulement — les classements hebdo complets ne font pas partie de cette archive. ") +
+      (state.src === "hot-100"
+        ? '<a href="https://www.billboard.com/charts/hot-100/" target="_blank" rel="noopener">Billboard ↗</a>'
+        : state.src === "rpm"
+          ? '<a href="https://www.bac-lac.gc.ca/eng/discover/films-videos-sound-recordings/rpm/Pages/list.aspx" target="_blank" rel="noopener">RPM ↗</a>'
+          : state.src === "campus"
+            ? '<a href="https://www.earshot.org/charts/" target="_blank" rel="noopener">!earshot ↗</a>'
+            : '<a href="https://www.billboard.com/charts/canadian-hot-100/" target="_blank" rel="noopener">Billboard ↗</a>');
+    setMeta(fmt(pool.length) + " " + t("NUMBER ONES", "NUMÉROS UN"),
+      (state.year ? "· " + state.year : "") + (state.q ? " · “" + state.q + "”" : ""));
+    noneEl.textContent = t("No number ones match these filters.", "Aucun numéro un ne correspond à ces filtres.");
+    renderFeat(pool[0] || null, t("MOST RECENT DOCUMENTED #1", "NUMÉRO UN LE PLUS RÉCENT"));
+  }
+
+  function renderYearEnd(rows) {
+    fillYearSelect(rows.map(function (r) { return String(r.y || ""); }));
+    var pool = rows.filter(function (r) { return (!state.year || String(r.y) === state.year) && matchQ(r); })
+      .sort(function (a, b) { return (a.r || 999) - (b.r || 999); });
+    if (state.sort === "az") pool = pool.slice().sort(function (a, b) { return norm(a.a).localeCompare(norm(b.a)); });
+    filtered = pool.map(function (r) { return { el: rowEl(r, {}) }; });
+    renderAll();
+    srcNote.innerHTML = t("Year-end lists from RPM and the surveys that followed it. ",
+                          "Palmarès de fin d'année de RPM et des sondages qui lui ont succédé. ") +
+      '<a href="https://www.bac-lac.gc.ca/eng/discover/films-videos-sound-recordings/rpm/Pages/list.aspx" target="_blank" rel="noopener">RPM ↗</a>';
+    setMeta(fmt(pool.length) + " " + t("ENTRIES", "ENTRÉES"),
+      (state.year ? "· " + state.year : "") + (state.q ? " · “" + state.q + "”" : ""));
+    noneEl.textContent = t("No year-end entries match these filters.", "Aucune entrée de fin d'année ne correspond.");
+    renderFeat(pool.filter(function (r) { return r.r === 1; })[0] || pool[0],
+      t("TOP OF THE LIST", "SOMMET DU PALMARÈS"));
+  }
+
+  function renderCerts(rows) {
+    rows = rows.filter(function (r) { return r.certification && matchQ(r); })
+      .sort(function (a, b) { return (b.year || b.y || 0) - (a.year || a.y || 0); });
+    if (state.sort === "az") rows = rows.slice().sort(function (a, b) { return norm(a.a).localeCompare(norm(b.a)); });
+    filtered = rows.map(function (r) {
+      var el = document.createElement("li");
+      el.className = "chrow";
+      var rk = document.createElement("span");
+      rk.className = "rk";
+      rk.textContent = (r.certification || "").toUpperCase().slice(0, 3) || "—";
+      var mid = document.createElement("div");
+      mid.className = "mid";
+      var h4 = document.createElement("h4");
+      h4.textContent = r.t || "—";
+      var who = document.createElement("div");
+      who.className = "who";
+      who.textContent = (r.a || "") + (r.year || r.y ? " · " + (r.year || r.y) : "");
+      mid.appendChild(h4); mid.appendChild(who);
+      var act = document.createElement("div");
+      act.className = "act";
+      var pb = document.createElement("button");
+      pb.className = "pl"; pb.type = "button"; pb.textContent = "▶";
+      pb.addEventListener("click", function () { playRow(pb, r.t, r.a); });
+      act.appendChild(pb);
+      el.appendChild(rk); el.appendChild(mid); el.appendChild(act);
+      return { el: el };
+    });
+    renderAll();
+    srcNote.innerHTML = t("Certifications measure sales, not chart positions — a different achievement, kept separate on purpose. ",
+                          "Les certifications mesurent des ventes, pas des positions — un autre accomplissement, gardé séparé exprès. ") +
+      '<a href="https://musiccanada.com/gold-platinum/" target="_blank" rel="noopener">Music Canada ↗</a>';
+    setMeta(fmt(rows.length) + " " + t("CERTIFIED RECORDINGS", "ENREGISTREMENTS CERTIFIÉS"), state.q ? "· “" + state.q + "”" : "");
+    noneEl.textContent = t("No certifications match these filters.", "Aucune certification ne correspond à ces filtres.");
+    clearFeat();
+  }
+
+  /* ---------- year select ---------- */
+  var yearFilledFor = "";
+  function fillYearSelect(years) {
+    var uniq = {};
+    years.forEach(function (y) { if (y) uniq[y] = 1; });
+    var list = Object.keys(uniq).sort();
+    var sig = list.length + "|" + list[0] + "|" + list[list.length - 1];
+    if (sig === yearFilledFor) { fYear.value = state.year; return; }
+    yearFilledFor = sig;
+    fYear.innerHTML = "";
+    var all = document.createElement("option");
+    all.value = "";
+    all.textContent = t("All years", "Toutes les années");
+    fYear.appendChild(all);
+    list.forEach(function (y) {
+      var o = document.createElement("option");
+      o.value = y; o.textContent = y;
+      fYear.appendChild(o);
+    });
+    fYear.value = state.year;
+  }
+
+  /* ---------- controls ---------- */
+  function buildSubSelects() {
+    var fRpm = document.getElementById("fRpmChart"),
+        fCampus = document.getElementById("fCampusChart");
+    fRpm.innerHTML = ""; fCampus.innerHTML = "";
+    (SOURCES.rpm.charts || []).forEach(function (c) {
+      var o = document.createElement("option");
+      o.value = c; o.textContent = c;
+      fRpm.appendChild(o);
+    });
+    (SOURCES.campus.charts || []).forEach(function (c) {
+      var o = document.createElement("option");
+      o.value = c[0]; o.textContent = c[1];
+      fCampus.appendChild(o);
+    });
+    fRpm.value = state.sub;
+    fCampus.value = state.sub;
+  }
+  document.getElementById("fSrc").addEventListener("change", function (e) {
+    state.src = e.target.value;
+    var def = SOURCES[state.src];
+    if (state.view === "weekly" && !def.weekly) state.view = "ones";
+    if (state.view === "ones" && !def.ones) state.view = def.weekly ? "weekly" : "ones";
+    state.sub = defSub(state.src);
+    state.issue = ""; state.year = "";
+    buildSubSelects();
+    render();
+  });
+  document.getElementById("fRpmChart").addEventListener("change", function (e) {
+    state.sub = e.target.value; state.issue = ""; render();
+  });
+  document.getElementById("fCampusChart").addEventListener("change", function (e) {
+    state.sub = e.target.value; state.issue = ""; render();
+  });
+  document.querySelectorAll("#viewTabs .cvtab").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (b.disabled || !b.getAttribute("data-view")) return;
+      state.view = b.getAttribute("data-view");
+      state.issue = "";
+      render();
+    });
+  });
+  fYear.addEventListener("change", function () {
+    state.year = fYear.value;
+    if (state.view === "weekly") state.issue = "";
+    render();
+  });
+  fIssue.addEventListener("change", function () {
+    state.issue = fIssue.value;
+    state.year = fIssue.value.slice(0, 4);
+    render();
+  });
+  function stepIssue(dir) {
+    currentRows().then(function (raw) {
+      var rows2 = raw.map(function (r) { return normRow(r, state.src); })
+        .filter(function (r) { return r.chart === state.sub; });
+      var issues = buildIssues(rows2, state.src, state.sub);
+      var idx = -1;
+      for (var i = 0; i < issues.length; i++) if (issues[i].d === state.issue) { idx = i; break; }
+      var nxt = issues[idx + dir];
+      if (nxt) { state.issue = nxt.d; state.year = nxt.d.slice(0, 4); render(); }
+    });
+  }
+  document.getElementById("dPrev").addEventListener("click", function () { stepIssue(-1); });
+  document.getElementById("dNext").addEventListener("click", function () { stepIssue(1); });
+  document.getElementById("dLatest").addEventListener("click", function () {
+    state.issue = ""; state.year = "";
+    render();
+  });
+  document.getElementById("fCancon").addEventListener("click", function () {
+    state.can = state.can === "1" ? "0" : "1";
+    render();
+  });
+  document.getElementById("fSort").addEventListener("change", function (e) {
+    state.sort = e.target.value; render();
+  });
+  var qTimer = null;
+  document.getElementById("fQ").addEventListener("input", function (e) {
+    clearTimeout(qTimer);
+    qTimer = setTimeout(function () { state.q = e.target.value.trim(); render(); }, 180);
+  });
+  moreBtn.addEventListener("click", renderSlice);
+  document.getElementById("dBirthGo").addEventListener("click", function () {
+    var v = document.getElementById("fBirth").value;
+    if (!v) return;
+    state.year = v;
+    if (state.view === "certs" || state.view === "yearend") { render(); document.getElementById("chartsApp").scrollIntoView({ behavior: "smooth" }); return; }
+    if (state.view === "weekly") state.issue = "";
+    if (!SOURCES[state.src].weekly && state.view === "weekly") state.view = "ones";
+    render();
+    document.getElementById("chartsApp").scrollIntoView({ behavior: "smooth" });
+  });
+
+  var langBtn = document.querySelector("[data-lang-toggle]");
+  if (langBtn) langBtn.addEventListener("click", function () { setTimeout(render, 0); });
+
+  readURL();
+  document.getElementById("fSrc").value = state.src;
+  document.getElementById("fQ").value = state.q;
+  buildSubSelects();
+  render();
+})();
+</script>
+</body>
+</html>
